@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import java.util.ArrayList
 
 /**
@@ -18,9 +19,7 @@ class MoviesPreviewAdapter(context:Context, moviesList: ArrayList<MoviePreview>)
     var context = context
     var moviesList = moviesList
 
-    override fun getItemCount(): Int {
-        return moviesList.size
-    }
+    override fun getItemCount() = moviesList.size
 
     override fun onBindViewHolder(holder: CustomViewHolder?, position: Int) {
         var moviePreview:MoviePreview = moviesList[position]
@@ -36,5 +35,9 @@ class MoviesPreviewAdapter(context:Context, moviesList: ArrayList<MoviePreview>)
     class CustomViewHolder(view:View):RecyclerView.ViewHolder(view) {
         var titleView:TextView = view.findViewById(R.id.titleTxt)
         var imageView:ImageView = view.findViewById(R.id.coverImg)
+
+        init {
+            view.setOnClickListener{ v -> Toast.makeText(view.context,"Hello", Toast.LENGTH_LONG) }
+        }
     }
 }
