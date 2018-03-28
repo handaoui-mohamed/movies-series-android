@@ -16,9 +16,9 @@ class MainActivity : AppCompatActivity() {
         var recyclerView:RecyclerView = moviesPreview as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
         var moviesList = ArrayList<MoviePreview>()
-        moviesList.add(MoviePreview("Hello 1", R.drawable.zzz_watermark))
-        moviesList.add(MoviePreview("Hello 2", R.drawable.zzz_access_point))
-        moviesList.add(MoviePreview("Hello 3", R.drawable.zzz_account_box))
+        moviesList.add(MoviePreview("Harry Potter", R.drawable.harry))
+        moviesList.add(MoviePreview("The Shawshank", R.drawable.shawshank))
+        moviesList.add(MoviePreview("The beast", R.drawable.beast))
 
         var moviesPreviewAdapter = MoviesPreviewAdapter(applicationContext, moviesList)
         recyclerView.adapter = moviesPreviewAdapter

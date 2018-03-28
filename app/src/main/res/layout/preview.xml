@@ -21,18 +21,21 @@
                 android:id="@+id/coverImg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/zzz_amazon_clouddrive" />
 
             <TextView
                 android:id="@+id/titleTxt"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginStart="10dp"
+                android:paddingLeft="10dp"
                 android:maxWidth="200dp"
                 android:text="Movie Title"
+                android:textColor="#fff"
+                android:background="#333"
                 android:textSize="20sp" />
         </RelativeLayout>
 
