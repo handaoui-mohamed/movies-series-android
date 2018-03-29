@@ -1,9 +1,9 @@
-package com.handaoui.movies
+package com.handaoui.movies.Data
 
 /**
  * Created by User on 28/03/2018.
  */
-class MoviePreview(title:String, cover:Int){
+class Movie(title:String, cover:Int){
     var title = title
     var cover = cover
 }

@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_height="wrap_content"
-    tools:context="com.handaoui.movies.MainActivity">
+    tools:context="com.handaoui.movies.Activities.MainActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Movies in projection"
+        android:id="@+id/sectionTitleTxt"
         android:layout_marginTop="10sp"
         android:paddingStart="10sp"
         android:paddingEnd="10sp"

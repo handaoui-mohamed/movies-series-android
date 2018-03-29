@@ -34,9 +34,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
-                android:paddingLeft="10dp"
+                android:paddingStart="10sp"
+                android:paddingEnd="10sp"
                 android:maxWidth="200dp"
-                android:text="Movie Title"
                 android:textColor="#fff"
                 android:background="#333"
                 android:textSize="20sp" />
