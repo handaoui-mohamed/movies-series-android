@@ -30,7 +30,7 @@
             android:title="@string/bookmark" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/application">
         <menu>
             <item
                 android:id="@+id/nav_settings"
