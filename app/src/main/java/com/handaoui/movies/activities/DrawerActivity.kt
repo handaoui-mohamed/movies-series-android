@@ -13,6 +13,8 @@ import com.handaoui.movies.fragments.HomeFragment
 import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.app_bar_drawer.*
 
+
+
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,14 +34,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         nav_view.setNavigationItemSelectedListener(this)
         nav_view.menu.getItem(0).isChecked = true
-
-        val homeFragment = HomeFragment()
-
-        val fragmentManager = supportFragmentManager
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.drawer_fragment_container, homeFragment, homeFragment.tag)
-                .commit()
+        loadHomeFragment()
     }
 
     override fun onBackPressed() {
@@ -70,35 +65,44 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_home -> {
-                // Handle the camera action
+                setTitle(R.string.home)
+                loadHomeFragment()
             }
             R.id.nav_cinema-> {
-
+                setTitle(R.string.cinema)
             }
             R.id.nav_series -> {
-
+                setTitle(R.string.series)
             }
             R.id.nav_persons -> {
-
+                setTitle(R.string.persons)
             }
             R.id.nav_comments -> {
-
+                setTitle(R.string.comments_ratings)
             }
             R.id.nav_bookmark -> {
-
+                setTitle(R.string.bookmark)
             }
             R.id.nav_settings -> {
-
+                setTitle(R.string.settings)
             }
             R.id.nav_contact -> {
-
+                setTitle(R.string.contact_us)
             }
             R.id.nav_share -> {
-
+                setTitle(R.string.share)
             }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun loadHomeFragment(){
+        val homeFragment = HomeFragment()
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.drawer_fragment_container, homeFragment, homeFragment.tag)
+                .commit()
     }
 }
