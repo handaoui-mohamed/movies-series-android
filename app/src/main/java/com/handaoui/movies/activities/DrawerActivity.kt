@@ -1,18 +1,21 @@
 package com.handaoui.movies.activities
 
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.handaoui.movies.R
+import com.handaoui.movies.fragments.CinemaFragment
 import com.handaoui.movies.fragments.HomeFragment
 import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.app_bar_drawer.*
-
 
 
 class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -34,7 +37,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         nav_view.setNavigationItemSelectedListener(this)
         nav_view.menu.getItem(0).isChecked = true
-        loadHomeFragment()
+        loadFragment(HomeFragment())
     }
 
     override fun onBackPressed() {
@@ -65,11 +68,14 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_home -> {
+                ViewCompat.setElevation(appBarLayout, 4f)
                 setTitle(R.string.home)
-                loadHomeFragment()
+                loadFragment(HomeFragment())
             }
             R.id.nav_cinema-> {
+                ViewCompat.setElevation(appBarLayout, 0f)
                 setTitle(R.string.cinema)
+                loadFragment(CinemaFragment())
             }
             R.id.nav_series -> {
                 setTitle(R.string.series)
@@ -98,11 +104,10 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         return true
     }
 
-    private fun loadHomeFragment(){
-        val homeFragment = HomeFragment()
+    private fun loadFragment(fragment: Fragment){
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.drawer_fragment_container, homeFragment, homeFragment.tag)
+                .replace(R.id.drawer_fragment_container, fragment, fragment.tag)
                 .commit()
     }
 }
