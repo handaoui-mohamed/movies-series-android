@@ -1,4 +1,4 @@
-package com.handaoui.movies.Activities
+package com.handaoui.movies.activities
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -8,7 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.handaoui.movies.Fragments.PreviewFragment
+import com.handaoui.movies.fragments.PreviewFragment
 import com.handaoui.movies.R
 import com.handaoui.movies.R.id.currentSeriesLayout
 import com.handaoui.movies.R.id.moviesInProjectionLayout

@@ -1,4 +1,4 @@
-package com.handaoui.movies.Adapters
+package com.handaoui.movies.adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.handaoui.movies.Data.Movie
+import com.handaoui.movies.data.Movie
 import com.handaoui.movies.R
 import java.util.ArrayList
 

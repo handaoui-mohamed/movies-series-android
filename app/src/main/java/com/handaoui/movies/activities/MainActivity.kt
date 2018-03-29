@@ -1,4 +1,4 @@
-package com.handaoui.movies.Activities
+package com.handaoui.movies.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
