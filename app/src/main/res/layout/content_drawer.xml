@@ -6,27 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginTop="50dp"
-    tools:context="com.handaoui.movies.activities.MainActivity"
+    tools:context="com.handaoui.movies.activities.DrawerActivity"
     >
 
     <LinearLayout
+        android:id="@+id/drawer_fragment_container"
+        tools:context="com.handaoui.movies.activities.DrawerActivity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.handaoui.movies.activities.MainActivity">
-
-        <LinearLayout
-            android:id="@+id/moviesInProjectionLayout"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-        <LinearLayout
-            android:id="@+id/currentSeriesLayout"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+        android:layout_height="wrap_content">
     </LinearLayout>
 </ScrollView>

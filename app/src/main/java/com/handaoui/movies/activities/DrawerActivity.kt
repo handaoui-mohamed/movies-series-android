@@ -8,10 +8,8 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.handaoui.movies.fragments.PreviewFragment
 import com.handaoui.movies.R
-import com.handaoui.movies.R.id.currentSeriesLayout
-import com.handaoui.movies.R.id.moviesInProjectionLayout
+import com.handaoui.movies.fragments.HomeFragment
 import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.app_bar_drawer.*
 
@@ -33,26 +31,14 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+        nav_view.menu.getItem(0).isChecked = true
 
-        val moviesArgs = Bundle()
-        moviesArgs.putString("TYPE", "MOVIES")
-        val projectionMoviesFragment = PreviewFragment()
-        projectionMoviesFragment.arguments = moviesArgs
-
-        val seriesArgs = Bundle()
-        seriesArgs.putString("TYPE", "SERIES")
-        val currentSeriesFragment = PreviewFragment()
-        currentSeriesFragment.arguments = seriesArgs
+        val homeFragment = HomeFragment()
 
         val fragmentManager = supportFragmentManager
         fragmentManager
                 .beginTransaction()
-                .replace(moviesInProjectionLayout, projectionMoviesFragment, projectionMoviesFragment.tag)
-                .commit()
-
-        fragmentManager
-                .beginTransaction()
-                .replace(currentSeriesLayout, currentSeriesFragment, currentSeriesFragment.tag)
+                .replace(R.id.drawer_fragment_container, homeFragment, homeFragment.tag)
                 .commit()
     }
 

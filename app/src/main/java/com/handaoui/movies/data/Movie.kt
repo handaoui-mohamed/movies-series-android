@@ -9,7 +9,7 @@ data class Movie(
         val description: String = "",
         val actors: ArrayList<Person> = ArrayList(),
         val directors: ArrayList<Person> = ArrayList(),
-        val projectRoom: ProjectionRoom,
+        val projectRoom: ProjectionRoom? = null,
         val relatedMovies: ArrayList<Movie> = ArrayList(),
         val date: Date = Date(),
         val tags: ArrayList<String> = ArrayList(),
