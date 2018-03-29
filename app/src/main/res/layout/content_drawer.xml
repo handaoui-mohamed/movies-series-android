@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginTop="50dp"
     tools:context="com.handaoui.movies.MainActivity">
 
-   <LinearLayout
-       android:id="@+id/moviesInProjectionLayout"
-       android:orientation="vertical"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_weight="1"/>
+    <LinearLayout
+        android:id="@+id/moviesInProjectionLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:id="@+id/currentSeriesLayout"
