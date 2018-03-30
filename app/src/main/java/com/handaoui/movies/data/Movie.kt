@@ -11,9 +11,11 @@ data class Movie(
         val directors: ArrayList<Person> = ArrayList(),
         val projectRoom: ProjectionRoom? = null,
         val relatedMovies: ArrayList<Movie> = ArrayList(),
-        val date: Date = Date(),
+        val date: String = Date().toString(),
         val tags: ArrayList<String> = ArrayList(),
         // TODO: if i would to keep this, then i should remove related movies?
         val trailerUrl: String = "",
-        var comments: ArrayList<Comment> = ArrayList()
+        var comments: ArrayList<Comment> = ArrayList(),
+        var rating: Float = 0f,
+        val genre: List<String>? = null
 )

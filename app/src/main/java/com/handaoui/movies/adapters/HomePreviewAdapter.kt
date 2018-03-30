@@ -1,8 +1,6 @@
 package com.handaoui.movies.adapters
 
 import android.content.Context
-import android.graphics.PorterDuff
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -21,8 +19,9 @@ class MoviesPreviewAdapter(var context: Context, private var moviesList: ArrayLi
     override fun getItemCount() = moviesList.size
 
     override fun onBindViewHolder(holder: CustomViewHolder?, position: Int) {
-        var movie: Movie = moviesList[position]
+        val movie: Movie = moviesList[position]
         holder?.imageView?.setImageResource(movie.cover)
+        holder?.projectionRoomView?.text = movie.projectRoom?.name
         holder?.titleView?.text = movie.title
     }
 
@@ -32,18 +31,13 @@ class MoviesPreviewAdapter(var context: Context, private var moviesList: ArrayLi
     }
 
     inner class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var titleView: TextView = view.findViewById(R.id.titleTxt)
+        var titleView: TextView = view.findViewById(R.id.movieTitleTxt)
+        var projectionRoomView: TextView = view.findViewById(R.id.projectionRoomTxt)
         var imageView: ImageView = view.findViewById(R.id.coverImg)
-        var cardView: CardView = view.findViewById(R.id.card_view)
+        private var cardView: CardView = view.findViewById(R.id.card_view)
 
         init {
-            cardView.setOnClickListener { Toast.makeText(context, "Hello", Toast.LENGTH_LONG).show() }
-
-            // change icons color
-            val newColor = ContextCompat.getColor(context, R.color.colorDefault)
-            view.findViewById<ImageView>(R.id.favBtn).setColorFilter(newColor, PorterDuff.Mode.SRC_ATOP)
-            view.findViewById<ImageView>(R.id.saveBtn).setColorFilter(newColor, PorterDuff.Mode.SRC_ATOP)
-            view.findViewById<ImageView>(R.id.openBtn).setColorFilter(newColor, PorterDuff.Mode.SRC_ATOP)
+            cardView.setOnClickListener { Toast.makeText(context, "Hello ", Toast.LENGTH_LONG).show() }
         }
     }
 }

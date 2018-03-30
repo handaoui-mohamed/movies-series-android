@@ -1,7 +1,9 @@
 package com.handaoui.movies.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -32,17 +34,23 @@ class PreviewFragment : Fragment() {
         return rootView
     }
 
+    private fun calculateNoOfColumns(context: Context): Int {
+        val displayMetrics = context.resources.displayMetrics
+        val dpWidth = displayMetrics.widthPixels / displayMetrics.density
+        return (dpWidth / 180).toInt()
+    }
+
     private fun createMoviesPreview(rootView: View){
         val recyclerView: RecyclerView = rootView.findViewById(R.id.moviesPreview)
-        recyclerView.layoutManager = LinearLayoutManager(rootView.context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.layoutManager = GridLayoutManager(rootView.context,calculateNoOfColumns(rootView.context))
         rootView.findViewById<TextView>(R.id.sectionTitleTxt).text = getString(R.string.movies_in_projection)
-        val moviesPreviewAdapter = MoviesPreviewAdapter(rootView.context, Movies.list)
+        val moviesPreviewAdapter = MoviesPreviewAdapter(rootView.context, Movies.getProjectedMovies())
         recyclerView.adapter = moviesPreviewAdapter
     }
 
     private fun createSeriesPreview(rootView: View){
         val recyclerView: RecyclerView = rootView.findViewById(R.id.moviesPreview)
-        recyclerView.layoutManager = LinearLayoutManager(rootView.context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.layoutManager = GridLayoutManager(rootView.context,calculateNoOfColumns(rootView.context))
         rootView.findViewById<TextView>(R.id.sectionTitleTxt).text = getString(R.string.series_in_progress)
         val moviesPreviewAdapter = MoviesPreviewAdapter(rootView.context, Movies.list)
         recyclerView.adapter = moviesPreviewAdapter
