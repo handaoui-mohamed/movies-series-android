@@ -2,17 +2,14 @@ package com.handaoui.movies.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.handaoui.movies.R
 
+
 class HomeFragment : Fragment() {
-
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -22,26 +19,16 @@ class HomeFragment : Fragment() {
         loadMoviesFragment(fragmentTransaction)
         loadSeriesFragment(fragmentTransaction)
         fragmentTransaction.commit()
-
         return rootView
     }
 
     private fun loadMoviesFragment(fragmentTransaction: FragmentTransaction){
         val moviesArgs = Bundle()
-        moviesArgs.putString("TYPE", "MOVIES")
         val projectionMoviesFragment = PreviewFragment()
         projectionMoviesFragment.arguments = moviesArgs
 
         fragmentTransaction.replace(R.id.moviesInProjectionLayout, projectionMoviesFragment, projectionMoviesFragment.tag)
     }
 
-    private fun loadSeriesFragment(fragmentTransaction: FragmentTransaction){
-        val seriesArgs = Bundle()
-        seriesArgs.putString("TYPE", "SERIES")
-        val currentSeriesFragment = PreviewFragment()
-        currentSeriesFragment.arguments = seriesArgs
-
-        fragmentTransaction.replace(R.id.currentSeriesLayout, currentSeriesFragment, currentSeriesFragment.tag)
-    }
-
+    private fun loadSeriesFragment(fragmentTransaction: FragmentTransaction){}
 }

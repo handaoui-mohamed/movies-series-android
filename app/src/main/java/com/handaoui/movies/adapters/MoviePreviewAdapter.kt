@@ -1,6 +1,7 @@
 package com.handaoui.movies.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,13 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import com.handaoui.movies.data.Movie
 import com.handaoui.movies.R
+import com.handaoui.movies.activities.MovieDetailsActivity
 import java.util.ArrayList
 
 
-class MoviesPreviewAdapter(var context: Context, private var moviesList: ArrayList<Movie>) : RecyclerView.Adapter<MoviesPreviewAdapter.CustomViewHolder>() {
+class MoviesPreviewAdapter(var context: Context,
+                           private var moviesList: ArrayList<Movie>) :
+        RecyclerView.Adapter<MoviesPreviewAdapter.CustomViewHolder>() {
 
     override fun getItemCount() = moviesList.size
 
@@ -26,7 +29,7 @@ class MoviesPreviewAdapter(var context: Context, private var moviesList: ArrayLi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomViewHolder {
-        val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.preview_card, parent, false)
+        val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.movie_preview_card, parent, false)
         return CustomViewHolder(view)
     }
 
@@ -37,7 +40,10 @@ class MoviesPreviewAdapter(var context: Context, private var moviesList: ArrayLi
         private var cardView: CardView = view.findViewById(R.id.card_view)
 
         init {
-            cardView.setOnClickListener { Toast.makeText(context, "Hello ", Toast.LENGTH_LONG).show() }
+            cardView.setOnClickListener {
+                val movieDetailsIntent = Intent(context, MovieDetailsActivity::class.java)
+                context.startActivity(movieDetailsIntent)
+            }
         }
     }
 }
