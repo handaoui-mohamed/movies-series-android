@@ -26,6 +26,7 @@ class MoviesPreviewAdapter(var context: Context,
         holder?.imageView?.setImageResource(movie.cover)
         holder?.projectionRoomView?.text = movie.projectRoom?.name
         holder?.titleView?.text = movie.title
+        holder?.id = movie.id
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomViewHolder {
@@ -34,6 +35,7 @@ class MoviesPreviewAdapter(var context: Context,
     }
 
     inner class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var id: Int = 0
         var titleView: TextView = view.findViewById(R.id.movieTitleTxt)
         var projectionRoomView: TextView = view.findViewById(R.id.projectionRoomTxt)
         var imageView: ImageView = view.findViewById(R.id.coverImg)
@@ -41,7 +43,9 @@ class MoviesPreviewAdapter(var context: Context,
 
         init {
             cardView.setOnClickListener {
-                val movieDetailsIntent = Intent(context, MovieDetailsActivity::class.java)
+                val movieDetailsIntent = Intent(context, MovieDetailsActivity::class.java).apply {
+                    putExtra("id", id)
+                }
                 context.startActivity(movieDetailsIntent)
             }
         }

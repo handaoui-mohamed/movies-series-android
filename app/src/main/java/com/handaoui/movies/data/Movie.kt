@@ -4,6 +4,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 data class Movie(
+        val id:Int,
         val title: String,
         val cover: Int,
         val description: String = "",

@@ -17,7 +17,6 @@ class HomeFragment : Fragment() {
 
         val fragmentTransaction = childFragmentManager.beginTransaction()
         loadMoviesFragment(fragmentTransaction)
-        loadSeriesFragment(fragmentTransaction)
         fragmentTransaction.commit()
         return rootView
     }
@@ -29,6 +28,4 @@ class HomeFragment : Fragment() {
 
         fragmentTransaction.replace(R.id.moviesInProjectionLayout, projectionMoviesFragment, projectionMoviesFragment.tag)
     }
-
-    private fun loadSeriesFragment(fragmentTransaction: FragmentTransaction){}
 }
