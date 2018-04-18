@@ -14,6 +14,7 @@ import android.view.MenuItem
 import com.handaoui.movies.R
 import com.handaoui.movies.fragments.CinemaFragment
 import com.handaoui.movies.fragments.HomeFragment
+import com.handaoui.movies.fragments.SeriePreviewFragment
 import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.app_bar_drawer.*
 
@@ -73,7 +74,9 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 loadFragment(CinemaFragment())
             }
             R.id.nav_series -> {
-                setTitle(R.string.series)
+                ViewCompat.setElevation(appBarLayout, 0f)
+                setTitle(R.string.tvShows)
+                loadFragment(SeriePreviewFragment())
             }
             R.id.nav_persons -> {
                 setTitle(R.string.persons)
