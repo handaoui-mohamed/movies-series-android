@@ -23,7 +23,7 @@
     <string name="share">Share</string>
     <string name="application">Application</string>
     <string name="movieDetails">Movie details</string>
-
     <string name="trending_series">Trending TV Shows</string>
     <string name="tvShows">TV Shows</string>
+    <string name="rating">Rating</string>
 </resources>

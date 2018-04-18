@@ -6,7 +6,6 @@ import android.view.Menu
 import android.view.MenuItem
 import com.handaoui.movies.R
 import com.handaoui.movies.fakers.Movies
-import android.support.design.widget.CollapsingToolbarLayout
 import kotlinx.android.synthetic.main.activity_movie_details.*
 
 
@@ -19,11 +18,12 @@ class MovieDetailsActivity : AppCompatActivity() {
         val movie = Movies.getMovieById(movieId)
 
         if(movie !== null){
-            setSupportActionBar(toolbar)
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-            val collapsingToolbar = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar)
-            collapsingToolbar.title = getString(R.string.movieDetails)
+            collapsing_toolbar.title = resources.getString(R.string.movieDetails)
             header.setImageResource(movie.cover)
+
+            movieTitleTxt.text = movie.title
+            movieRating.numStars = 5
+            movieRating.rating = (movie.rating / 4)
         }
     }
 
