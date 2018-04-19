@@ -16,6 +16,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_movie_details)
         val movieId = intent.getIntExtra("id", 0)
         val movie = Movies.getMovieById(movieId)
+        var isFavorite = false
 
         if (movie !== null) {
             collapsing_toolbar.title = resources.getString(R.string.movieDetails)
@@ -29,6 +30,14 @@ class MovieDetailsActivity : AppCompatActivity() {
             seeMoreBtn.setOnClickListener {
                 movieDescriptionTxt.maxLines = 200
                 movieDetailsContainer.removeView(seeMoreBtn)
+            }
+
+            favoriteBtn.setOnClickListener {
+                isFavorite = !isFavorite
+                favoriteBtn.setImageResource(
+                        if (isFavorite) R.drawable.zzz_heart
+                        else R.drawable.ic_favorite_border_black_24dp
+                )
             }
 
             // Projection Room
