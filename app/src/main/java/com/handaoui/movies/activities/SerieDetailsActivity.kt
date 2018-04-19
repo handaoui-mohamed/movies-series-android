@@ -2,15 +2,25 @@ package com.handaoui.movies.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Button
 import com.handaoui.movies.R
+import com.handaoui.movies.adapters.ReviewsAdapter
 import com.handaoui.movies.fakers.Series
 import kotlinx.android.synthetic.main.activity_serie_details.*
+import android.content.Intent
+
+
 
 
 class SerieDetailsActivity : AppCompatActivity() {
-
+    val source = "source"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_serie_details)
@@ -25,6 +35,14 @@ class SerieDetailsActivity : AppCompatActivity() {
             serieRating.numStars = 5
             serieRating.rating = (serie.rating / 2f)
         }
+
+        val button:Button = findViewById(R.id.see_reviews_buttons)
+        button.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View) {
+                seeReviews(v)
+            }
+        })
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -40,5 +58,12 @@ class SerieDetailsActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         return true
+    }
+
+    fun seeReviews(view: View) {
+        val intent = Intent(this, ReviewsActivity::class.java).apply {
+            putExtra(source, "Serie")
+        }
+        startActivity(intent)
     }
 }

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Movies.iml" filepath="$PROJECT_DIR$/Movies.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/movies-series-android.iml" filepath="$PROJECT_DIR$/movies-series-android.iml" />
       <module fileurl="file://C:\Users\handaoui\AndroidStudioProjects\Movies\movies-series-android.iml" filepath="C:\Users\handaoui\AndroidStudioProjects\Movies\movies-series-android.iml" />
     </modules>
   </component>

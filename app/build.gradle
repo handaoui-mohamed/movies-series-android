@@ -25,6 +25,7 @@ android {
 }
 
 repositories {
+    google()
     maven {
         url "https://jitpack.io"
     }
@@ -44,4 +45,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.pavelsikun:materialdesignicons:1.0'
     compile 'com.github.pedrovgs:DraggablePanel:RELEASE-1.9'
+    compile 'com.stepstone.apprating:app-rating:2.2.0'
 }

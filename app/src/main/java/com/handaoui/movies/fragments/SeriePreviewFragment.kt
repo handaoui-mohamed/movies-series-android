@@ -2,6 +2,7 @@ package com.handaoui.movies.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.CoordinatorLayout
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -12,12 +13,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.github.pedrovgs.DraggableView
 import com.handaoui.movies.adapters.SeriePreviewAdapter
+import com.handaoui.movies.adapters.ReviewsAdapter
 import com.handaoui.movies.R
 import com.handaoui.movies.fakers.Movies
 import com.handaoui.movies.fakers.Series
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
+
+
 
 
 class SeriePreviewFragment : Fragment() {
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater!!.inflate(R.layout.fragment_serie_preview, container, false)
         this.createSeriesPreview(rootView)

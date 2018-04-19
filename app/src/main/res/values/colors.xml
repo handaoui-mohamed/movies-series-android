@@ -7,4 +7,14 @@
     <color name="white">#ffffff</color>
     <color name="background">#232323</color>
     <color name="cardBackground">#eee</color>
+
+    <color name="bg_row_background">#fa315b</color>
+    <color name="item_name">#535353</color>
+    <color name="description">#a9a9a9</color>
+    <color name="starColor">@color/colorAccent</color>
+    <color name="noteDescriptionTextColor">@color/colorAccent</color>
+    <color name="hintTextColor">@color/colorAccent</color>
+    <color name="titleTextColor">@color/colorAccent</color>
+    <color name="commentTextColor">#222</color>
+    <color name="contentTextColor">#111</color>
 </resources>
