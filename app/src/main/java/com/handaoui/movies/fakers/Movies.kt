@@ -6,6 +6,7 @@ import java.util.*
 
 object Movies {
     private var projectRooms = ProjectionRooms.list
+    private var persons = Persons.list
 
     var list: ArrayList<Movie> = arrayListOf(
             Movie(
@@ -16,7 +17,9 @@ object Movies {
                     rating = 8f,
                     genre = listOf("Action", "Adventure", "Drama", "History", "Thriller", "Western"),
                     projectRoom = projectRooms[0],
-                    date = "01/01/2014"
+                    date = "01/01/2014",
+                    actors = persons,
+                    directors = persons
             ),
             Movie(
                     id = 1,
@@ -26,7 +29,9 @@ object Movies {
                     rating = 8.1f,
                     genre = listOf("Action", "Drama ", "Sci-Fi", "Thriller"),
                     projectRoom = projectRooms[2],
-                    date = "01/01/2017"
+                    date = "01/01/2017",
+                    actors = persons,
+                    directors = persons
             ),
             Movie(
                     id = 2,
@@ -36,7 +41,9 @@ object Movies {
                     rating = 6.7f,
                     genre = listOf("Action", "Adventure", "Crime ", "Thriller"),
                     projectRoom = projectRooms[4],
-                    date = "01/01/2017"
+                    date = "01/01/2017",
+                    actors = persons,
+                    directors = persons
             ),
             Movie(
                     id = 3,
@@ -46,7 +53,9 @@ object Movies {
                     rating = 7.5f,
                     genre = listOf("Action", "Adventure", "Sci-Fi"),
                     projectRoom = projectRooms[3],
-                    date = "01/01/2017"
+                    date = "01/01/2017",
+                    actors = persons,
+                    directors = persons
             )
     )
 
