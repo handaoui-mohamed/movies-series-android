@@ -7,6 +7,7 @@ import android.view.MenuItem
 import com.handaoui.movies.R
 import com.handaoui.movies.fakers.Movies
 import com.handaoui.movies.fakers.User
+import com.handaoui.movies.fragments.PersonsFragment
 import kotlinx.android.synthetic.main.activity_movie_details.*
 
 
@@ -52,6 +53,15 @@ class MovieDetailsActivity : AppCompatActivity() {
                 isFavorite = !isFavorite
                 toggleFavorite(isFavorite, true, movieId)
             }
+
+            // persons fragment
+            val personsFragment  = PersonsFragment().apply {
+                arguments.putInt("id", movieId)
+            }
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.personsContainer, personsFragment, personsFragment.tag)
+                    .commit()
         }
     }
 

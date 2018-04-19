@@ -9,13 +9,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import com.github.pedrovgs.DraggableView
 import com.handaoui.movies.adapters.SeriePreviewAdapter
 import com.handaoui.movies.adapters.ReviewsAdapter
 import com.handaoui.movies.R
-import com.handaoui.movies.fakers.Movies
 import com.handaoui.movies.fakers.Series
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.DefaultItemAnimator

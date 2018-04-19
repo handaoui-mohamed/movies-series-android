@@ -163,6 +163,11 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/personsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

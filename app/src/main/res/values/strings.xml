@@ -33,4 +33,6 @@
     <string name="see_more">See more</string>
     <string name="see_reviews">See reviews</string>
     <string name="add_review">Add review</string>
+    <string name="actors">Actors</string>
+    <string name="directors">Directors</string>
 </resources>
