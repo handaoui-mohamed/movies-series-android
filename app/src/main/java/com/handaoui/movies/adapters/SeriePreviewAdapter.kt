@@ -1,6 +1,7 @@
 package com.handaoui.movies.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.handaoui.movies.data.Series
 import com.handaoui.movies.R
+import com.handaoui.movies.activities.SerieDetailsActivity
 import java.util.ArrayList
 
 
@@ -39,10 +41,10 @@ class SeriePreviewAdapter(var context: Context,
 
         init {
             cardView.setOnClickListener {
-//                val serieDetailsIntent = Intent(context, SerieDetailsActivity::class.java).apply {
-//                    putExtra("id", id)
-//                }
-//                context.startActivity(serieDetailsIntent)
+                val serieDetailsIntent = Intent(context, SerieDetailsActivity::class.java).apply {
+                    putExtra("id", id)
+                }
+                context.startActivity(serieDetailsIntent)
             }
         }
     }
