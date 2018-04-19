@@ -47,7 +47,7 @@ class MovieDetailsActivity : AppCompatActivity() {
 
             // favorite button
             var isFavorite = User.profile.isMovieFavored(movieId)
-            updateFavoriteBtnIcon(isFavorite)
+            toggleFavorite(isFavorite)
 
             favoriteBtn.setOnClickListener {
                 isFavorite = !isFavorite
@@ -57,7 +57,6 @@ class MovieDetailsActivity : AppCompatActivity() {
     }
 
     private fun toggleFavorite(isFavorite: Boolean, updateProfile:Boolean = false, movieId:Int = -1){
-        updateFavoriteBtnIcon(isFavorite)
         if (isFavorite) {
             favoriteBtn.setImageResource(R.drawable.zzz_heart)
             if(updateProfile) User.profile.addMovie(movieId)
@@ -66,13 +65,6 @@ class MovieDetailsActivity : AppCompatActivity() {
             favoriteBtn.setImageResource(R.drawable.ic_favorite_border_black_24dp)
             if(updateProfile) User.profile.removeMovie(movieId)
         }
-    }
-
-    private fun updateFavoriteBtnIcon(isFavorite: Boolean){
-        favoriteBtn.setImageResource(
-                if (isFavorite) R.drawable.zzz_heart
-                else R.drawable.ic_favorite_border_black_24dp
-        )
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
