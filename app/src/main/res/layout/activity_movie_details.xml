@@ -8,7 +8,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="20dp"
+        android:paddingTop="30dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -27,6 +27,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="Very long action Movie title"
                     android:layout_marginEnd="10dp"
                     android:layout_gravity="center_vertical"
@@ -61,7 +62,107 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/summary"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/summary"
+                android:id="@+id/movieDescriptionTxt"
+                android:padding="5dp"
+                android:ellipsize="marquee"
+                android:maxLines="5"
+                android:textSize="15sp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/see_more"
+                android:id="@+id/seeMoreBtn"
+                android:background="@android:color/transparent"
+                android:textColor="@color/colorAccent"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/projection_room"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+
+            <LinearLayout
+                android:id="@+id/projectRoomContainer"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginEnd="10dp"
+                    android:clickable="true"
+                    android:id="@+id/projectRoomImg"
+                    android:foreground="?android:selectableItemBackground"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/zzz_heart"
+                    android:layout_height="match_parent"
+                    android:minHeight="200dp"
+                    android:contentDescription="@string/movieDetails"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    android:focusable="true" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ProjectRoom name"
+                        android:textStyle="bold"
+                        android:id="@+id/projectRoomNameTxt"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ProjectRoom description"
+                        android:id="@+id/projectRoomDescriptionTxt"
+                        android:textSize="15sp"/>
+
+                    <LinearLayout
+                        android:clickable="true"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/projectRoomBtn"
+                        android:focusable="true">
+                        <ImageView
+                            android:clickable="true"
+                            android:layout_height="20dp"
+                            android:layout_width="20dp"
+                            android:src="@drawable/zzz_google_maps"
+                            android:tint="#333"
+                            android:layout_marginTop="5dp"
+                            android:scaleType="centerCrop"
+                            android:focusable="true" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/see_in_google_maps"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/projectRoomPlaceBtn"
+                            android:padding="5dp"
+                            android:textSize="15sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

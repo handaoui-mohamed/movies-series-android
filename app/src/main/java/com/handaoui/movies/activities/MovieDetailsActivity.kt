@@ -17,13 +17,30 @@ class MovieDetailsActivity : AppCompatActivity() {
         val movieId = intent.getIntExtra("id", 0)
         val movie = Movies.getMovieById(movieId)
 
-        if(movie !== null){
+        if (movie !== null) {
             collapsing_toolbar.title = resources.getString(R.string.movieDetails)
             header.setImageResource(movie.cover)
 
             movieTitleTxt.text = movie.title
             movieRating.numStars = 5
             movieRating.rating = movie.rating / 2
+            movieDescriptionTxt.text = movie.description
+
+            seeMoreBtn.setOnClickListener {
+                movieDescriptionTxt.maxLines = 200
+                movieDetailsContainer.removeView(seeMoreBtn)
+            }
+
+            // Projection Room
+            val projectRoom = movie.projectRoom
+            if (projectRoom !== null) {
+                projectRoomNameTxt.text = projectRoom.name
+                projectRoomImg.setImageResource(projectRoom.image)
+                projectRoomDescriptionTxt.text = projectRoom.address
+            } else {
+                // remove projectRoom
+                movieDetailsContainer.removeView(projectRoomContainer)
+            }
         }
     }
 
