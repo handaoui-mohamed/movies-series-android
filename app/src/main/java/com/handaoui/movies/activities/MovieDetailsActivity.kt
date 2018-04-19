@@ -23,7 +23,7 @@ class MovieDetailsActivity : AppCompatActivity() {
 
             movieTitleTxt.text = movie.title
             movieRating.numStars = 5
-            movieRating.rating = (movie.rating / 4)
+            movieRating.rating = movie.rating / 2
         }
     }
 
