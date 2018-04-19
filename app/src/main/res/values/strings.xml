@@ -26,4 +26,5 @@
     <string name="trending_series">Trending TV Shows</string>
     <string name="tvShows">TV Shows</string>
     <string name="rating">Rating</string>
+    <string name="serieDetails">Show details</string>
 </resources>
