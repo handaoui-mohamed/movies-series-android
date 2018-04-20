@@ -36,7 +36,7 @@
                     android:text="Very long action Movie title"
                     android:layout_marginEnd="10dp"
                     android:layout_gravity="center_vertical"
-                    android:id="@+id/serieTitleTxt"
+                    android:id="@+id/seasonTitleTxt"
                     android:textSize="20sp"/>
 
                 <LinearLayout
@@ -49,11 +49,11 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:text="Release date:  01/01/1999"
-                        android:id="@+id/serieReleaseTxt"
+                        android:id="@+id/seasonReleaseTxt"
                         android:textSize="12sp"/>
 
                     <me.zhanghai.android.materialratingbar.MaterialRatingBar
-                        android:id="@+id/serieRating"
+                        android:id="@+id/seasonRating"
                         style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -75,11 +75,11 @@
                 android:layout_height="wrap_content"
                 layout="@layout/summary"/>
 
-            <!--<FrameLayout-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:id="@+id/personsContainer"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="200dp"/>-->
+            <FrameLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/personsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
 
 
             <include android:id="@+id/news_title"
@@ -89,26 +89,6 @@
 
             <include layout="@layout/seasons_list" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/relaties_tv_shows"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
-
-            <FrameLayout
-                android:layout_marginTop="10dp"
-                android:id="@+id/relatedSeriesContainer"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"/>
-
-            <Button
-                android:id="@+id/see_reviews_buttons"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@string/see_reviews" />
 
 
 
@@ -134,7 +114,7 @@
 
             <ImageView
                 android:clickable="true"
-                android:id="@+id/Serieheader"
+                android:id="@+id/seasonHeader"
                 android:foreground="?android:selectableItemBackground"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

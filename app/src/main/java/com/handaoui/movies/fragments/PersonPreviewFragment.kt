@@ -33,8 +33,8 @@ class PersonPreviewFragment : Fragment() {
                 persons = if (forActors) movie!!.actors else movie!!.directors
             }
             "serie" -> {
-                val serie = Series.getSeriesById(id)
-                persons = if (forActors) serie!!.seasons[0].actors else serie!!.seasons[0].directors
+                val serie = Series.getSeriesById(0)
+                persons = if (forActors) serie!!.seasons[id].actors else serie!!.seasons[0].directors
 
             }
         }

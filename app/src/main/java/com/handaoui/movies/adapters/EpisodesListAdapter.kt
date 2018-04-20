@@ -12,11 +12,10 @@ import android.widget.TextView
 import com.handaoui.movies.R
 import com.handaoui.movies.activities.SeasonPreviewActivity
 import com.handaoui.movies.activities.SerieDetailsActivity
-import com.handaoui.movies.data.SeasonEpisode
 import com.handaoui.movies.data.SeriesSeason
 
-class EpisodesListAdapter(private val context: Context, private val seasons: ArrayList<SeasonEpisode>) :
-        RecyclerView.Adapter<EpisodesListAdapter.ViewHolder>() {
+class SeasonsListAdapter(private val context: Context, private val seasons: ArrayList<SeriesSeason>) :
+        RecyclerView.Adapter<SeasonsListAdapter.ViewHolder>() {
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view){
         var name: TextView = view.findViewById(R.id.name)
@@ -26,7 +25,7 @@ class EpisodesListAdapter(private val context: Context, private val seasons: Arr
             frame.setOnClickListener {
                 val serieDetailsIntent = Intent(context, SeasonPreviewActivity::class.java).apply {
                     putExtra("id", id)
-                    putExtra("seriesId", 0)
+                    putExtra("seasonId", 0)
                 }
                 context.startActivity(serieDetailsIntent)
             }
@@ -35,7 +34,7 @@ class EpisodesListAdapter(private val context: Context, private val seasons: Arr
 
 
     override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): EpisodesListAdapter.ViewHolder {
+                                    viewType: Int): SeasonsListAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.seasonlist_item, parent, false) as View
         return ViewHolder(view)
@@ -43,7 +42,7 @@ class EpisodesListAdapter(private val context: Context, private val seasons: Arr
 
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.name.text = """Episode ${position + 1}"""
+        holder.name.text = """Season ${position + 1}"""
         holder.id = seasons[position].id
     }
 

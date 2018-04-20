@@ -104,11 +104,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"/>
 
-            <Button
-                android:id="@+id/see_reviews_buttons"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@string/see_reviews" />
 
 
 

@@ -24,7 +24,14 @@ object Series {
                     ),
                     seasons = arrayListOf(
                             SeriesSeason(0, R.drawable.gameofthrones, "season one of GOT",
-                                    ArrayList(),
+                                    arrayListOf(
+                                            SeasonEpisode(0,"", arrayListOf(Persons.list[2]),arrayListOf(Persons.list[1], Persons.list[0]),"01/01/1994"),
+                                            SeasonEpisode(1,"", arrayListOf(Persons.list[2]),arrayListOf(Persons.list[1], Persons.list[0]),"01/01/1994"),
+                                            SeasonEpisode(2,"", arrayListOf(Persons.list[2]),arrayListOf(Persons.list[1], Persons.list[0]),"01/01/1994"),
+                                            SeasonEpisode(3,"", arrayListOf(Persons.list[2]),arrayListOf(Persons.list[1], Persons.list[0]),"01/01/1994"),
+                                            SeasonEpisode(4,"", arrayListOf(Persons.list[2]),arrayListOf(Persons.list[1], Persons.list[0]),"01/01/1994")
+
+                                    ),
                                     arrayListOf(Persons.list[1], Persons.list[0]),
                                     arrayListOf(Persons.list[2]),
                                     "17/04/2011",
@@ -33,7 +40,7 @@ object Series {
                                             Comment("Adem", "Yes", 4.5f),
                                             Comment("Amine", "Yey", 3.5f),
                                             Comment("Achraf", "Nope", 2.2f)
-                                    )
+                                    ),5f
                                     ),
 
                             SeriesSeason(1, R.drawable.gameofthrones, "season two of GOT",
@@ -46,7 +53,39 @@ object Series {
                                             Comment("Adem", "Yes", 4.5f),
                                             Comment("Amine", "Yey", 3.5f),
                                             Comment("Achraf", "Nope", 2.2f)
-                                    )
+                                    ),4f
+                            ),
+                            SeriesSeason(3, R.drawable.gameofthrones, "season one of GOT",
+                                    arrayListOf(
+                                            SeasonEpisode(0,"", arrayListOf(Persons.list[2]),arrayListOf(Persons.list[1], Persons.list[0]),"01/01/1994"),
+                                            SeasonEpisode(1,"", arrayListOf(Persons.list[2]),arrayListOf(Persons.list[1], Persons.list[0]),"01/01/1994"),
+                                            SeasonEpisode(2,"", arrayListOf(Persons.list[2]),arrayListOf(Persons.list[1], Persons.list[0]),"01/01/1994"),
+                                            SeasonEpisode(3,"", arrayListOf(Persons.list[2]),arrayListOf(Persons.list[1], Persons.list[0]),"01/01/1994"),
+                                            SeasonEpisode(4,"", arrayListOf(Persons.list[2]),arrayListOf(Persons.list[1], Persons.list[0]),"01/01/1994")
+
+                                    ),
+                                    arrayListOf(Persons.list[1], Persons.list[0]),
+                                    arrayListOf(Persons.list[2]),
+                                    "17/04/2011",
+                                    "",
+                                    arrayListOf(
+                                            Comment("Adem", "Yes", 4.5f),
+                                            Comment("Amine", "Yey", 3.5f),
+                                            Comment("Achraf", "Nope", 2.2f)
+                                    ),5f
+                            ),
+
+                            SeriesSeason(4, R.drawable.gameofthrones, "season two of GOT",
+                                    ArrayList(),
+                                    arrayListOf(Persons.list[1], Persons.list[0]),
+                                    arrayListOf(Persons.list[2]),
+                                    "11/01/2015",
+                                    "",
+                                    arrayListOf(
+                                            Comment("Adem", "Yes", 4.5f),
+                                            Comment("Amine", "Yey", 3.5f),
+                                            Comment("Achraf", "Nope", 2.2f)
+                                    ),4f
                             )
                     )
             ),
@@ -74,7 +113,7 @@ object Series {
                                             Comment("Adem", "Yes", 4.5f),
                                             Comment("Amine", "Yey", 3.5f),
                                             Comment("Achraf", "Nope", 2.2f)
-                                    )
+                                    ),4f
                             ),
 
                             SeriesSeason(1, R.drawable.gameofthrones, "season two of GOT",
@@ -87,7 +126,7 @@ object Series {
                                             Comment("Adem", "Yes", 4.5f),
                                             Comment("Amine", "Yey", 3.5f),
                                             Comment("Achraf", "Nope", 2.2f)
-                                    )
+                                    ),4.5f
                             )
                     )
             ),

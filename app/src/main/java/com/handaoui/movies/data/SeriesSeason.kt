@@ -13,5 +13,6 @@ data class SeriesSeason(
         val directors: ArrayList<Person> = ArrayList(),
         val date: String = Date().toString(),
         val trailerUrl: String,
-        var comments: ArrayList<Comment> = ArrayList()
+        var comments: ArrayList<Comment> = ArrayList(),
+        val rating : Float = 0f
 )

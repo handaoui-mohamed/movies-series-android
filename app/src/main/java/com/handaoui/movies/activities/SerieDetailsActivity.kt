@@ -74,12 +74,7 @@ class SerieDetailsActivity : AppCompatActivity() {
 
         }
 
-        val button:Button = findViewById(R.id.see_reviews_buttons)
-        button.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View) {
-                seeReviews(v)
-            }
-        })
+
 
 
         val mLayoutManager = LinearLayoutManager(this.applicationContext)
