@@ -56,7 +56,9 @@ class MovieDetailsActivity : AppCompatActivity() {
 
             // persons fragment
             val personsFragment  = PersonsFragment().apply {
-                arguments.putInt("id", movieId)
+                arguments = Bundle().apply {
+                    putInt("id", movieId)
+                }
             }
             supportFragmentManager
                     .beginTransaction()

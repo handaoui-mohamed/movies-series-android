@@ -1,11 +1,12 @@
 package com.handaoui.movies.adapters
 
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.handaoui.movies.fragments.PersonPreviewFragment
 
-class PersonTabsAdapter(fm: FragmentManager, private var tabCount: Int, private val dataId: Int) : FragmentPagerAdapter(fm) {
+class PersonTabsAdapter(fm: FragmentManager, private var tabCount: Int, private var dataId: Int) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment? {
         return when (position) {
@@ -15,9 +16,11 @@ class PersonTabsAdapter(fm: FragmentManager, private var tabCount: Int, private 
     }
 
     private fun createMoviePersonFragment(index: Int) = PersonPreviewFragment().apply {
-        arguments.putString("type", "movie")
-        arguments.putString("personType", if (index == 0) "actors" else "directors")
-        arguments.putInt("id", dataId)
+        arguments = Bundle().apply {
+            putString("type", "movie")
+            putString("personType", if (index == 0) "actors" else "directors")
+            putInt("id", dataId)
+        }
     }
 
 

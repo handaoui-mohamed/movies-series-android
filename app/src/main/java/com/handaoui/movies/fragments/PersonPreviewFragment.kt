@@ -12,25 +12,15 @@ import com.handaoui.movies.R
 import com.handaoui.movies.adapters.PersonPreviewAdapter
 import com.handaoui.movies.data.Person
 import com.handaoui.movies.fakers.Movies
-import com.handaoui.movies.fakers.Series
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.LinearSnapHelper
+import android.support.v7.widget.SnapHelper
 
 
 class PersonPreviewFragment : Fragment() {
-    private lateinit var persons: ArrayList<Person>
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater!!.inflate(R.layout.fragment_person_preview, container, false)
         this.createPersonPreview(rootView)
-        val type = arguments.getString("type", "movie")
-        val forActors = arguments.getString("personType", "actors") == "actors"
-        val id = arguments.getInt("id", 0)
-
-        when (type){
-            "movie" -> {
-                val movie = Movies.getMovieById(id)
-                persons = if(forActors) movie!!.actors else movie!!.directors
-            }
-        }
         return rootView
     }
 
@@ -40,9 +30,21 @@ class PersonPreviewFragment : Fragment() {
     }
 
     private fun createPersonPreview(rootView: View) {
+        val args = arguments
+        val type = args.getString("type")
+        val forActors = args.getString("personType") == "actors"
+        val id = args.getInt("id")
+        var persons = ArrayList<Person>()
+        when (type) {
+            "movie" -> {
+                val movie = Movies.getMovieById(id)
+                persons = if (forActors) movie!!.actors else movie!!.directors
+            }
+        }
         val recyclerView: RecyclerView = rootView.findViewById(R.id.personsPreview)
-        recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context))
-        val personPreviewAdapter = PersonPreviewAdapter(rootView.context, persons)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false)
+        val personPreviewAdapter = PersonPreviewAdapter(context, persons)
         recyclerView.adapter = personPreviewAdapter
     }
 }

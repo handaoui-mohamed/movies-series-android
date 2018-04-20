@@ -17,4 +17,5 @@
     <color name="titleTextColor">@color/colorAccent</color>
     <color name="commentTextColor">#222</color>
     <color name="contentTextColor">#111</color>
+    <color name="grey">#f3f3f3</color>
 </resources>
