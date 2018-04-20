@@ -37,4 +37,5 @@
     <string name="directors">Directors</string>
     <string name="comments_and_ratings">Comments and Ratings</string>
     <string name="see_all_comments">See all comments/Add Review</string>
+    <string name="related_movies">Related movies</string>
 </resources>

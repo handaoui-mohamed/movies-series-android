@@ -6,5 +6,7 @@ data class Comment(
         val commentator: String,
         val content: String,
         val rating: Float = -1f,
-        val date: Date = Date()
+        val date: String = Date().toString(),
+        val type: String = "",
+        val id: Int = 0
 )

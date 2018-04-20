@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.handaoui.movies.adapters.MoviesPreviewAdapter
 import com.handaoui.movies.R
+import com.handaoui.movies.data.Movie
 import com.handaoui.movies.fakers.Movies
 
 
@@ -28,10 +29,26 @@ class PreviewFragment : Fragment() {
     }
 
     private fun createMoviesPreview(rootView: View) {
+        val args = arguments
+        val type = args.getString("type", "projected")
         val recyclerView: RecyclerView = rootView.findViewById(R.id.moviesPreview)
-        recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context))
-        rootView.findViewById<TextView>(R.id.sectionTitleTxt).text = getString(R.string.movies_in_projection)
-        val moviesPreviewAdapter = MoviesPreviewAdapter(rootView.context, Movies.getProjectedMovies())
+        var movies = ArrayList<Movie>()
+
+        when(type){
+            "projected" ->{
+                recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context))
+                rootView.findViewById<TextView>(R.id.sectionTitleTxt).text = getString(R.string.movies_in_projection)
+                movies = Movies.getProjectedMovies()
+            }
+            "related" ->{
+                recyclerView.layoutManager = GridLayoutManager(rootView.context, 1, GridLayoutManager.HORIZONTAL, false)
+                val movieId = args.getInt("id")
+                rootView.findViewById<View>(R.id.sectionTitleTxt).visibility = View.GONE
+                movies = Movies.getRelatedMovies(movieId)
+            }
+        }
+
+        val moviesPreviewAdapter = MoviesPreviewAdapter(rootView.context, movies)
         recyclerView.adapter = moviesPreviewAdapter
     }
 }

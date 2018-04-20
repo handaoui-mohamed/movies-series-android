@@ -5,10 +5,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.handaoui.movies.R
+import com.handaoui.movies.fakers.Comments
 import com.handaoui.movies.fakers.Movies
 import com.handaoui.movies.fakers.User
 import com.handaoui.movies.fragments.PersonsFragment
+import com.handaoui.movies.fragments.PreviewFragment
 import kotlinx.android.synthetic.main.activity_movie_details.*
+import android.content.Intent
+import android.net.Uri
 
 
 class MovieDetailsActivity : AppCompatActivity() {
@@ -28,6 +32,7 @@ class MovieDetailsActivity : AppCompatActivity() {
             movieRating.numStars = 5
             movieRating.rating = movie.rating / 2
             movieDescriptionTxt.text = movie.description
+            movieReleaseTxt.text = movie.date
 
             seeMoreBtn.setOnClickListener {
                 movieDescriptionTxt.maxLines = 200
@@ -40,6 +45,12 @@ class MovieDetailsActivity : AppCompatActivity() {
                 projectRoomNameTxt.text = projectRoom.name
                 projectRoomImg.setImageResource(projectRoom.image)
                 projectRoomDescriptionTxt.text = projectRoom.address
+
+                projectRoomBtn.setOnClickListener{
+                    val map = "http://maps.google.co.in/maps?q=" + projectRoom.address
+                    val i = Intent(Intent.ACTION_VIEW, Uri.parse(map))
+                    startActivity(i)
+                }
             } else {
                 // remove projectRoom
                 movieDetailsContainer.removeView(projectRoomContainer)
@@ -55,7 +66,7 @@ class MovieDetailsActivity : AppCompatActivity() {
             }
 
             // persons fragment
-            val personsFragment  = PersonsFragment().apply {
+            val personsFragment = PersonsFragment().apply {
                 arguments = Bundle().apply {
                     putInt("id", movieId)
                 }
@@ -64,17 +75,38 @@ class MovieDetailsActivity : AppCompatActivity() {
                     .beginTransaction()
                     .replace(R.id.personsContainer, personsFragment, personsFragment.tag)
                     .commit()
+
+            // latest comment
+            val comments = Comments.getMovieComments(/*movieId*/0) // for testing purposes
+            val latestComment = comments[comments.size - 1]
+            commentatorNameTxt.text = latestComment.commentator
+            latestRating.rating =  latestComment.rating / 2
+            commentContent.text = latestComment.content
+
+            seeCommentsBtn.setOnClickListener {  }
+
+            // related movies
+            val moviesPreviewFragment = PreviewFragment().apply {
+                arguments = Bundle().apply {
+                    putString("type", "related")
+                    putInt("id", movieId)
+                }
+            }
+
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.relatedMoviesContainer, moviesPreviewFragment, moviesPreviewFragment.tag)
+                    .commit()
         }
     }
 
-    private fun toggleFavorite(isFavorite: Boolean, updateProfile:Boolean = false, movieId:Int = -1){
+    private fun toggleFavorite(isFavorite: Boolean, updateProfile: Boolean = false, movieId: Int = -1) {
         if (isFavorite) {
             favoriteBtn.setImageResource(R.drawable.zzz_heart)
-            if(updateProfile) User.profile.addMovie(movieId)
-        }
-        else {
+            if (updateProfile) User.profile.addMovie(movieId)
+        } else {
             favoriteBtn.setImageResource(R.drawable.ic_favorite_border_black_24dp)
-            if(updateProfile) User.profile.removeMovie(movieId)
+            if (updateProfile) User.profile.removeMovie(movieId)
         }
     }
 

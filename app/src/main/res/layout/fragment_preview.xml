@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_height="wrap_content"
+    android:id="@+id/moviesContainer"
     tools:context=".activities.DrawerActivity">
 
     <TextView

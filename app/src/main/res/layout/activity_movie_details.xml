@@ -207,6 +207,7 @@
                     android:text="Jane Doe"
                     android:layout_gravity="center_horizontal"
                     android:padding="5dp"
+                    android:id="@+id/commentatorNameTxt"
                     android:textColor="@color/white"
                     android:layout_weight="1"
                     android:textSize="15sp"/>
@@ -232,6 +233,7 @@
                 android:text="In publishing and graphic design, lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document without relying on meaningful content (also called greeking). Replacing the actual content with placeholder text allows designers to design the form of the content before the content itself has"
                 android:layout_gravity="center_horizontal"
                 android:padding="5dp"
+                android:id="@+id/commentContent"
                 android:textColor="@color/white"
                 android:textSize="15sp"/>
 
@@ -264,6 +266,22 @@
                     android:padding="5dp"
                     android:textSize="15sp"/>
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/related_movies"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+
+            <FrameLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/relatedMoviesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"/>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
