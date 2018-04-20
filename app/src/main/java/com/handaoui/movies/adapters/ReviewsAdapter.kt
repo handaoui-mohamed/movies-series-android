@@ -52,17 +52,5 @@ class ReviewsAdapter(private val context: Context, private val cartList: Mutable
         return cartList.size
     }
 
-    fun removeItem(position: Int) {
-        cartList.removeAt(position)
-        // notify the item removed by position
-        // to perform recycler view delete animations
-        // NOTE: don't call notifyDataSetChanged()
-        notifyItemRemoved(position)
-    }
 
-    fun restoreItem(item: Comment, position: Int) {
-        cartList.add(position, item)
-        // notify item added by position
-        notifyItemInserted(position)
-    }
 }

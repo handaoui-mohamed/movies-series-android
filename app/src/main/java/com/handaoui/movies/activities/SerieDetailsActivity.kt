@@ -15,9 +15,15 @@ import com.handaoui.movies.adapters.ReviewsAdapter
 import com.handaoui.movies.fakers.Series
 import kotlinx.android.synthetic.main.activity_serie_details.*
 import android.content.Intent
+import android.util.Log
+import com.handaoui.movies.adapters.SeasonsListAdapter
+import com.handaoui.movies.fakers.Comments
 import com.handaoui.movies.fakers.User
 import com.handaoui.movies.fragments.PersonsFragment
+import com.handaoui.movies.fragments.PreviewFragment
+import com.handaoui.movies.fragments.SeriePreviewFragment
 import kotlinx.android.synthetic.main.activity_movie_details.*
+import kotlinx.android.synthetic.main.latest_comment.*
 import kotlinx.android.synthetic.main.summary.*
 
 
@@ -53,17 +59,17 @@ class SerieDetailsActivity : AppCompatActivity() {
                 toggleFavorite(isFavorite, true, serieId)
             }
 
-            val personsFragment = PersonsFragment().apply {
-                arguments = Bundle().apply {
-                    putInt("id", serieId)
-                    putInt("origin", 1)
-                }
-            }
-
-            supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.personsContainer, personsFragment, personsFragment.tag)
-                    .commit()
+//            val personsFragment = PersonsFragment().apply {
+//                arguments = Bundle().apply {
+//                    putInt("id", serieId)
+//                    putInt("origin", 1)
+//                }
+//            }
+//
+//            supportFragmentManager
+//                    .beginTransaction()
+//                    .replace(R.id.personsContainer, personsFragment, personsFragment.tag)
+//                    .commit()
 
 
         }
@@ -75,6 +81,45 @@ class SerieDetailsActivity : AppCompatActivity() {
             }
         })
 
+
+        val mLayoutManager = LinearLayoutManager(this.applicationContext)
+        val mAdapter = SeasonsListAdapter(this, Series.list[0].seasons)
+
+        var recyclerView = findViewById<RecyclerView>(R.id.seasons_list_recycler).apply {
+            layoutManager= mLayoutManager
+            itemAnimator = DefaultItemAnimator()
+            adapter = mAdapter
+        }
+        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+        val comments = Comments.getMovieComments(/*movieId*/0) // for testing purposes
+        val latestComment = comments[comments.size - 1]
+        commentatorNameTxt.text = latestComment.commentator
+        latestRating.rating = latestComment.rating / 2
+        Log.i("rating", latestRating.rating.toString())
+        commentContent.text = latestComment.content
+
+        seeCommentsBtn.setOnClickListener {
+            val intent = Intent(this, ReviewsActivity::class.java).apply {
+                putExtra("type", "Movie")
+                putExtra("id", serieId)
+            }
+            startActivity(intent)
+            overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
+        }
+
+        // related movies
+        val seriesPreviewFragment = SeriePreviewFragment().apply {
+            arguments = Bundle().apply {
+                putString("type", "related")
+                putInt("id", serieId)
+            }
+        }
+
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.relatedSeriesContainer, seriesPreviewFragment, seriesPreviewFragment.tag)
+                .commit()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

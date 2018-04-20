@@ -5,6 +5,7 @@ import kotlin.collections.ArrayList
 
 data class SeriesSeason(
 //        val series: Series,
+        val id : Int,
         val cover: Int,
         val description: String,
         val episodes: ArrayList<SeasonEpisode> = ArrayList(),

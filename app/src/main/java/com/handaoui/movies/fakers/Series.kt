@@ -1,10 +1,8 @@
 package com.handaoui.movies.fakers
 
 import com.handaoui.movies.R
-import com.handaoui.movies.data.Comment
-import com.handaoui.movies.data.Person
+import com.handaoui.movies.data.*
 import com.handaoui.movies.data.Series
-import com.handaoui.movies.data.SeriesSeason
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -25,7 +23,7 @@ object Series {
                             Comment("Achraf", "Nope", 2.2f)
                     ),
                     seasons = arrayListOf(
-                            SeriesSeason(R.drawable.gameofthrones, "season one of GOT",
+                            SeriesSeason(0, R.drawable.gameofthrones, "season one of GOT",
                                     ArrayList(),
                                     arrayListOf(Persons.list[1], Persons.list[0]),
                                     arrayListOf(Persons.list[2]),
@@ -36,7 +34,20 @@ object Series {
                                             Comment("Amine", "Yey", 3.5f),
                                             Comment("Achraf", "Nope", 2.2f)
                                     )
+                                    ),
+
+                            SeriesSeason(1, R.drawable.gameofthrones, "season two of GOT",
+                                    ArrayList(),
+                                    arrayListOf(Persons.list[1], Persons.list[0]),
+                                    arrayListOf(Persons.list[2]),
+                                    "11/01/2015",
+                                    "",
+                                    arrayListOf(
+                                            Comment("Adem", "Yes", 4.5f),
+                                            Comment("Amine", "Yey", 3.5f),
+                                            Comment("Achraf", "Nope", 2.2f)
                                     )
+                            )
                     )
             ),
             Series(
@@ -45,13 +56,40 @@ object Series {
                     cover = R.drawable.breakingbad,
                     description = "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
                     rating = 9.5f,
-                    genre = listOf("Crime" , "Drama" ,"Thriller"),
+                    genre = listOf("Crime" ,"Thriller"),
                     date = "20/01/2008",
                     comments = arrayListOf(
                             Comment("Adem", "Yes", 4.5f),
                             Comment("Amine", "Yey", 3.5f),
                             Comment("Achraf", "Nope", 2.2f)
+                            ),
+                    seasons = arrayListOf(
+                            SeriesSeason(0, R.drawable.gameofthrones, "season one of GOT",
+                                    ArrayList(),
+                                    arrayListOf(Persons.list[1], Persons.list[0]),
+                                    arrayListOf(Persons.list[2]),
+                                    "17/04/2011",
+                                    "",
+                                    arrayListOf(
+                                            Comment("Adem", "Yes", 4.5f),
+                                            Comment("Amine", "Yey", 3.5f),
+                                            Comment("Achraf", "Nope", 2.2f)
+                                    )
+                            ),
+
+                            SeriesSeason(1, R.drawable.gameofthrones, "season two of GOT",
+                                    ArrayList(),
+                                    arrayListOf(Persons.list[1], Persons.list[0]),
+                                    arrayListOf(Persons.list[2]),
+                                    "11/01/2015",
+                                    "",
+                                    arrayListOf(
+                                            Comment("Adem", "Yes", 4.5f),
+                                            Comment("Amine", "Yey", 3.5f),
+                                            Comment("Achraf", "Nope", 2.2f)
+                                    )
                             )
+                    )
             ),
             Series(
                     id = 2,
@@ -65,6 +103,33 @@ object Series {
                         Comment("Adem", "Yes", 4.5f),
                         Comment("Amine", "Yey", 3.5f),
                         Comment("Achraf", "Nope", 2.2f)
+                    ),
+                    seasons = arrayListOf(
+                            SeriesSeason(0, R.drawable.gameofthrones, "season one of GOT",
+                                    ArrayList(),
+                                    arrayListOf(Persons.list[1], Persons.list[0]),
+                                    arrayListOf(Persons.list[2]),
+                                    "17/04/2011",
+                                    "",
+                                    arrayListOf(
+                                            Comment("Adem", "Yes", 4.5f),
+                                            Comment("Amine", "Yey", 3.5f),
+                                            Comment("Achraf", "Nope", 2.2f)
+                                    )
+                            ),
+
+                            SeriesSeason(1, R.drawable.gameofthrones, "season two of GOT",
+                                    ArrayList(),
+                                    arrayListOf(Persons.list[1], Persons.list[0]),
+                                    arrayListOf(Persons.list[2]),
+                                    "11/01/2015",
+                                    "",
+                                    arrayListOf(
+                                            Comment("Adem", "Yes", 4.5f),
+                                            Comment("Amine", "Yey", 3.5f),
+                                            Comment("Achraf", "Nope", 2.2f)
+                                    )
+                            )
                     )
 
             ),
@@ -80,15 +145,53 @@ object Series {
                             Comment("Adem", "Yes", 4.5f),
                             Comment("Amine", "Yey", 3.5f),
                             Comment("Achraf", "Nope", 2.2f)
+                            ),
+                    seasons = arrayListOf(
+                            SeriesSeason(0, R.drawable.gameofthrones, "season one of GOT",
+                                    ArrayList(),
+                                    arrayListOf(Persons.list[1], Persons.list[0]),
+                                    arrayListOf(Persons.list[2]),
+                                    "17/04/2011",
+                                    "",
+                                    arrayListOf(
+                                            Comment("Adem", "Yes", 4.5f),
+                                            Comment("Amine", "Yey", 3.5f),
+                                            Comment("Achraf", "Nope", 2.2f)
+                                    )
+                            ),
+
+                            SeriesSeason(1, R.drawable.gameofthrones, "season two of GOT",
+                                    ArrayList(),
+                                    arrayListOf(Persons.list[1], Persons.list[0]),
+                                    arrayListOf(Persons.list[2]),
+                                    "11/01/2015",
+                                    "",
+                                    arrayListOf(
+                                            Comment("Adem", "Yes", 4.5f),
+                                            Comment("Amine", "Yey", 3.5f),
+                                            Comment("Achraf", "Nope", 2.2f)
+                                    )
                             )
+                    )
             )
     )
 //
-//    fun getProjectedMovies(): ArrayList<Movie> {
-//        val filtered = ArrayList<Movie>()
-//        list.forEach { movie -> if (movie.projectRoom !== null) filtered.add(movie) }
+//    fun getProjectedSeriess(): ArrayList<Series> {
+//        val filtered = ArrayList<Series>()
+//        list.forEach { serie -> if (serie.projectRoom !== null) filtered.add(serie) }
 //        return filtered
 //    }
+
+    fun getRelatedSeriess(serieId: Int): ArrayList<Series> {
+        val serie = getSeriesById(serieId)
+        val filtered = ArrayList<Series>()
+
+        // TODO: replace isNotEmpty() with a fixed number like 2
+        list.forEach { mv -> if (mv.id != serie!!.id && mv.genre.intersect(serie.genre).isNotEmpty()) filtered.add(mv) }
+
+        return filtered
+    }
+
 
     fun getSeriesById(id: Int): Series? = list.find { series -> series.id == id }
 }

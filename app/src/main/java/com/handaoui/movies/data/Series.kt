@@ -14,6 +14,6 @@ data class Series(
         val trailerUrl: String = "",
         var comments: ArrayList<Comment> = ArrayList(),
         var rating: Float = 0f,
-        val genre: List<String>? = null,
+        val genre: List<String> = ArrayList(),
         val seasons: ArrayList<SeriesSeason> = ArrayList()
 )

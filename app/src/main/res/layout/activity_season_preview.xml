@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:id="@+id/serieDetailsContainer"
+            android:id="@+id/seasonDetailsContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="5dp"
@@ -76,10 +76,10 @@
                 layout="@layout/summary"/>
 
             <!--<FrameLayout-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:id="@+id/personsContainer"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="200dp"/>-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:id="@+id/personsContainer"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="200dp"/>-->
 
 
             <include android:id="@+id/news_title"
@@ -146,19 +146,5 @@
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:clickable="true"
-        android:id="@+id/serfavoriteBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:layout_anchor="@+id/appbar"
-        android:tint="@color/white"
-        android:scaleType="center"
-        android:src="@drawable/ic_favorite_border_black_24dp"
-        android:padding="0dp"
-        app:layout_anchorGravity="bottom|right|end"
-        android:focusable="true" />
 
 </android.support.design.widget.CoordinatorLayout>

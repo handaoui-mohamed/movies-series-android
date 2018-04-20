@@ -19,8 +19,6 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 
 
-
-
 class SeriePreviewFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -36,10 +34,32 @@ class SeriePreviewFragment : Fragment() {
     }
 
     private fun createSeriesPreview(rootView: View) {
+//        val recyclerView: RecyclerView = rootView.findViewById(R.id.seriesPreview)
+//        recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context)) as RecyclerView.LayoutManager?
+//        rootView.findViewById<TextView>(R.id.sectionTitleTxt).text = getString(R.string.trending_series)
+//        val seriesPreviewAdapter = SeriePreviewAdapter(rootView.context, Series.list)
+//        recyclerView.adapter = seriesPreviewAdapter
+
+        val args = arguments
+        val type = args!!.getString("type", "all")
         val recyclerView: RecyclerView = rootView.findViewById(R.id.seriesPreview)
-        recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context)) as RecyclerView.LayoutManager?
-        rootView.findViewById<TextView>(R.id.sectionTitleTxt).text = getString(R.string.trending_series)
-        val seriesPreviewAdapter = SeriePreviewAdapter(rootView.context, Series.list)
+        var series = ArrayList<com.handaoui.movies.data.Series>()
+
+        when(type){
+            "all" ->{
+                recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context))
+                rootView.findViewById<TextView>(R.id.sectionTitleTxt).visibility = View.GONE
+                series = Series.list
+            }
+            "related" ->{
+                recyclerView.layoutManager = GridLayoutManager(rootView.context, 1, GridLayoutManager.HORIZONTAL, false)
+                val movieId = args.getInt("id")
+                rootView.findViewById<View>(R.id.sectionTitleTxt).visibility = View.GONE
+                series = Series.getRelatedSeriess(movieId)
+            }
+        }
+
+        val seriesPreviewAdapter = SeriePreviewAdapter(rootView.context, series)
         recyclerView.adapter = seriesPreviewAdapter
     }
 }

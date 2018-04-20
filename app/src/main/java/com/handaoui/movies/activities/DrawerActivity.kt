@@ -80,7 +80,12 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
             R.id.nav_series -> {
                 ViewCompat.setElevation(appBarLayout, 0f)
                 setTitle(R.string.tvShows)
-                loadFragment(SeriePreviewFragment())
+                val seriesPreviewFragment = SeriePreviewFragment().apply {
+                    arguments = Bundle().apply {
+                        putString("type", "all")
+                    }
+                }
+                loadFragment(seriesPreviewFragment)
             }
             R.id.nav_bookmark -> {
                 ViewCompat.setElevation(appBarLayout, 0f)
