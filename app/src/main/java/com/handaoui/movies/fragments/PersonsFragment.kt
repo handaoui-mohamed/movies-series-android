@@ -13,10 +13,9 @@ import com.handaoui.movies.R
 import com.handaoui.movies.adapters.PersonTabsAdapter
 
 class PersonsFragment : Fragment() {
-
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = inflater!!.inflate(R.layout.fragment_persons, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_persons, container, false)
         configureTabLayout(rootView)
         return rootView
     }
@@ -27,7 +26,7 @@ class PersonsFragment : Fragment() {
 
         tabLayout.addTab(tabLayout.newTab().setText(resources.getString(R.string.actors)))
         tabLayout.addTab(tabLayout.newTab().setText(resources.getString(R.string.directors)))
-        val dataId = arguments.getInt("id")
+        val dataId = arguments!!.getInt("id")
 
         pager.adapter = PersonTabsAdapter(childFragmentManager, tabLayout.tabCount, dataId)
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))

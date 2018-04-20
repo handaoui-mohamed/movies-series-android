@@ -16,8 +16,8 @@ import com.handaoui.movies.fakers.Movies
 
 
 class PreviewFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater!!.inflate(R.layout.fragment_preview, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.fragment_preview, container, false)
         this.createMoviesPreview(rootView)
         return rootView
     }
@@ -30,7 +30,7 @@ class PreviewFragment : Fragment() {
 
     private fun createMoviesPreview(rootView: View) {
         val args = arguments
-        val type = args.getString("type", "projected")
+        val type = args!!.getString("type", "projected")
         val recyclerView: RecyclerView = rootView.findViewById(R.id.moviesPreview)
         var movies = ArrayList<Movie>()
 

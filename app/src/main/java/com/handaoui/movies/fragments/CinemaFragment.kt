@@ -12,9 +12,9 @@ import com.handaoui.movies.R
 import com.handaoui.movies.adapters.CinemaTabsAdapter
 
 class CinemaFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = inflater!!.inflate(R.layout.fragment_cinema, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_cinema, container, false)
         configureTabLayout(rootView)
         return rootView
     }

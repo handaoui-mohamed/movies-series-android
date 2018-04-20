@@ -13,6 +13,7 @@ import com.handaoui.movies.fragments.PreviewFragment
 import kotlinx.android.synthetic.main.activity_movie_details.*
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.latest_comment.*
 import kotlinx.android.synthetic.main.movie_projection_room.*
@@ -36,7 +37,7 @@ class MovieDetailsActivity : AppCompatActivity() {
             movieRating.numStars = 5
             movieRating.rating = movie.rating / 2
             movieDescriptionTxt.text = movie.description
-            movieReleaseTxt.text = "Release date:  "+movie.date
+            movieReleaseTxt.text = "${resources.getString(R.string.releaseDate)}:  ${movie.date}"
 
             seeMoreBtn.setOnClickListener {
                 movieDescriptionTxt.maxLines = 200
@@ -50,7 +51,7 @@ class MovieDetailsActivity : AppCompatActivity() {
                 projectRoomImg.setImageResource(projectRoom.image)
                 projectRoomDescriptionTxt.text = projectRoom.address
 
-                projectRoomBtn.setOnClickListener{
+                projectRoomBtn.setOnClickListener {
                     val map = "http://maps.google.co.in/maps?q=" + projectRoom.address
                     val i = Intent(Intent.ACTION_VIEW, Uri.parse(map))
                     startActivity(i)
@@ -84,10 +85,18 @@ class MovieDetailsActivity : AppCompatActivity() {
             val comments = Comments.getMovieComments(/*movieId*/0) // for testing purposes
             val latestComment = comments[comments.size - 1]
             commentatorNameTxt.text = latestComment.commentator
-            latestRating.rating =  latestComment.rating / 2
+            latestRating.rating = latestComment.rating / 2
+            Log.i("rating", latestRating.rating.toString())
             commentContent.text = latestComment.content
 
-            seeCommentsBtn.setOnClickListener {  }
+            seeCommentsBtn.setOnClickListener {
+                val intent = Intent(this, ReviewsActivity::class.java).apply {
+                    putExtra("type", "Movie")
+                    putExtra("id", movieId)
+                }
+                startActivity(intent)
+                overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
+            }
 
             // related movies
             val moviesPreviewFragment = PreviewFragment().apply {

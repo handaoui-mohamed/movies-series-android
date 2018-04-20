@@ -23,8 +23,8 @@ import android.support.v7.widget.LinearLayoutManager
 
 class SeriePreviewFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater!!.inflate(R.layout.fragment_serie_preview, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.fragment_serie_preview, container, false)
         this.createSeriesPreview(rootView)
         return rootView
     }

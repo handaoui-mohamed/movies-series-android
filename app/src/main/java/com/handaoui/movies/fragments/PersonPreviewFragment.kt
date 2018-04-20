@@ -14,14 +14,15 @@ import com.handaoui.movies.fakers.Movies
 
 
 class PersonPreviewFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater!!.inflate(R.layout.fragment_person_preview, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.fragment_person_preview, container, false)
         this.createPersonPreview(rootView)
         return rootView
     }
+
     private fun createPersonPreview(rootView: View) {
         val args = arguments
-        val type = args.getString("type")
+        val type = args!!.getString("type")
         val forActors = args.getString("personType") == "actors"
         val id = args.getInt("id")
         var persons = ArrayList<Person>()
@@ -33,8 +34,8 @@ class PersonPreviewFragment : Fragment() {
         }
         val recyclerView: RecyclerView = rootView.findViewById(R.id.personsPreview)
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false)
-        val personPreviewAdapter = PersonPreviewAdapter(context, persons)
+        recyclerView.layoutManager = GridLayoutManager(rootView.context, 2, GridLayoutManager.HORIZONTAL, false)
+        val personPreviewAdapter = PersonPreviewAdapter(rootView.context, persons)
         recyclerView.adapter = personPreviewAdapter
     }
 }
