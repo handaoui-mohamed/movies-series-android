@@ -34,14 +34,13 @@ class MovieDetailsActivity : AppCompatActivity() {
 
             // Movie details
             movieTitleTxt.text = movie.title
-            movieRating.numStars = 5
             movieRating.rating = movie.rating / 2
             movieDescriptionTxt.text = movie.description
             movieReleaseTxt.text = "${resources.getString(R.string.releaseDate)}:  ${movie.date}"
 
             seeMoreBtn.setOnClickListener {
                 movieDescriptionTxt.maxLines = 200
-                movieDetailsContainer.removeView(seeMoreBtn)
+                seeMoreBtn.visibility = View.GONE
             }
 
             // Projection Room
