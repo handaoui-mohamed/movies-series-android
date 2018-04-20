@@ -74,6 +74,7 @@ class MovieDetailsActivity : AppCompatActivity() {
             val personsFragment = PersonsFragment().apply {
                 arguments = Bundle().apply {
                     putInt("id", movieId)
+                    putInt("origin", 0)
                 }
             }
             supportFragmentManager

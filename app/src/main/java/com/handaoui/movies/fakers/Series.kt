@@ -2,7 +2,9 @@ package com.handaoui.movies.fakers
 
 import com.handaoui.movies.R
 import com.handaoui.movies.data.Comment
+import com.handaoui.movies.data.Person
 import com.handaoui.movies.data.Series
+import com.handaoui.movies.data.SeriesSeason
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -21,6 +23,20 @@ object Series {
                             Comment("Adem", "Yes", 4.5f),
                             Comment("Amine", "Yey", 3.5f),
                             Comment("Achraf", "Nope", 2.2f)
+                    ),
+                    seasons = arrayListOf(
+                            SeriesSeason(R.drawable.gameofthrones, "season one of GOT",
+                                    ArrayList(),
+                                    arrayListOf(Persons.list[1], Persons.list[0]),
+                                    arrayListOf(Persons.list[2]),
+                                    "17/04/2011",
+                                    "",
+                                    arrayListOf(
+                                            Comment("Adem", "Yes", 4.5f),
+                                            Comment("Amine", "Yey", 3.5f),
+                                            Comment("Achraf", "Nope", 2.2f)
+                                    )
+                                    )
                     )
             ),
             Series(

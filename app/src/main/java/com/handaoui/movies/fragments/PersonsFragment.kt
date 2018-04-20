@@ -27,8 +27,9 @@ class PersonsFragment : Fragment() {
         tabLayout.addTab(tabLayout.newTab().setText(resources.getString(R.string.actors)))
         tabLayout.addTab(tabLayout.newTab().setText(resources.getString(R.string.directors)))
         val dataId = arguments!!.getInt("id")
+        val origin = arguments!!.getInt("origin")
 
-        pager.adapter = PersonTabsAdapter(childFragmentManager, tabLayout.tabCount, dataId)
+        pager.adapter = PersonTabsAdapter(childFragmentManager, tabLayout.tabCount, dataId, origin)
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

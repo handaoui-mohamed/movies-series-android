@@ -6,5 +6,6 @@ object User {
     val profile = UserProfile("Jone Doe").apply {
         addMovie(1)
         addSeries(0)
+        addSeries(2)
     }
 }

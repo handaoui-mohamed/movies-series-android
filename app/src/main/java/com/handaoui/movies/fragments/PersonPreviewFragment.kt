@@ -11,6 +11,7 @@ import com.handaoui.movies.R
 import com.handaoui.movies.adapters.PersonPreviewAdapter
 import com.handaoui.movies.data.Person
 import com.handaoui.movies.fakers.Movies
+import com.handaoui.movies.fakers.Series
 
 
 class PersonPreviewFragment : Fragment() {
@@ -30,6 +31,11 @@ class PersonPreviewFragment : Fragment() {
             "movie" -> {
                 val movie = Movies.getMovieById(id)
                 persons = if (forActors) movie!!.actors else movie!!.directors
+            }
+            "serie" -> {
+                val serie = Series.getSeriesById(id)
+                persons = if (forActors) serie!!.seasons[0].actors else serie!!.seasons[0].directors
+
             }
         }
         val recyclerView: RecyclerView = rootView.findViewById(R.id.personsPreview)

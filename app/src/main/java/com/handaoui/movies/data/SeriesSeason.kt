@@ -10,7 +10,7 @@ data class SeriesSeason(
         val episodes: ArrayList<SeasonEpisode> = ArrayList(),
         val actors: ArrayList<Person> = ArrayList(),
         val directors: ArrayList<Person> = ArrayList(),
-        val date: Date = Date(),
+        val date: String = Date().toString(),
         val trailerUrl: String,
         var comments: ArrayList<Comment> = ArrayList()
 )
