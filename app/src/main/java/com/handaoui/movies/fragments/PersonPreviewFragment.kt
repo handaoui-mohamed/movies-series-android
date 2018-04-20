@@ -1,6 +1,5 @@
 package com.handaoui.movies.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -12,9 +11,6 @@ import com.handaoui.movies.R
 import com.handaoui.movies.adapters.PersonPreviewAdapter
 import com.handaoui.movies.data.Person
 import com.handaoui.movies.fakers.Movies
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.LinearSnapHelper
-import android.support.v7.widget.SnapHelper
 
 
 class PersonPreviewFragment : Fragment() {
@@ -23,12 +19,6 @@ class PersonPreviewFragment : Fragment() {
         this.createPersonPreview(rootView)
         return rootView
     }
-
-    private fun calculateNoOfColumns(context: Context): Int {
-        val displayMetrics = context.resources.displayMetrics
-        return (displayMetrics.widthPixels / displayMetrics.density).toInt()
-    }
-
     private fun createPersonPreview(rootView: View) {
         val args = arguments
         val type = args.getString("type")

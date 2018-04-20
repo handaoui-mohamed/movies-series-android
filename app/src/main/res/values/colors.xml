@@ -18,4 +18,5 @@
     <color name="commentTextColor">#222</color>
     <color name="contentTextColor">#111</color>
     <color name="grey">#f3f3f3</color>
+    <color name="lightBackground">#333</color>
 </resources>

@@ -35,4 +35,6 @@
     <string name="add_review">Add review</string>
     <string name="actors">Actors</string>
     <string name="directors">Directors</string>
+    <string name="comments_and_ratings">Comments and Ratings</string>
+    <string name="see_all_comments">See all comments/Add Review</string>
 </resources>
