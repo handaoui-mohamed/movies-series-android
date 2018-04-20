@@ -36,7 +36,7 @@ class MovieDetailsActivity : AppCompatActivity() {
             movieRating.numStars = 5
             movieRating.rating = movie.rating / 2
             movieDescriptionTxt.text = movie.description
-            movieReleaseTxt.text = movie.date
+            movieReleaseTxt.text = "Release date:  "+movie.date
 
             seeMoreBtn.setOnClickListener {
                 movieDescriptionTxt.maxLines = 200

@@ -54,7 +54,7 @@
                     <RatingBar
                         android:id="@+id/movieRating"
                         style="?android:attr/ratingBarStyleSmall"
-                        android:layout_width="130dp"
+                        android:layout_width="98dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:isIndicator="true"
