@@ -13,6 +13,7 @@ import com.handaoui.movies.fragments.PreviewFragment
 import kotlinx.android.synthetic.main.activity_movie_details.*
 import android.content.Intent
 import android.net.Uri
+import android.view.View
 
 
 class MovieDetailsActivity : AppCompatActivity() {
@@ -53,7 +54,7 @@ class MovieDetailsActivity : AppCompatActivity() {
                 }
             } else {
                 // remove projectRoom
-                movieDetailsContainer.removeView(projectRoomContainer)
+                projectRoomContainer.visibility = View.GONE
             }
 
             // favorite button
