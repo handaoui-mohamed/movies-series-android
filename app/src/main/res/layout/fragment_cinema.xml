@@ -16,7 +16,8 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:tabMode="fixed"
             app:tabGravity="fill"/>
 
@@ -26,6 +27,9 @@
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_margin="0dp"
+        android:padding="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
 

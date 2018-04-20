@@ -78,12 +78,6 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 setTitle(R.string.tvShows)
                 loadFragment(SeriePreviewFragment())
             }
-            R.id.nav_persons -> {
-                setTitle(R.string.persons)
-            }
-            R.id.nav_comments -> {
-                setTitle(R.string.comments_ratings)
-            }
             R.id.nav_bookmark -> {
                 setTitle(R.string.bookmark)
             }
