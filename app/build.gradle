@@ -46,4 +46,5 @@ dependencies {
     compile 'com.pavelsikun:materialdesignicons:1.0'
     compile 'com.github.pedrovgs:DraggablePanel:RELEASE-1.9'
     compile 'com.stepstone.apprating:app-rating:2.2.0'
+    compile 'me.zhanghai.android.materialratingbar:library:1.2.0'
 }
