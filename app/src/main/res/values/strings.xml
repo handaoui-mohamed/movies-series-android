@@ -39,4 +39,6 @@
     <string name="see_all_comments">See all comments/Add Review</string>
     <string name="related_movies">Related movies</string>
     <string name="releaseDate">Release date</string>
+    <string name="movies">Movies</string>
+    <string name="projection_rooms">Projection rooms</string>
 </resources>

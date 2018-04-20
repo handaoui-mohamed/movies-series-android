@@ -47,4 +47,5 @@ dependencies {
     compile 'com.github.pedrovgs:DraggablePanel:RELEASE-1.9'
     compile 'com.stepstone.apprating:app-rating:2.2.0'
     compile 'me.zhanghai.android.materialratingbar:library:1.2.0'
+    implementation 'com.android.support:animated-vector-drawable:26.1.0'
 }

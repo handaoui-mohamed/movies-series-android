@@ -54,7 +54,7 @@
                     <me.zhanghai.android.materialratingbar.MaterialRatingBar
                         android:id="@+id/movieRating"
                         style="?android:attr/ratingBarStyleSmall"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:isIndicator="true"
