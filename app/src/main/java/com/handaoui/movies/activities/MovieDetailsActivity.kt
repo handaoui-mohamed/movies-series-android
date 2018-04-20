@@ -14,6 +14,9 @@ import kotlinx.android.synthetic.main.activity_movie_details.*
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import kotlinx.android.synthetic.main.latest_comment.*
+import kotlinx.android.synthetic.main.movie_projection_room.*
+import kotlinx.android.synthetic.main.summary.*
 
 
 class MovieDetailsActivity : AppCompatActivity() {

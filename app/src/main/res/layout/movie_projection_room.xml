@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/projection_room"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:id="@+id/projectRoomContainer"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginEnd="10dp"
+            android:clickable="true"
+            android:id="@+id/projectRoomImg"
+            android:foreground="?android:selectableItemBackground"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/zzz_heart"
+            android:layout_height="match_parent"
+            android:minHeight="200dp"
+            android:contentDescription="@string/movieDetails"
+            android:fitsSystemWindows="true"
+            android:scaleType="centerCrop"
+            android:focusable="true" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ProjectRoom name"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:id="@+id/projectRoomNameTxt"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ProjectRoom description"
+                android:textColor="@color/white"
+                android:id="@+id/projectRoomDescriptionTxt"
+                android:textSize="15sp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/projectRoomBtn"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground">
+                <ImageView
+                    android:clickable="true"
+                    android:layout_height="20dp"
+                    android:layout_width="20dp"
+                    android:src="@drawable/zzz_google_maps"
+                    android:tint="@color/colorAccent"
+                    android:layout_marginTop="5dp"
+                    android:scaleType="centerCrop"
+                    android:focusable="true" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
+                    android:text="@string/see_in_google_maps"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/projectRoomPlaceBtn"
+                    android:padding="5dp"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

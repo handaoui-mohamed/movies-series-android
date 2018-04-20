@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/comments_and_ratings"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/latestComment"
+        android:layout_gravity="center"
+        android:focusable="true">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Jane Doe"
+            android:layout_gravity="center_horizontal"
+            android:padding="5dp"
+            android:id="@+id/commentatorNameTxt"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:textSize="15sp"/>
+
+        <RatingBar
+            android:id="@+id/latestRating"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:isIndicator="true"
+            android:scaleX="1.5"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:numStars="5"
+            android:scaleY="1.5"
+            android:stepSize="0.1" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="In publishing and graphic design, lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document without relying on meaningful content (also called greeking). Replacing the actual content with placeholder text allows designers to design the form of the content before the content itself has"
+        android:layout_gravity="center_horizontal"
+        android:padding="5dp"
+        android:id="@+id/commentContent"
+        android:textColor="@color/white"
+        android:textSize="15sp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seeCommentsBtn"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="3dp"
+        android:foreground="?android:selectableItemBackground">
+        <ImageView
+            android:clickable="true"
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            android:src="@drawable/zzz_comment_multipe_outline"
+            android:tint="@color/colorAccent"
+            android:layout_marginTop="5dp"
+            android:scaleType="centerCrop"
+            android:focusable="true" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/see_all_comments"
+            android:textColor="@color/colorAccent"
+            android:layout_gravity="center_horizontal"
+            android:padding="5dp"
+            android:textSize="15sp"/>
+    </LinearLayout>
+</LinearLayout>

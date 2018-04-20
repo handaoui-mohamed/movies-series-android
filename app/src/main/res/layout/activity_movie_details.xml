@@ -54,129 +54,28 @@
                     <RatingBar
                         android:id="@+id/movieRating"
                         style="?android:attr/ratingBarStyleSmall"
-                        android:layout_width="match_parent"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:isIndicator="true"
-                        android:numStars="5"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="5dp"
                         android:scaleX="1.5"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:numStars="5"
                         android:scaleY="1.5"
                         android:stepSize="0.1" />
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
+            <include android:id="@+id/news_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/summary"
-                android:textColor="@color/white"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
+                layout="@layout/summary"/>
 
-            <TextView
+            <include android:id="@+id/news_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/summary"
-                android:textColor="@color/white"
-                android:id="@+id/movieDescriptionTxt"
-                android:padding="5dp"
-                android:ellipsize="marquee"
-                android:maxLines="5"
-                android:textSize="15sp"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/see_more"
-                android:textStyle="bold"
-                android:id="@+id/seeMoreBtn"
-                android:background="@android:color/transparent"
-                android:textColor="@color/colorAccent"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/projection_room"
-                android:textColor="@color/white"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
-
-            <LinearLayout
-                android:id="@+id/projectRoomContainer"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_marginEnd="10dp"
-                    android:clickable="true"
-                    android:id="@+id/projectRoomImg"
-                    android:foreground="?android:selectableItemBackground"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/zzz_heart"
-                    android:layout_height="match_parent"
-                    android:minHeight="200dp"
-                    android:contentDescription="@string/movieDetails"
-                    android:fitsSystemWindows="true"
-                    android:scaleType="centerCrop"
-                    android:focusable="true" />
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="ProjectRoom name"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"
-                        android:id="@+id/projectRoomNameTxt"
-                        android:textSize="18sp"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="ProjectRoom description"
-                        android:textColor="@color/white"
-                        android:id="@+id/projectRoomDescriptionTxt"
-                        android:textSize="15sp"/>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/projectRoomBtn"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:selectableItemBackground">
-                        <ImageView
-                            android:clickable="true"
-                            android:layout_height="20dp"
-                            android:layout_width="20dp"
-                            android:src="@drawable/zzz_google_maps"
-                            android:tint="@color/colorAccent"
-                            android:layout_marginTop="5dp"
-                            android:scaleType="centerCrop"
-                            android:focusable="true" />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorAccent"
-                            android:textStyle="bold"
-                            android:text="@string/see_in_google_maps"
-                            android:layout_gravity="center_horizontal"
-                            android:id="@+id/projectRoomPlaceBtn"
-                            android:padding="5dp"
-                            android:textSize="15sp"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
+                layout="@layout/movie_projection_room"/>
 
             <FrameLayout
                 android:layout_marginTop="10dp"
@@ -184,88 +83,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"/>
 
-            <TextView
+            <include android:id="@+id/news_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/comments_and_ratings"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
-
-            <LinearLayout
-                android:clickable="true"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/latestComment"
-                android:layout_gravity="center"
-                android:focusable="true">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Jane Doe"
-                    android:layout_gravity="center_horizontal"
-                    android:padding="5dp"
-                    android:id="@+id/commentatorNameTxt"
-                    android:textColor="@color/white"
-                    android:layout_weight="1"
-                    android:textSize="15sp"/>
-
-                <RatingBar
-                    android:id="@+id/latestRating"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="98dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:isIndicator="true"
-                    android:scaleX="1.5"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:numStars="5"
-                    android:scaleY="1.5"
-                    android:stepSize="0.1" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="In publishing and graphic design, lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document without relying on meaningful content (also called greeking). Replacing the actual content with placeholder text allows designers to design the form of the content before the content itself has"
-                android:layout_gravity="center_horizontal"
-                android:padding="5dp"
-                android:id="@+id/commentContent"
-                android:textColor="@color/white"
-                android:textSize="15sp"/>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/seeCommentsBtn"
-                android:layout_gravity="center"
-                android:clickable="true"
-                android:focusable="true"
-                android:padding="3dp"
-                android:foreground="?android:selectableItemBackground">
-                <ImageView
-                    android:clickable="true"
-                    android:layout_height="20dp"
-                    android:layout_width="20dp"
-                    android:src="@drawable/zzz_comment_multipe_outline"
-                    android:tint="@color/colorAccent"
-                    android:layout_marginTop="5dp"
-                    android:scaleType="centerCrop"
-                    android:focusable="true" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:text="@string/see_all_comments"
-                    android:textColor="@color/colorAccent"
-                    android:layout_gravity="center_horizontal"
-                    android:padding="5dp"
-                    android:textSize="15sp"/>
-            </LinearLayout>
+                layout="@layout/latest_comment"/>
 
             <TextView
                 android:layout_width="match_parent"
