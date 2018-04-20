@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.handaoui.movies.R
+import com.handaoui.movies.fragments.BookmarkFragment
 import com.handaoui.movies.fragments.CinemaFragment
 import com.handaoui.movies.fragments.HomeFragment
 import com.handaoui.movies.fragments.SeriePreviewFragment
@@ -24,16 +25,19 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drawer)
+
         setSupportActionBar(toolbar)
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-
         nav_view.setNavigationItemSelectedListener(this)
-        nav_view.menu.getItem(0).isChecked = true
-        loadFragment(HomeFragment())
+
+        if(savedInstanceState == null){
+            nav_view.menu.getItem(0).isChecked = true
+            loadFragment(HomeFragment())
+        }
     }
 
     override fun onBackPressed() {
@@ -79,7 +83,9 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                 loadFragment(SeriePreviewFragment())
             }
             R.id.nav_bookmark -> {
+                ViewCompat.setElevation(appBarLayout, 0f)
                 setTitle(R.string.bookmark)
+                loadFragment(BookmarkFragment())
             }
             R.id.nav_settings -> {
                 setTitle(R.string.settings)

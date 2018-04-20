@@ -13,6 +13,7 @@ import com.handaoui.movies.adapters.MoviesPreviewAdapter
 import com.handaoui.movies.R
 import com.handaoui.movies.data.Movie
 import com.handaoui.movies.fakers.Movies
+import com.handaoui.movies.fakers.User
 
 
 class PreviewFragment : Fragment() {
@@ -44,6 +45,11 @@ class PreviewFragment : Fragment() {
                 recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context))
                 rootView.findViewById<TextView>(R.id.sectionTitleTxt).text = getString(R.string.movies_in_projection)
                 movies = Movies.getProjectedMovies()
+            }
+            "bookmark" ->{
+                recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context))
+                rootView.findViewById<TextView>(R.id.sectionTitleTxt).visibility = View.GONE
+                movies = Movies.getListFromIds(User.profile.favoriteMovies)
             }
             "related" ->{
                 recyclerView.layoutManager = GridLayoutManager(rootView.context, 1, GridLayoutManager.HORIZONTAL, false)

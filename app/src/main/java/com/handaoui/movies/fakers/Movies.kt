@@ -76,6 +76,11 @@ object Movies {
         return filtered
     }
 
+    fun getListFromIds(ids: ArrayList<Int>): ArrayList<Movie> {
+        val filtered = ArrayList<Movie>()
+        list.forEach { movie -> if (ids.contains(movie.id)) filtered.add(movie) }
+        return filtered
+    }
 
     fun getMovieById(id: Int): Movie? = list.find { movie -> movie.id == id }
 }

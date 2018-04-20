@@ -2,8 +2,8 @@ package com.handaoui.movies.data
 
 
 class UserProfile(val name:String) {
-    private val favoriteMovies = ArrayList<Int>()
-    private val favoriteSeries = ArrayList<Int>()
+    val favoriteMovies = ArrayList<Int>()
+    val favoriteSeries = ArrayList<Int>()
 
     fun isMovieFavored(movieId: Int) = favoriteMovies.contains(movieId)
 

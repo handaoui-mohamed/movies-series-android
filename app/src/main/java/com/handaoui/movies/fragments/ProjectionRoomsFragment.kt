@@ -1,5 +1,6 @@
 package com.handaoui.movies.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -19,9 +20,16 @@ class ProjectionRoomsFragment : Fragment() {
         return rootView
     }
 
+    private fun calculateNoOfColumns(context: Context): Int {
+        val displayMetrics = context.resources.displayMetrics
+        val dpWidth = displayMetrics.widthPixels / displayMetrics.density
+        return (dpWidth / 250).toInt()
+    }
+
+
     private fun createMoviesPreview(rootView: View) {
         val recyclerView: RecyclerView = rootView.findViewById(R.id.projectionRoomsContainer)
-        recyclerView.layoutManager = GridLayoutManager(rootView.context, 1)
+        recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context))
 
         val projectionRoomsAdapter = ProjectionRoomsAdapter(rootView.context, ProjectionRooms.list)
         recyclerView.adapter = projectionRoomsAdapter

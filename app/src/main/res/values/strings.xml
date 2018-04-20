@@ -41,4 +41,7 @@
     <string name="releaseDate">Release date</string>
     <string name="movies">Movies</string>
     <string name="projection_rooms">Projection rooms</string>
+    <string name="myMovies">My movies</string>
+    <string name="mySeries">My series</string>
+    <string name="myCinemas">My cinemas</string>
 </resources>
