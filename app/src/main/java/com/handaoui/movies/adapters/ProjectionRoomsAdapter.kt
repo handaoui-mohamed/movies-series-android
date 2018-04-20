@@ -15,6 +15,7 @@ import com.handaoui.movies.data.Movie
 import com.handaoui.movies.R
 import com.handaoui.movies.activities.MovieDetailsActivity
 import com.handaoui.movies.data.ProjectionRoom
+import com.handaoui.movies.fakers.User
 import java.util.ArrayList
 
 
@@ -26,10 +27,17 @@ class ProjectionRoomsAdapter(var context: Context,
 
     override fun onBindViewHolder(holder: CustomViewHolder?, position: Int) {
         val projectionRoom = projectionRoomsList[position]
-        holder?.imageView?.setImageResource(projectionRoom.image)
-        holder?.nameView?.text = projectionRoom.name
-        holder?.addressView?.text = projectionRoom.address
-        holder?.id = projectionRoom.id
+        if(holder != null){
+            holder.imageView.setImageResource(projectionRoom.image)
+            holder.nameView.text = projectionRoom.name
+            holder.addressView.text = projectionRoom.address
+            holder.id = projectionRoom.id
+            if(User.profile.isProjectionRoomFavored(holder.id)){
+                holder.favoriteBtn.setImageResource(R.drawable.zzz_heart)
+            }else{
+                holder.favoriteBtn.setImageResource(R.drawable.ic_favorite_border_black_24dp)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomViewHolder {
@@ -42,6 +50,7 @@ class ProjectionRoomsAdapter(var context: Context,
         var nameView: TextView = view.findViewById(R.id.nameTxt)
         var addressView: TextView = view.findViewById(R.id.addressTxt)
         var imageView: ImageView = view.findViewById(R.id.imageView)
+        var favoriteBtn: ImageView = view.findViewById(R.id.favoriteBtn)
         private var cardView: CardView = view.findViewById(R.id.card_view)
 
         init {
@@ -49,6 +58,16 @@ class ProjectionRoomsAdapter(var context: Context,
                 val map = "http://maps.google.co.in/maps?q=" + addressView.text
                 val googleMap = Intent(Intent.ACTION_VIEW, Uri.parse(map))
                 context.startActivity(googleMap)
+            }
+
+            favoriteBtn.setOnClickListener{
+                if(User.profile.isProjectionRoomFavored(id)){
+                    favoriteBtn.setImageResource(R.drawable.ic_favorite_border_black_24dp)
+                    User.profile.removeProjectionRoom(id)
+                }else{
+                    favoriteBtn.setImageResource(R.drawable.zzz_heart)
+                    User.profile.addProjectionRoom(id)
+                }
             }
         }
     }

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import com.handaoui.movies.R
 import com.handaoui.movies.adapters.ProjectionRoomsAdapter
 import com.handaoui.movies.fakers.ProjectionRooms
+import com.handaoui.movies.fakers.User
 
 
 class ProjectionRoomsFragment : Fragment() {
@@ -31,7 +32,17 @@ class ProjectionRoomsFragment : Fragment() {
         val recyclerView: RecyclerView = rootView.findViewById(R.id.projectionRoomsContainer)
         recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context))
 
-        val projectionRoomsAdapter = ProjectionRoomsAdapter(rootView.context, ProjectionRooms.list)
+        var type = ""
+        if(arguments != null){
+            type = arguments!!.getString("type", "")
+        }
+
+        val projectionRoomsAdapter = ProjectionRoomsAdapter(
+                rootView.context,
+                if(type == "bookmark")
+                    ProjectionRooms.getListFromIds(User.profile.favoriteProjectionRooms)
+                else ProjectionRooms.list
+        )
         recyclerView.adapter = projectionRoomsAdapter
     }
 }

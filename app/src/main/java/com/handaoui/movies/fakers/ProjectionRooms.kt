@@ -43,4 +43,10 @@ object ProjectionRooms {
                     name = "Cinéma Metidja",
                     address = "Alger Ctre 16000")
     )
+
+    fun getListFromIds(ids: ArrayList<Int>): ArrayList<ProjectionRoom> {
+        val filtered = ArrayList<ProjectionRoom>()
+        list.forEach { room -> if (ids.contains(room.id)) filtered.add(room) }
+        return filtered
+    }
 }
