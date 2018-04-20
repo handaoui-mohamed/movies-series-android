@@ -35,6 +35,11 @@ class PreviewFragment : Fragment() {
         var movies = ArrayList<Movie>()
 
         when(type){
+            "all" ->{
+                recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context))
+                rootView.findViewById<TextView>(R.id.sectionTitleTxt).visibility = View.GONE
+                movies = Movies.list
+            }
             "projected" ->{
                 recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context))
                 rootView.findViewById<TextView>(R.id.sectionTitleTxt).text = getString(R.string.movies_in_projection)

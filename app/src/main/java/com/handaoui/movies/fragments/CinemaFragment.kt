@@ -23,8 +23,8 @@ class CinemaFragment : Fragment() {
         val tabLayout: TabLayout = rootView.findViewById(R.id.tab_layout)
         val pager: ViewPager = rootView.findViewById(R.id.pager)
 
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1 Item"))
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2 Item"))
+        tabLayout.addTab(tabLayout.newTab().setText(resources.getString(R.string.movies)))
+        tabLayout.addTab(tabLayout.newTab().setText(resources.getString(R.string.projection_rooms)))
 
         pager.adapter = CinemaTabsAdapter(childFragmentManager, tabLayout.tabCount)
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
