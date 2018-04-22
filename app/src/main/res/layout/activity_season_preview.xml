@@ -79,7 +79,7 @@
             android:layout_marginTop="10dp"
             android:id="@+id/personsContainer"
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="300dp"/>
 
 
             <include android:id="@+id/news_title"
