@@ -231,6 +231,11 @@ object Series {
         return filtered
     }
 
+    fun getListFromIds(ids: ArrayList<Int>): ArrayList<Series> {
+        val filtered = ArrayList<Series>()
+        list.forEach { series -> if (ids.contains(series.id)) filtered.add(series) }
+        return filtered
+    }
 
     fun getSeriesById(id: Int): Series? = list.find { series -> series.id == id }
 }

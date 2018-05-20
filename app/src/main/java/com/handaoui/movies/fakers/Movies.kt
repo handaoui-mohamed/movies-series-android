@@ -12,7 +12,7 @@ object Movies {
     var list: ArrayList<Movie> = arrayListOf(
             Movie(
                     id = 0,
-                        title = "The Revenant",
+                    title = "The Revenant",
                     cover = R.drawable.the_revenant,
                     description = "While exploring uncharted wilderness in 1823, legendary frontiersman Hugh Glass sustains injuries from a brutal bear attack. When his hunting team leaves him for dead, Glass must utilize his survival skills to find a way back home while avoiding natives on their own hunt. Grief-stricken and fueled by vengeance, Glass treks through the wintry terrain to track down John Fitzgerald, the former confidant who betrayed and abandoned him.",
                     rating = 8f,
@@ -54,6 +54,52 @@ object Movies {
                     rating = 7.5f,
                     genres = arrayListOf("Action", "Adventure", "Sci-Fi"),
                     projectRoom = projectRooms[3],
+                    date = "01/01/2017",
+                    actors = persons,
+                    directors = persons
+            ),
+            Movie(
+                    id = 4,
+                    title = "2- The Fate of the Furious",
+                    cover = R.drawable.the_fate_of_the_furious,
+                    description = "Now that Dom and Letty are on their honeymoon and Brian and Mia have retired from the game-and the rest of the crew has been exonerated-the globetrotting team has found a semblance of a normal life. But when a mysterious woman seduces Dom into the world of crime he can't seem to escape and a betrayal of those closest to him, they will face trials that will test them as never before. From the shores of Cuba and the streets of New York City to the icy plains off the arctic Barents Sea, the elite force will crisscross the globe to stop an anarchist from unleashing chaos on the world's stage... and to bring home the man who made them a family.",
+                    rating = 6.7f,
+                    genres = arrayListOf("Action", "Adventure", "Crime ", "Thriller"),
+                    projectRoom = projectRooms[1],
+                    date = "01/01/2017",
+                    actors = persons,
+                    directors = persons
+            ),
+            Movie(
+                    id = 5,
+                    title = "2- Spider-Man: Homecoming",
+                    cover = R.drawable.spiderman_homecoming,
+                    description = "Thrilled by his experience with the Avengers, Peter returns home, where he lives with his Aunt May, under the watchful eye of his new mentor Tony Stark, Peter tries to fall back into his normal daily routine - distracted by thoughts of proving himself to be more than just your friendly neighborhood Spider-Man - but when the Vulture emerges as a new villain, everything that Peter holds most important will be threatened.",
+                    rating = 7.5f,
+                    genres = arrayListOf("Action", "Adventure", "Sci-Fi"),
+                    projectRoom = projectRooms[3],
+                    date = "01/01/2017",
+                    actors = persons,
+                    directors = persons
+            ),
+            Movie(
+                    id = 6,
+                    title = "3- The Fate of the Furious",
+                    cover = R.drawable.the_fate_of_the_furious,
+                    description = "Now that Dom and Letty are on their honeymoon and Brian and Mia have retired from the game-and the rest of the crew has been exonerated-the globetrotting team has found a semblance of a normal life. But when a mysterious woman seduces Dom into the world of crime he can't seem to escape and a betrayal of those closest to him, they will face trials that will test them as never before. From the shores of Cuba and the streets of New York City to the icy plains off the arctic Barents Sea, the elite force will crisscross the globe to stop an anarchist from unleashing chaos on the world's stage... and to bring home the man who made them a family.",
+                    rating = 6.7f,
+                    genres = arrayListOf("Action", "Adventure", "Crime ", "Thriller"),
+                    date = "01/01/2017",
+                    actors = persons,
+                    directors = persons
+            ),
+            Movie(
+                    id = 7,
+                    title = "3- Spider-Man: Homecoming",
+                    cover = R.drawable.spiderman_homecoming,
+                    description = "Thrilled by his experience with the Avengers, Peter returns home, where he lives with his Aunt May, under the watchful eye of his new mentor Tony Stark, Peter tries to fall back into his normal daily routine - distracted by thoughts of proving himself to be more than just your friendly neighborhood Spider-Man - but when the Vulture emerges as a new villain, everything that Peter holds most important will be threatened.",
+                    rating = 7.5f,
+                    genres = arrayListOf("Action", "Adventure", "Sci-Fi"),
                     date = "01/01/2017",
                     actors = persons,
                     directors = persons

@@ -17,6 +17,7 @@ import com.handaoui.movies.fakers.Series
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import com.handaoui.movies.fakers.User
 
 
 class SeriePreviewFragment : Fragment() {
@@ -50,6 +51,11 @@ class SeriePreviewFragment : Fragment() {
                 recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context))
                 rootView.findViewById<TextView>(R.id.sectionTitleTxt).visibility = View.GONE
                 series = Series.list
+            }
+            "bookmark" ->{
+                recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context))
+                rootView.findViewById<TextView>(R.id.sectionTitleTxt).visibility = View.GONE
+                series = Series.getListFromIds(User.profile.favoriteSeries)
             }
             "related" ->{
                 recyclerView.layoutManager = GridLayoutManager(rootView.context, 1, GridLayoutManager.HORIZONTAL, false)
