@@ -12,7 +12,7 @@
         <item name="alertDialogTheme">@style/MyAlertDialogStyle</item>
         <item name="alertDialogStyle">@style/MyAlertDialogStyle</item>
 
-        <!-- Assign custom text styles for title, description, comment -->
+        <!-- Assign custom text styles for titoverviewtion, comment -->
         <!--<item name="appRatingDialogTitleStyle">@style/MyDialogTitleStyle</item>-->
         <!--<item name="appRatingDialogDescriptionStyle">@style/MyDialogDescriptionStyle</item>-->
         <!--<item name="appRatingDialogNoteDescriptionStyle">@style/MyDialogNoteDescriptionStyle</item>-->

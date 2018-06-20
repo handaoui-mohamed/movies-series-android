@@ -6,15 +6,15 @@ import kotlin.collections.ArrayList
 data class Movie(
         val id:Int,
         val title: String,
-        val cover: Int,
-        val description: String = "",
+        val poster_path: String,
+        val overview: String = "",
         val actors: ArrayList<Person> = ArrayList(),
         val directors: ArrayList<Person> = ArrayList(),
         val projectRoom: ProjectionRoom? = null,
-        val date: String = Date().toString(),
+        val release_date: String = Date().toString(),
         val tags: ArrayList<String> = ArrayList(),
         val trailerUrl: String = "",
         var comments: ArrayList<Comment> = ArrayList(),
-        var rating: Float = 0f,
+        var vote_average: Float = 0f,
         val genres: ArrayList<String> = ArrayList()
 )

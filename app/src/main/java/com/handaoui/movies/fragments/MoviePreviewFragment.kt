@@ -5,15 +5,21 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.handaoui.movies.adapters.MoviesPreviewAdapter
 import com.handaoui.movies.R
 import com.handaoui.movies.data.Movie
+import com.handaoui.movies.dtos.MoviesDto
 import com.handaoui.movies.fakers.Movies
 import com.handaoui.movies.fakers.User
+import com.handaoui.movies.services.Api
+import retrofit2.Call
+import retrofit2.Callback
 
 
 class PreviewFragment : Fragment() {
@@ -42,9 +48,22 @@ class PreviewFragment : Fragment() {
                 movies = Movies.list
             }
             "projected" ->{
-                recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context))
-                rootView.findViewById<TextView>(R.id.sectionTitleTxt).text = getString(R.string.movies_in_projection)
-                movies = Movies.getProjectedMovies()
+                Api.movieService.getPlayingMovies(1).enqueue(object : Callback<MoviesDto> {
+                    override fun onResponse(call: Call<MoviesDto>, response: retrofit2.Response<MoviesDto>) {
+                        val res = response.body()
+                        if(res?.results != null){
+                            recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context))
+                            rootView.findViewById<TextView>(R.id.sectionTitleTxt).text = getString(R.string.movies_in_projection)
+                            val moviesPreviewAdapter = MoviesPreviewAdapter(rootView.context, res.results)
+                            recyclerView.adapter = moviesPreviewAdapter
+                            Log.i("MoviePreview",""+res?.results.size)
+                        }
+                    }
+
+                    override fun onFailure(call: Call<MoviesDto>, t: Throwable) {
+                        Log.i("MoviePreview", t.toString())
+                    }
+                })
             }
             "bookmark" ->{
                 recyclerView.layoutManager = GridLayoutManager(rootView.context, calculateNoOfColumns(rootView.context))
@@ -59,7 +78,7 @@ class PreviewFragment : Fragment() {
             }
         }
 
-        val moviesPreviewAdapter = MoviesPreviewAdapter(rootView.context, movies)
-        recyclerView.adapter = moviesPreviewAdapter
+//        val moviesPreviewAdapter = MoviesPreviewAdapter(rootView.context, movies)
+//        recyclerView.adapter = moviesPreviewAdapter
     }
 }

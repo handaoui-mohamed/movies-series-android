@@ -79,7 +79,7 @@ class SeasonPreviewActivity : AppCompatActivity() {
         val latestComment = comments[comments.size - 1]
         commentatorNameTxt.text = latestComment.commentator
         latestRating.rating = latestComment.rating / 2
-        Log.i("rating", latestRating.rating.toString())
+        Log.i("vote_average", latestRating.rating.toString())
         commentContent.text = latestComment.content
 
         seeCommentsBtn.setOnClickListener {

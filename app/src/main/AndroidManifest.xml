@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.handaoui.movies">
+    <uses-permission android:name="android.permission.INTERNET" />
 
-    <application
+     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -28,7 +29,7 @@
         <activity
             android:name=".activities.ReviewsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.SeasonPreviewActivity"></activity>
+        <activity android:name=".activities.SeasonPreviewActivity" />
     </application>
 
 </manifest>

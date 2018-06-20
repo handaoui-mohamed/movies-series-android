@@ -9,9 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.handaoui.movies.Config
 import com.handaoui.movies.data.Movie
 import com.handaoui.movies.R
 import com.handaoui.movies.activities.MovieDetailsActivity
+import com.squareup.picasso.Picasso
 import java.util.ArrayList
 
 
@@ -23,8 +25,11 @@ class MoviesPreviewAdapter(var context: Context,
 
     override fun onBindViewHolder(holder: CustomViewHolder?, position: Int) {
         val movie: Movie = moviesList[position]
-        holder?.imageView?.setImageResource(movie.cover)
-        holder?.projectionRoomView?.text = movie.projectRoom?.name
+        Picasso.with(context)
+                .load(Config.imagePreviewUrl + movie.poster_path)
+//                .centerCrop()
+                .into(holder?.imageView)
+        holder?.projectionRoomView?.text = ""
         holder?.titleView?.text = movie.title
         holder?.id = movie.id
     }

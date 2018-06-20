@@ -30,13 +30,13 @@ class MovieDetailsActivity : AppCompatActivity() {
         val movie = Movies.getMovieById(movieId)
 
         if (movie !== null) {
-            header.setImageResource(movie.cover)
+//            header.setImageResource(movie.poster_path)
 
             // Movie details
             movieTitleTxt.text = movie.title
-            movieRating.rating = movie.rating / 2
-            movieDescriptionTxt.text = movie.description
-            movieReleaseTxt.text = "${resources.getString(R.string.releaseDate)}:  ${movie.date}"
+            movieRating.rating = movie.vote_average / 2
+            movieDescriptionTxt.text = movie.overview
+            movieReleaseTxt.text = "${resources.getString(R.string.releaseDate)}:  ${movie.release_date}"
 
             seeMoreBtn.setOnClickListener {
                 movieDescriptionTxt.maxLines = 200
@@ -86,7 +86,7 @@ class MovieDetailsActivity : AppCompatActivity() {
             val latestComment = comments[comments.size - 1]
             commentatorNameTxt.text = latestComment.commentator
             latestRating.rating = latestComment.rating / 2
-            Log.i("rating", latestRating.rating.toString())
+            Log.i("vote_average", latestRating.rating.toString())
             commentContent.text = latestComment.content
 
             seeCommentsBtn.setOnClickListener {
