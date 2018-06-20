@@ -11,6 +11,6 @@ interface MovieService {
     @GET("movie/now_playing")
     fun getPlayingMovies(@Query("page") page:Int): Call<MoviesDto>
 
-    @GET("movie")
+    @GET("movie/popular")
     fun getAllMovies(@Query("page") page:Int): Call<MoviesDto>
 }
