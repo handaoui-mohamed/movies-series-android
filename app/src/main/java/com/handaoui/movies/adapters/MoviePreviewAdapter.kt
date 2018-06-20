@@ -27,11 +27,20 @@ class MoviesPreviewAdapter(var context: Context,
         val movie: Movie = moviesList[position]
         Picasso.with(context)
                 .load(Config.imagePreviewUrl + movie.poster_path)
-//                .centerCrop()
                 .into(holder?.imageView)
         holder?.projectionRoomView?.text = ""
         holder?.titleView?.text = movie.title
         holder?.id = movie.id
+    }
+
+    fun updateList(movies: ArrayList<Movie>) {
+        moviesList = movies
+        notifyDataSetChanged()
+    }
+
+    fun addToList(movies: ArrayList<Movie>) {
+        moviesList.addAll(movies)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomViewHolder {
