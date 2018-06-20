@@ -79,21 +79,24 @@ class PreviewFragment : Fragment() {
                 totalItemCount = layoutManager.itemCount
                 pastVisiblesItems = layoutManager.findFirstVisibleItemPosition()
 
-                if (visibleItemCount + pastVisiblesItems >= totalItemCount) loadData(moviesPreviewAdapter, type)
+                if ((visibleItemCount + pastVisiblesItems >= totalItemCount) && !loading)
+                    loadData(moviesPreviewAdapter, type)
             }
         })
     }
 
     private fun loadData(moviesPreviewAdapter: MoviesPreviewAdapter, type:String){
-
+        loading = true
         val moviesCallback = object : Callback<MoviesDto> {
             override fun onResponse(call: Call<MoviesDto>, response: retrofit2.Response<MoviesDto>) {
+                loading = false
                 val res = response.body()
                 if (res?.results != null) moviesPreviewAdapter.addToList(res.results)
             }
 
             override fun onFailure(call: Call<MoviesDto>, t: Throwable) {
                 Log.i("Movies Playing", t.toString())
+                loading = false
             }
         }
 
