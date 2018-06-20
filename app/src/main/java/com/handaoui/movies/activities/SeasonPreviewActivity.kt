@@ -28,45 +28,45 @@ class SeasonPreviewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_season_preview)
         val seasonId = intent.getIntExtra("id", 0)
         val seriesId = intent.getIntExtra("seriesId", 0)
-        val season = Series.getSeriesById(seriesId)!!.seasons[seasonId]
+//        val season = Series.getSeriesById(seriesId)!!.seasons[seasonId]
 
-        if(season !== null){
-            seasonHeader.setImageResource(season.cover)
-
-            seasonReleaseTxt.text = "${resources.getString(R.string.releaseDate)}:  ${season.date}"
-
-            seasonTitleTxt.text = "Season ${seasonId+1}"
-            seasonRating.numStars = 5
-            seasonRating.rating = season.rating / 2
-
-            movieDescriptionTxt.text = season.description
-
-            seeMoreBtn.setOnClickListener {
-                movieDescriptionTxt.maxLines = 200
-                seasonDetailsContainer.removeView(seeMoreBtn)
-            }
-
-
-
-            val personsFragment = PersonsFragment().apply {
-                arguments = Bundle().apply {
-                    putInt("id", seasonId)
-                    putInt("origin", 1)
-                }
-            }
-
-            supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.personsContainer, personsFragment, personsFragment.tag)
-                    .commit()
-
-
-        }
+//        if(season !== null){
+//            seasonHeader.setImageResource(season.cover)
+//
+//            seasonReleaseTxt.text = "${resources.getString(R.string.releaseDate)}:  ${season.date}"
+//
+//            seasonTitleTxt.text = "Season ${seasonId+1}"
+//            seasonRating.numStars = 5
+//            seasonRating.rating = season.rating / 2
+//
+//            movieDescriptionTxt.text = season.description
+//
+//            seeMoreBtn.setOnClickListener {
+//                movieDescriptionTxt.maxLines = 200
+//                seasonDetailsContainer.removeView(seeMoreBtn)
+//            }
+//
+//
+//
+//            val personsFragment = PersonsFragment().apply {
+//                arguments = Bundle().apply {
+//                    putInt("id", seasonId)
+//                    putInt("origin", 1)
+//                }
+//            }
+//
+//            supportFragmentManager
+//                    .beginTransaction()
+//                    .replace(R.id.personsContainer, personsFragment, personsFragment.tag)
+//                    .commit()
+//
+//
+//        }
 
 
 
         val mLayoutManager = LinearLayoutManager(this.applicationContext)
-        val mAdapter = EpisodesListAdapter(this, Series.list[seriesId].seasons[seasonId].episodes)
+        val mAdapter = EpisodesListAdapter(this, ArrayList())
 
         var recyclerView = findViewById<RecyclerView>(R.id.seasons_list_recycler).apply {
             layoutManager= mLayoutManager
@@ -82,24 +82,24 @@ class SeasonPreviewActivity : AppCompatActivity() {
         Log.i("vote_average", latestRating.rating.toString())
         commentContent.text = latestComment.content
 
-        seeCommentsBtn.setOnClickListener {
-            val intent = Intent(this, ReviewsActivity::class.java).apply {
-                putExtra("type", "Movie")
-                putExtra("id", seasonId)
-            }
-            startActivity(intent)
-            overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
-        }
+//        seeCommentsBtn.setOnClickListener {
+//            val intent = Intent(this, ReviewsActivity::class.java).apply {
+//                putExtra("type", "Movie")
+//                putExtra("id", seasonId)
+//            }
+//            startActivity(intent)
+//            overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
+//        }
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         return true
     }
 
-    fun seeReviews(view: View) {
-        val intent = Intent(this, ReviewsActivity::class.java).apply {
-            putExtra("source", "Serie")
-        }
-        startActivity(intent)
-    }
+//    fun seeReviews(view: View) {
+//        val intent = Intent(this, ReviewsActivity::class.java).apply {
+//            putExtra("source", "Serie")
+//        }
+//        startActivity(intent)
+//    }
 
 }

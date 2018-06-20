@@ -34,51 +34,51 @@ class SerieDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_serie_details)
         val serieId = intent.getIntExtra("id", 0)
         val serie = Series.getSeriesById(serieId)
-
-        if(serie !== null){
-            Serieheader.setImageResource(serie.cover)
-
-            serieReleaseTxt.text = "${resources.getString(R.string.releaseDate)}:  ${serie.date}"
-
-            serieTitleTxt.text = serie.title
-            serieRating.numStars = 5
-            serieRating.rating = serie.rating / 2
-
-            movieDescriptionTxt.text = serie.description
-
-            seeMoreBtn.setOnClickListener {
-                movieDescriptionTxt.maxLines = 200
-                serieDetailsContainer.removeView(seeMoreBtn)
-            }
-
-            var isFavorite = User.profile.isSeriesFavored(serieId)
-            toggleFavorite(isFavorite)
-
-            serfavoriteBtn.setOnClickListener {
-                isFavorite = !isFavorite
-                toggleFavorite(isFavorite, true, serieId)
-            }
-
-//            val personsFragment = PersonsFragment().apply {
-//                arguments = Bundle().apply {
-//                    putInt("id", serieId)
-//                    putInt("origin", 1)
-//                }
+//
+//        if(serie !== null){
+//            Serieheader.setImageResource(serie.cover)
+//
+//            serieReleaseTxt.text = "${resources.getString(R.string.releaseDate)}:  ${serie.date}"
+//
+//            serieTitleTxt.text = serie.title
+//            serieRating.numStars = 5
+//            serieRating.rating = serie.rating / 2
+//
+//            movieDescriptionTxt.text = serie.description
+//
+//            seeMoreBtn.setOnClickListener {
+//                movieDescriptionTxt.maxLines = 200
+//                serieDetailsContainer.removeView(seeMoreBtn)
 //            }
 //
-//            supportFragmentManager
-//                    .beginTransaction()
-//                    .replace(R.id.personsContainer, personsFragment, personsFragment.tag)
-//                    .commit()
-
-
-        }
+//            var isFavorite = User.profile.isSeriesFavored(serieId)
+//            toggleFavorite(isFavorite)
+//
+//            serfavoriteBtn.setOnClickListener {
+//                isFavorite = !isFavorite
+//                toggleFavorite(isFavorite, true, serieId)
+//            }
+//
+////            val personsFragment = PersonsFragment().apply {
+////                arguments = Bundle().apply {
+////                    putInt("id", serieId)
+////                    putInt("origin", 1)
+////                }
+////            }
+////
+////            supportFragmentManager
+////                    .beginTransaction()
+////                    .replace(R.id.personsContainer, personsFragment, personsFragment.tag)
+////                    .commit()
+//
+//
+//        }
 
 
 
 
         val mLayoutManager = LinearLayoutManager(this.applicationContext)
-        val mAdapter = SeasonsListAdapter(this, Series.list[0].seasons)
+        val mAdapter = SeasonsListAdapter(this, ArrayList())
 
         var recyclerView = findViewById<RecyclerView>(R.id.seasons_list_recycler).apply {
             layoutManager= mLayoutManager
@@ -87,21 +87,21 @@ class SerieDetailsActivity : AppCompatActivity() {
         }
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
-        val comments = Comments.getMovieComments(/*movieId*/0) // for testing purposes
-        val latestComment = comments[comments.size - 1]
-        commentatorNameTxt.text = latestComment.commentator
-        latestRating.rating = latestComment.rating / 2
-        Log.i("vote_average", latestRating.rating.toString())
-        commentContent.text = latestComment.content
+////        val comments = Comments.getMovieComments(/*movieId*/0) // for testing purposes
+////        val latestComment = comments[comments.size - 1]
+//        commentatorNameTxt.text = latestComment.commentator
+//        latestRating.rating = latestComment.rating / 2
+//        Log.i("vote_average", latestRating.rating.toString())
+//        commentContent.text = latestComment.content
 
-        seeCommentsBtn.setOnClickListener {
-            val intent = Intent(this, ReviewsActivity::class.java).apply {
-                putExtra("type", "Movie")
-                putExtra("id", serieId)
-            }
-            startActivity(intent)
-            overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
-        }
+//        seeCommentsBtn.setOnClickListener {
+//            val intent = Intent(this, ReviewsActivity::class.java).apply {
+//                putExtra("type", "Movie")
+//                putExtra("id", serieId)
+//            }
+//            startActivity(intent)
+//            overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
+//        }
 
         // related movies
         val seriesPreviewFragment = SeriePreviewFragment().apply {
@@ -132,12 +132,12 @@ class SerieDetailsActivity : AppCompatActivity() {
         return true
     }
 
-    fun seeReviews(view: View) {
-        val intent = Intent(this, ReviewsActivity::class.java).apply {
-            putExtra(source, "Serie")
-        }
-        startActivity(intent)
-    }
+//    fun seeReviews(view: View) {
+//        val intent = Intent(this, ReviewsActivity::class.java).apply {
+//            putExtra(source, "Serie")
+//        }
+//        startActivity(intent)
+//    }
 
     private fun toggleFavorite(isFavorite: Boolean, updateProfile: Boolean = false, serieId: Int = -1) {
         if (isFavorite) {

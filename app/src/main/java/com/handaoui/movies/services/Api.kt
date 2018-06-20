@@ -25,4 +25,5 @@ object Api {
             .build()
 
     val movieService = retrofit.create(MovieService::class.java)
+    val serieService = retrofit.create(SerieService::class.java)
 }

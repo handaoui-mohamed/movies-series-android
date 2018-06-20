@@ -89,14 +89,14 @@ class MovieDetailsActivity : AppCompatActivity() {
             Log.i("vote_average", latestRating.rating.toString())
             commentContent.text = latestComment.content
 
-            seeCommentsBtn.setOnClickListener {
-                val intent = Intent(this, ReviewsActivity::class.java).apply {
-                    putExtra("type", "Movie")
-                    putExtra("id", movieId)
-                }
-                startActivity(intent)
-                overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
-            }
+//            seeCommentsBtn.setOnClickListener {
+//                val intent = Intent(this, ReviewsActivity::class.java).apply {
+//                    putExtra("type", "Movie")
+//                    putExtra("id", movieId)
+//                }
+//                startActivity(intent)
+//                overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
+//            }
 
             // related movies
             val moviesPreviewFragment = PreviewFragment().apply {

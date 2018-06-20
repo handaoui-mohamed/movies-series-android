@@ -34,7 +34,7 @@ class PersonPreviewFragment : Fragment() {
             }
             "serie" -> {
                 val serie = Series.getSeriesById(0)
-                persons = if (forActors) serie!!.seasons[id].actors else serie!!.seasons[0].directors
+//                persons = if (forActors) serie!!.seasons[id].actors else serie!!.seasons[0].directors
 
             }
         }

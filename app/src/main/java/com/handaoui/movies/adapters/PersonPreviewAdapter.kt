@@ -25,7 +25,7 @@ class PersonPreviewAdapter(var context: Context,
 
     override fun onBindViewHolder(holder: CustomViewHolder?, position: Int) {
         val person: Person = personsList[position]
-        holder?.imageView?.setImageResource(person.picture)
+//        holder?.imageView?.setImageResource(person.picture)
         holder?.nameView?.text = person.name
         holder?.id = person.id
     }

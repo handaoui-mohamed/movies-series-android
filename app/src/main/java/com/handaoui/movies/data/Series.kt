@@ -5,15 +5,10 @@ import kotlin.collections.ArrayList
 
 data class Series(
         val id: Int,
-        val title: String,
-        val cover: Int,
-        val description: String,
-        val relatedSeries: ArrayList<Series> = ArrayList(),
-        val date: String = Date().toString(),
-        val tags: ArrayList<String> = ArrayList(),
-        val trailerUrl: String = "",
-        var comments: ArrayList<Comment> = ArrayList(),
-        var rating: Float = 0f,
-        val genre: List<String> = ArrayList(),
-        val seasons: ArrayList<SeriesSeason> = ArrayList()
+        val name: String,
+        val poster_path: String,
+        val overview: String,
+        val first_air_date: String,
+        val vote_average: Float = 0f
+//        val seasons: ArrayList<SeriesSeason> = ArrayList()
 )

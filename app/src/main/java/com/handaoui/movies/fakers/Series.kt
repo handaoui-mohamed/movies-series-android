@@ -12,7 +12,7 @@ object Series {
         val filtered = ArrayList<Series>()
 
         // TODO: replace isNotEmpty() with a fixed number like 2
-        list.forEach { mv -> if (mv.id != serie!!.id && mv.genre.intersect(serie.genre).isNotEmpty()) filtered.add(mv) }
+//        list.forEach { mv -> if (mv.id != serie!!.id && mv.genre.intersect(serie.genre).isNotEmpty()) filtered.add(mv) }
 
         return filtered
     }
