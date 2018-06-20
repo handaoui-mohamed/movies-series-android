@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.handaoui.movies.adapters.MoviesPreviewAdapter
 import com.handaoui.movies.R
-import com.handaoui.movies.data.Movie
 import com.handaoui.movies.dtos.MoviesDto
 import com.handaoui.movies.services.Api
 import retrofit2.Call
@@ -59,6 +58,7 @@ class PreviewFragment : Fragment() {
             }
             "related" -> {
                 layoutManager = GridLayoutManager(rootView.context, 1, GridLayoutManager.HORIZONTAL, false)
+                recyclerView.setHasFixedSize(true)
                 movieId = args.getInt("id")
                 loadData(moviesPreviewAdapter, type)
                 rootView.findViewById<View>(R.id.sectionTitleTxt).visibility = View.GONE
@@ -66,7 +66,6 @@ class PreviewFragment : Fragment() {
         }
 
         recyclerView.layoutManager = layoutManager
-
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             var pastVisibleItems: Int = 0
             var visibleItemCount: Int = 0
@@ -91,7 +90,10 @@ class PreviewFragment : Fragment() {
             override fun onResponse(call: Call<MoviesDto>, response: retrofit2.Response<MoviesDto>) {
                 loading = false
                 val res = response.body()
-                if (res?.results != null) moviesPreviewAdapter.addToList(res.results)
+                if (res?.results != null) {
+                    moviesPreviewAdapter.addToList(res.results)
+                    page++
+                }
             }
 
             override fun onFailure(call: Call<MoviesDto>, t: Throwable) {
@@ -102,15 +104,15 @@ class PreviewFragment : Fragment() {
 
         when (type) {
             "all" -> {
-                Api.movieService.getAllMovies(page++).enqueue(moviesCallback)
+                Api.movieService.getAllMovies(page).enqueue(moviesCallback)
             }
             "projected" -> {
-                Api.movieService.getPlayingMovies(page++).enqueue(moviesCallback)
+                Api.movieService.getPlayingMovies(page).enqueue(moviesCallback)
             }
             "bookmark" -> {
             }
             "related" -> {
-                Api.movieService.getSimilarMovies(movieId).enqueue(moviesCallback)
+                Api.movieService.getSimilarMovies(movieId, page).enqueue(moviesCallback)
             }
         }
     }

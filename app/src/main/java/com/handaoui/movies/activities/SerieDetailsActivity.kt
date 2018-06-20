@@ -9,9 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import com.handaoui.movies.R
-import com.handaoui.movies.adapters.ReviewsAdapter
 import com.handaoui.movies.fakers.Series
 import kotlinx.android.synthetic.main.activity_serie_details.*
 import android.content.Intent
@@ -19,10 +17,7 @@ import android.util.Log
 import com.handaoui.movies.adapters.SeasonsListAdapter
 import com.handaoui.movies.fakers.Comments
 import com.handaoui.movies.fakers.User
-import com.handaoui.movies.fragments.PersonsFragment
-import com.handaoui.movies.fragments.PreviewFragment
 import com.handaoui.movies.fragments.SeriePreviewFragment
-import kotlinx.android.synthetic.main.activity_movie_details.*
 import kotlinx.android.synthetic.main.latest_comment.*
 import kotlinx.android.synthetic.main.summary.*
 

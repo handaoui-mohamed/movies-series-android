@@ -28,7 +28,7 @@ class MoviesPreviewAdapter(var context: Context,
         Picasso.with(context)
                 .load(Config.imagePreviewUrl + movie.poster_path)
                 .into(holder?.imageView)
-        holder?.projectionRoomView?.text = ""
+        holder?.projectionRoomView?.text = movie.release_date
         holder?.titleView?.text = movie.title
         holder?.id = movie.id
     }
@@ -57,8 +57,16 @@ class MoviesPreviewAdapter(var context: Context,
 
         init {
             cardView.setOnClickListener {
+                val selectedMovie = moviesList.find { movie -> movie.id == id }
                 val movieDetailsIntent = Intent(context, MovieDetailsActivity::class.java).apply {
-                    putExtra("id", id)
+                    if(selectedMovie != null){
+                        putExtra("id", id)
+                        putExtra("title", selectedMovie.title)
+                        putExtra("overview", selectedMovie.overview)
+                        putExtra("release_date", selectedMovie.release_date)
+                        putExtra("vote_average", selectedMovie.vote_average)
+                        putExtra("poster_path", selectedMovie.poster_path)
+                    }
                 }
                 context.startActivity(movieDetailsIntent)
             }

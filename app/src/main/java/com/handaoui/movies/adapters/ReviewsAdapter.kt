@@ -39,7 +39,7 @@ class ReviewsAdapter(private val context: Context, private val cartList: Mutable
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = cartList[position]
-        holder.name.setText(item.commentator)
+        holder.name.setText(item.author)
         holder.description.setText(item.content)
         holder.price.text = item.rating.toString()
 
