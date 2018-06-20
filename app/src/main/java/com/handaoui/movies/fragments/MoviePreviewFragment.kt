@@ -68,7 +68,7 @@ class PreviewFragment : Fragment() {
         recyclerView.layoutManager = layoutManager
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            var pastVisiblesItems: Int = 0
+            var pastVisibleItems: Int = 0
             var visibleItemCount: Int = 0
             var totalItemCount: Int = 0
 
@@ -77,15 +77,15 @@ class PreviewFragment : Fragment() {
                 super.onScrolled(recyclerView, dx, dy)
                 visibleItemCount = layoutManager.childCount
                 totalItemCount = layoutManager.itemCount
-                pastVisiblesItems = layoutManager.findFirstVisibleItemPosition()
+                pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
 
-                if ((visibleItemCount + pastVisiblesItems >= totalItemCount) && !loading)
+                if ((visibleItemCount + pastVisibleItems >= totalItemCount) && !loading)
                     loadData(moviesPreviewAdapter, type)
             }
         })
     }
 
-    private fun loadData(moviesPreviewAdapter: MoviesPreviewAdapter, type:String){
+    private fun loadData(moviesPreviewAdapter: MoviesPreviewAdapter, type: String) {
         loading = true
         val moviesCallback = object : Callback<MoviesDto> {
             override fun onResponse(call: Call<MoviesDto>, response: retrofit2.Response<MoviesDto>) {
@@ -107,8 +107,11 @@ class PreviewFragment : Fragment() {
             "projected" -> {
                 Api.movieService.getPlayingMovies(page++).enqueue(moviesCallback)
             }
-            "bookmark" -> {}
-            "related" -> {}
+            "bookmark" -> {
+            }
+            "related" -> {
+                Api.movieService.getSimilarMovies(movieId).enqueue(moviesCallback)
+            }
         }
     }
 

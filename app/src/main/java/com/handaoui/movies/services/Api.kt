@@ -6,9 +6,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Retrofit
 import okhttp3.OkHttpClient
 
-
-
-
 object Api {
     private val clientInterceptor = Interceptor { chain ->
         var request = chain.request()
