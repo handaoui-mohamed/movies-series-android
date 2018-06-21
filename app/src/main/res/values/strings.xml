@@ -49,4 +49,7 @@
     <string name="actors_and_directors">Actors and Directors</string>
     <string name="series_airing">Series Airing</string>
     <string name="movies_in_projection">Movies in projection</string>
+    <string name="movie_credits">Movie credits</string>
+    <string name="series_credits">Series credits</string>
+    <string name="birthday">Birthday</string>
 </resources>

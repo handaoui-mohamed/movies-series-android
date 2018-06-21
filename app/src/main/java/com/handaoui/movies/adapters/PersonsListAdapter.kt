@@ -13,6 +13,7 @@ import com.handaoui.movies.Config
 import com.handaoui.movies.data.Movie
 import com.handaoui.movies.R
 import com.handaoui.movies.activities.MovieDetailsActivity
+import com.handaoui.movies.activities.PersonDetailsActivity
 import com.handaoui.movies.data.Person
 import com.squareup.picasso.Picasso
 import java.util.ArrayList
@@ -59,7 +60,7 @@ class PersonsListAdapter(var context: Context,
         init {
             cardView.setOnClickListener {
                 val selectedPerson = personsList.find { person -> person.id == id }
-                val personDetailsIntent = Intent(context, MovieDetailsActivity::class.java).apply {
+                val personDetailsIntent = Intent(context, PersonDetailsActivity::class.java).apply {
                     if(selectedPerson != null){
                         putExtra("id", id)
                         putExtra("name", selectedPerson.name)
