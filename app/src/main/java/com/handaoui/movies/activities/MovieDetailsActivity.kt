@@ -1,6 +1,7 @@
 package com.handaoui.movies.activities
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -14,6 +15,7 @@ import android.view.View
 import com.handaoui.movies.Config
 import com.handaoui.movies.data.Movie
 import com.handaoui.movies.dtos.CommentsDto
+import com.handaoui.movies.fragments.PersonsFragment
 import com.handaoui.movies.services.Api
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.latest_comment.*
@@ -71,22 +73,29 @@ class MovieDetailsActivity : AppCompatActivity() {
                         toggleFavorite(isFavorite, true, movieId)
                     }
 
-//                    getMovieReviews()
-
-//                    // persons fragment
-//                    val personsFragment = PersonsFragment().apply {
-//                        arguments = Bundle().apply {
-//                            putInt("id", movieId)
-//                            putInt("origin", 0)
-//                        }
-//                    }
-//                    supportFragmentManager
-//                            .beginTransaction()
-//                            .replace(R.id.personsContainer, personsFragment, personsFragment.tag)
-//                            .commit()
-//
+                    // persons fragment
+                    val personsFragment = PersonsFragment().apply {
+                        arguments = Bundle().apply {
+                            putInt("id", movieId)
+                            putInt("origin", 0)
+                        }
+                    }
+                    supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.personsContainer, personsFragment, personsFragment.tag)
+                            .commit()
 
                     getMovieReviews()
+
+                    seeCommentsBtn.setOnClickListener {
+                        val intent = Intent(context, ReviewsActivity::class.java).apply {
+                            putExtra("type", "Movie")
+                            putExtra("id", movieId)
+                        }
+
+                        startActivity(intent)
+                        overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
+                    }
 
                     // related movies
                     val moviesPreviewFragment = PreviewFragment().apply {
@@ -112,6 +121,7 @@ class MovieDetailsActivity : AppCompatActivity() {
 
     private fun getMovieReviews() {
         // latest comment
+        loading = true
         Api.movieService.getMovieReviews(movieId = movieId, page = 1).enqueue(object : Callback<CommentsDto> {
             override fun onResponse(call: Call<CommentsDto>, response: retrofit2.Response<CommentsDto>) {
                 loading = false
@@ -122,16 +132,6 @@ class MovieDetailsActivity : AppCompatActivity() {
                     commentatorNameTxt.text = latestComment.author
                     commentContent.text = latestComment.content
                     latestRating.rating = 0f
-//
-//                    seeCommentsBtn.setOnClickListener {
-//                        val intent = Intent(context, ReviewsActivity::class.java).apply {
-//                            putExtra("type", "Movie")
-//                            putExtra("id", movieId)
-//                        }
-//
-//                        startActivity(intent)
-//                        overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
-//                    }
                 }
             }
 

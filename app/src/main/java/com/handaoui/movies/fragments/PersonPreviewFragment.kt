@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.handaoui.movies.R
 import com.handaoui.movies.adapters.PersonPreviewAdapter
+import com.handaoui.movies.data.Movie
 import com.handaoui.movies.data.Person
 import com.handaoui.movies.fakers.Movies
 import com.handaoui.movies.fakers.Series
@@ -25,17 +26,16 @@ class PersonPreviewFragment : Fragment() {
         val args = arguments
         val type = args!!.getString("type")
         val forActors = args.getString("personType") == "actors"
-        val id = args.getInt("id")
+        val movieId = args.getInt("id")
         var persons = ArrayList<Person>()
         when (type) {
             "movie" -> {
-                val movie = Movies.getMovieById(id)
+                val movie = Movie(0,"","")
                 persons = if (forActors) movie!!.actors else movie!!.directors
             }
             "serie" -> {
                 val serie = Series.getSeriesById(0)
 //                persons = if (forActors) serie!!.seasons[id].actors else serie!!.seasons[0].directors
-
             }
         }
         val recyclerView: RecyclerView = rootView.findViewById(R.id.personsPreview)

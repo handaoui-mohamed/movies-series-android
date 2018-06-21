@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/projection_room"
+        android:text="@string/actors_and_directors"
         android:textColor="@color/white"
         android:layout_marginTop="10dp"
         android:textStyle="bold"

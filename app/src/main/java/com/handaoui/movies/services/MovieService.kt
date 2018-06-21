@@ -2,6 +2,7 @@ package com.handaoui.movies.services
 
 import com.handaoui.movies.data.Movie
 import com.handaoui.movies.dtos.CommentsDto
+import com.handaoui.movies.dtos.CreditsDto
 import com.handaoui.movies.dtos.MoviesDto
 import retrofit2.Call
 import retrofit2.http.GET
@@ -25,4 +26,7 @@ interface MovieService {
 
     @GET("movie/{movieId}/reviews")
     fun getMovieReviews(@Path("movieId") movieId: Int, @Query("page") page: Int): Call<CommentsDto>
+
+    @GET("movie/{movieId}/credits")
+    fun getMovieCredits(@Path("movieId") movieId: Int): Call<CreditsDto>
 }
