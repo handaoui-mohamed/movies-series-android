@@ -15,6 +15,6 @@ data class Movie(
         val tags: ArrayList<String> = ArrayList(),
         val trailerUrl: String = "",
         var comments: ArrayList<Comment> = ArrayList(),
-        var vote_average: Float = 0f,
-        val genres: ArrayList<String> = ArrayList()
+        var vote_average: Float = 0f
+//        val genres: ArrayList<String> = ArrayList()
 )

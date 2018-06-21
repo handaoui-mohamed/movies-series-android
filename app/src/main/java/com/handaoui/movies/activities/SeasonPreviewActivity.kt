@@ -10,10 +10,8 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.Menu
 import android.view.View
-import android.widget.Button
 import com.handaoui.movies.R
 import com.handaoui.movies.adapters.EpisodesListAdapter
-import com.handaoui.movies.adapters.SeasonsListAdapter
 import com.handaoui.movies.fakers.Comments
 import com.handaoui.movies.fakers.Series
 import com.handaoui.movies.fragments.PersonsFragment
@@ -77,7 +75,7 @@ class SeasonPreviewActivity : AppCompatActivity() {
 
         val comments = Comments.getMovieComments(/*movieId*/0) // for testing purposes
         val latestComment = comments[comments.size - 1]
-        commentatorNameTxt.text = latestComment.commentator
+        commentatorNameTxt.text = latestComment.author
         latestRating.rating = latestComment.rating / 2
         Log.i("vote_average", latestRating.rating.toString())
         commentContent.text = latestComment.content

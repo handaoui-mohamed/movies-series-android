@@ -20,7 +20,7 @@ object Movies {
         val filtered = ArrayList<Movie>()
 
         // TODO: replace isNotEmpty() with a fixed number like 2
-        list.forEach { mv -> if (mv.id != movie!!.id && mv.genres.intersect(movie!!.genres).isNotEmpty()) filtered.add(mv) }
+//        list.forEach { mv -> if (mv.id != movie!!.id && mv.genres.intersect(movie!!.genres).isNotEmpty()) filtered.add(mv) }
 
         return filtered
     }
