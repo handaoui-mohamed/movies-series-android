@@ -10,7 +10,6 @@
     <string name="default_email">user@gmail.com</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="movies_in_projection">Movies in projection</string>
     <string name="series_in_progress">Series in progress</string>
     <string name="home">Home</string>
     <string name="cinema">Cinema</string>
@@ -48,4 +47,6 @@
     <string name="seasons">Seasons</string>
     <string name="relaties_tv_shows">Relaties TV Shows</string>
     <string name="actors_and_directors">Actors and Directors</string>
+    <string name="series_airing">Series Airing</string>
+    <string name="movies_in_projection">Movies in projection</string>
 </resources>

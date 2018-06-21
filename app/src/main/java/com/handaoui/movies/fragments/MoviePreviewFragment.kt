@@ -45,11 +45,11 @@ class PreviewFragment : Fragment() {
 
         when (type) {
             "all" -> {
-                rootView.findViewById<TextView>(R.id.sectionTitleTxt).visibility = View.GONE
+//                rootView.findViewById<TextView>(R.id.sectionTitleTxt).visibility = View.GONE
                 loadData(moviesPreviewAdapter, type)
             }
             "projected" -> {
-                rootView.findViewById<TextView>(R.id.sectionTitleTxt).text = getString(R.string.movies_in_projection)
+//                rootView.findViewById<TextView>(R.id.sectionTitleTxt).text = getString(R.string.movies_in_projection)
                 loadData(moviesPreviewAdapter, type)
             }
             "bookmark" -> {
@@ -61,7 +61,7 @@ class PreviewFragment : Fragment() {
                 recyclerView.setHasFixedSize(true)
                 movieId = args.getInt("id")
                 loadData(moviesPreviewAdapter, type)
-                rootView.findViewById<View>(R.id.sectionTitleTxt).visibility = View.GONE
+//                rootView.findViewById<View>(R.id.sectionTitleTxt).visibility = View.GONE
             }
         }
 

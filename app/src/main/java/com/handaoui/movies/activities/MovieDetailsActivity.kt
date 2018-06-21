@@ -2,22 +2,22 @@ package com.handaoui.movies.activities
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import com.handaoui.movies.R
-import com.handaoui.movies.fakers.User
-import com.handaoui.movies.fragments.PreviewFragment
-import kotlinx.android.synthetic.main.activity_movie_details.*
-import android.util.Log
 import android.view.View
 import com.handaoui.movies.Config
+import com.handaoui.movies.R
 import com.handaoui.movies.data.Movie
 import com.handaoui.movies.dtos.CommentsDto
+import com.handaoui.movies.fakers.User
 import com.handaoui.movies.fragments.PersonsFragment
+import com.handaoui.movies.fragments.PreviewFragment
 import com.handaoui.movies.services.Api
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_movie_details.*
 import kotlinx.android.synthetic.main.latest_comment.*
 import kotlinx.android.synthetic.main.movie_projection_room.*
 import kotlinx.android.synthetic.main.summary.*
@@ -37,7 +37,7 @@ class MovieDetailsActivity : AppCompatActivity() {
 
         movieId = intent.getIntExtra("id", 0)
         movieTitleTxt.text = intent.getStringExtra("title")
-        movieRating.rating = intent.getFloatExtra("vote_average", 0f) / 2
+        movieRating.rating = intent.getFloatExtra("vote_average", 0f) / 2 + 1
         movieDescriptionTxt.text = intent.getStringExtra("overview")
         Picasso.with(context)
                 .load(Config.imagePreviewUrl + intent.getStringExtra("poster_path"))
