@@ -50,8 +50,14 @@ class SeriePreviewAdapter(var context: Context,
 
         init {
             cardView.setOnClickListener {
+                val serie = seriesList.find{s-> s.id == id}
                 val serieDetailsIntent = Intent(context, SerieDetailsActivity::class.java).apply {
                     putExtra("id", id)
+                    putExtra("name", serie!!.name)
+                    putExtra("overview", serie.overview)
+                    putExtra("poster_path", serie.poster_path)
+                    putExtra("first_air_date", serie.first_air_date)
+                    putExtra("vote_average", serie.vote_average)
                 }
                 context.startActivity(serieDetailsIntent)
             }

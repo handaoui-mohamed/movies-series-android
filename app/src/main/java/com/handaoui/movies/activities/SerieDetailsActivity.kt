@@ -33,7 +33,12 @@ class SerieDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_serie_details)
         val serieId = intent.getIntExtra("id", 0)
-        val serie = Series.getSeriesById(serieId)
+        val name= intent.getStringExtra("name")
+        val overview = intent.getStringExtra("overview")
+        val poster_path = intent.getStringExtra("poster_path")
+        val first_air_data = intent.getStringExtra("first_air_date")
+        val vote_average = intent.getStringExtra("vote_average")
+//        val serie = Series.getSeriesById(serieId)
 //
 //        if(serie !== null){
 //            Serieheader.setImageResource(serie.cover)
@@ -96,8 +101,8 @@ class SerieDetailsActivity : AppCompatActivity() {
 
 //        seeCommentsBtn.setOnClickListener {
 //            val intent = Intent(this, ReviewsActivity::class.java).apply {
-//                putExtra("type", "Movie")
-//                putExtra("id", serieId)
+//                intent.getIntExtra("type", "Movie")
+//                intent.getIntExtra("id", serieId)
 //            }
 //            startActivity(intent)
 //            overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
@@ -134,7 +139,7 @@ class SerieDetailsActivity : AppCompatActivity() {
 
 //    fun seeReviews(view: View) {
 //        val intent = Intent(this, ReviewsActivity::class.java).apply {
-//            putExtra(source, "Serie")
+//            intent.getIntExtra(source, "Serie")
 //        }
 //        startActivity(intent)
 //    }
