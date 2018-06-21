@@ -53,7 +53,7 @@ class PreviewFragment : Fragment() {
                 loadData(moviesPreviewAdapter, type)
             }
             "bookmark" -> {
-                rootView.findViewById<TextView>(R.id.sectionTitleTxt).visibility = View.GONE
+//                rootView.findViewById<TextView>(R.id.sectionTitleTxt).visibility = View.GONE
                 loadData(moviesPreviewAdapter, type)
             }
             "related" -> {

@@ -12,10 +12,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.handaoui.movies.R
-import com.handaoui.movies.fragments.BookmarkFragment
-import com.handaoui.movies.fragments.CinemaFragment
-import com.handaoui.movies.fragments.HomeFragment
-import com.handaoui.movies.fragments.SeriePreviewFragment
+import com.handaoui.movies.fragments.*
 import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.app_bar_drawer.*
 
@@ -86,6 +83,11 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
                     }
                 }
                 loadFragment(seriesPreviewFragment)
+            }
+            R.id.nav_persons -> {
+                ViewCompat.setElevation(appBarLayout, 0f)
+                setTitle(R.string.persons)
+                loadFragment(PersonsListFragment())
             }
             R.id.nav_bookmark -> {
                 ViewCompat.setElevation(appBarLayout, 0f)

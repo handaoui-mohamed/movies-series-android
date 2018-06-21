@@ -17,6 +17,10 @@
             android:icon="@drawable/zzz_television"
             android:title="@string/series" />
         <item
+            android:id="@+id/nav_persons"
+            android:icon="@drawable/zzz_person_box"
+            android:title="@string/persons" />
+        <item
             android:id="@+id/nav_bookmark"
             android:icon="@drawable/zzz_tag"
             android:title="@string/bookmark" />
