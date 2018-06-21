@@ -9,9 +9,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.handaoui.movies.adapters.MoviesPreviewAdapter
 import com.handaoui.movies.R
+import com.handaoui.movies.adapters.MoviesPreviewAdapter
+import com.handaoui.movies.dtos.MovieCreditDto
 import com.handaoui.movies.dtos.MoviesDto
 import com.handaoui.movies.services.Api
 import retrofit2.Call
@@ -21,7 +21,7 @@ import retrofit2.Callback
 class PreviewFragment : Fragment() {
     private var loading = true
     private var page = 1
-    private var movieId = 0
+    private var dataId = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_preview, container, false)
@@ -44,26 +44,14 @@ class PreviewFragment : Fragment() {
         recyclerView.adapter = moviesPreviewAdapter
 
         when (type) {
-            "all" -> {
-//                rootView.findViewById<TextView>(R.id.sectionTitleTxt).visibility = View.GONE
-                loadData(moviesPreviewAdapter, type)
-            }
-            "projected" -> {
-//                rootView.findViewById<TextView>(R.id.sectionTitleTxt).text = getString(R.string.movies_in_projection)
-                loadData(moviesPreviewAdapter, type)
-            }
-            "bookmark" -> {
-//                rootView.findViewById<TextView>(R.id.sectionTitleTxt).visibility = View.GONE
-                loadData(moviesPreviewAdapter, type)
-            }
-            "related" -> {
+            "related", "credits" -> {
                 layoutManager = GridLayoutManager(rootView.context, 1, GridLayoutManager.HORIZONTAL, false)
                 recyclerView.setHasFixedSize(true)
-                movieId = args.getInt("id")
-                loadData(moviesPreviewAdapter, type)
-//                rootView.findViewById<View>(R.id.sectionTitleTxt).visibility = View.GONE
+                dataId = args.getInt("id")
             }
         }
+
+        loadData(moviesPreviewAdapter, type)
 
         recyclerView.layoutManager = layoutManager
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -112,7 +100,25 @@ class PreviewFragment : Fragment() {
             "bookmark" -> {
             }
             "related" -> {
-                Api.movieService.getSimilarMovies(movieId, page).enqueue(moviesCallback)
+                Api.movieService.getSimilarMovies(dataId, page).enqueue(moviesCallback)
+            }
+            "credits" -> {
+                if (page == 1) Api.personService.getMovieCredits(dataId).enqueue(object : Callback<MovieCreditDto> {
+                    override fun onResponse(call: Call<MovieCreditDto>, response: retrofit2.Response<MovieCreditDto>) {
+                        loading = false
+                        val res = response.body()
+                        if (res?.cast != null) {
+                            moviesPreviewAdapter.addToList(res.cast)
+                            moviesPreviewAdapter.addToList(res.crew)
+                            page++
+                        }
+                    }
+
+                    override fun onFailure(call: Call<MovieCreditDto>, t: Throwable) {
+                        Log.i("Movies credits", t.toString())
+                        loading = false
+                    }
+                })
             }
         }
     }

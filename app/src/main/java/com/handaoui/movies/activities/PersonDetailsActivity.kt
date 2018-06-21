@@ -69,18 +69,31 @@ class PersonDetailsActivity : AppCompatActivity() {
                         toggleFavorite(isFavorite, true, personId)
                     }
 
-//                    // related movies
-//                    val moviesPreviewFragment = PreviewFragment().apply {
-//                        arguments = Bundle().apply {
-//                            putString("type", "credits")
-//                            putInt("id", personId)
-//                        }
-//                    }
-//
-//                    supportFragmentManager
-//                            .beginTransaction()
-//                            .replace(R.id.relatedMoviesContainer, moviesPreviewFragment, moviesPreviewFragment.tag)
-//                            .commit()
+                    // movie credits
+                    val moviesPreviewFragment = PreviewFragment().apply {
+                        arguments = Bundle().apply {
+                            putString("type", "credits")
+                            putInt("id", personId)
+                        }
+                    }
+
+                    supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.movieCreditsContainer, moviesPreviewFragment, moviesPreviewFragment.tag)
+                            .commit()
+
+                    // series credits
+                    val seriesPreviewFragment = PreviewFragment().apply {
+                        arguments = Bundle().apply {
+                            putString("type", "credits")
+                            putInt("id", personId)
+                        }
+                    }
+
+                    supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.seriesCreditsContainer, seriesPreviewFragment, seriesPreviewFragment.tag)
+                            .commit()
                 }
             }
 

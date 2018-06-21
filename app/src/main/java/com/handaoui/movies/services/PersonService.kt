@@ -1,6 +1,7 @@
 package com.handaoui.movies.services
 
 import com.handaoui.movies.data.Person
+import com.handaoui.movies.dtos.MovieCreditDto
 import com.handaoui.movies.dtos.PersonsDto
 import retrofit2.Call
 import retrofit2.http.GET
@@ -17,7 +18,7 @@ interface PersonService {
     fun getPerson(@Path("personId") personId: Int): Call<Person>
 
     @GET("person/{personId}/movie_credits")
-    fun getMovieCredits(@Path("personId") personId: Int): Call<PersonsDto>
+    fun getMovieCredits(@Path("personId") personId: Int): Call<MovieCreditDto>
 
 
     @GET("person/{personId}/tv_credits")
