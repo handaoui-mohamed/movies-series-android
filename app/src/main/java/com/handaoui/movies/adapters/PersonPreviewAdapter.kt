@@ -4,19 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.handaoui.movies.Config
-import com.handaoui.movies.data.Movie
 import com.handaoui.movies.R
-import com.handaoui.movies.activities.MovieDetailsActivity
+import com.handaoui.movies.activities.PersonDetailsActivity
 import com.handaoui.movies.data.Person
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_movie_details.*
 import java.util.ArrayList
 
 
@@ -55,10 +52,15 @@ class PersonPreviewAdapter(var context: Context,
 
         init {
             cardView.setOnClickListener {
-//                val movieDetailsIntent = Intent(context, MovieDetailsActivity::class.java).apply {
-//                    putExtra("id", id)
-//                }
-//                context.startActivity(movieDetailsIntent)
+                val selectedPerson = personsList.find { person -> person.id == id }
+                val personDetailsIntent = Intent(context, PersonDetailsActivity::class.java).apply {
+                    if(selectedPerson != null){
+                        putExtra("id", id)
+                        putExtra("name", selectedPerson.name)
+                        putExtra("profile_path", selectedPerson.profile_path)
+                    }
+                }
+                context.startActivity(personDetailsIntent)
             }
         }
     }

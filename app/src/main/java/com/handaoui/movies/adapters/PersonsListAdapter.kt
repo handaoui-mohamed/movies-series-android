@@ -10,9 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.handaoui.movies.Config
-import com.handaoui.movies.data.Movie
 import com.handaoui.movies.R
-import com.handaoui.movies.activities.MovieDetailsActivity
 import com.handaoui.movies.activities.PersonDetailsActivity
 import com.handaoui.movies.data.Person
 import com.squareup.picasso.Picasso

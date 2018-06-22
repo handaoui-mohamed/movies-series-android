@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.handaoui.movies.R
 import com.handaoui.movies.adapters.PersonPreviewAdapter
+import com.handaoui.movies.data.Person
 import com.handaoui.movies.dtos.CreditsDto
 import com.handaoui.movies.fakers.Series
 import com.handaoui.movies.services.Api
@@ -21,6 +22,7 @@ class PersonPreviewFragment : Fragment() {
     private var dataId = 0
     private var loading = false
     private var credits: CreditsDto? = null
+    private val crewTypes = arrayOf("Director", "Producer")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_person_preview, container, false)
@@ -43,9 +45,9 @@ class PersonPreviewFragment : Fragment() {
 
         when (type) {
             "movie" -> {
-                if(credits != null){
-                    personPreviewAdapter.addToList(if(!forActors) credits!!.crew else credits!!.cast)
-                }else{
+                if (credits != null) {
+                    personPreviewAdapter.addToList(if (!forActors) filterCrew(credits!!.crew) else credits!!.cast)
+                } else {
                     getMovieCredits(personPreviewAdapter, forActors)
                 }
             }
@@ -56,6 +58,12 @@ class PersonPreviewFragment : Fragment() {
         }
     }
 
+    private fun filterCrew(crewList: ArrayList<Person>): ArrayList<Person> {
+        val crew = ArrayList<Person>()
+        crew.addAll(crewList.filter { person -> crewTypes.contains(person.job) })
+        return crew
+    }
+
     private fun getMovieCredits(personPreviewAdapter: PersonPreviewAdapter, forActors: Boolean) {
         loading = true
         Api.movieService.getMovieCredits(dataId).enqueue(object : Callback<CreditsDto> {
@@ -64,7 +72,7 @@ class PersonPreviewFragment : Fragment() {
                 credits = response.body()
                 Log.i("credits", "id = $dataId")
                 if (credits?.crew != null && credits!!.crew.size > 0 && !forActors) {
-                    personPreviewAdapter.addToList(credits!!.crew)
+                    personPreviewAdapter.addToList(filterCrew(filterCrew(credits!!.crew) ))
                 }
 
                 if (credits?.cast != null && credits!!.cast.size > 0 && forActors) {
