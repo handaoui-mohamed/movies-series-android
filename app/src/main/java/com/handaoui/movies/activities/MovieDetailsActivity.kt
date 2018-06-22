@@ -2,6 +2,7 @@ package com.handaoui.movies.activities
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -13,13 +14,11 @@ import com.handaoui.movies.R
 import com.handaoui.movies.daos.Db
 import com.handaoui.movies.data.Movie
 import com.handaoui.movies.dtos.CommentsDto
-import com.handaoui.movies.fakers.User
 import com.handaoui.movies.fragments.PersonsFragment
 import com.handaoui.movies.fragments.PreviewFragment
 import com.handaoui.movies.services.Api
 import com.squareup.picasso.Picasso
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_movie_details.*
 import kotlinx.android.synthetic.main.latest_comment.*
@@ -51,7 +50,27 @@ class MovieDetailsActivity : AppCompatActivity() {
                 .into(header)
         movieReleaseTxt.text = "${resources.getString(R.string.releaseDate)}:  ${intent.getStringExtra("release_date")}"
         projectRoomContainer.visibility = View.GONE
-        getMovieDetails()
+
+        // favorite button
+        var isFavorite = false
+
+        favoriteBtn.setOnClickListener {
+            isFavorite = !isFavorite
+            toggleFavorite(isFavorite, true)
+        }
+
+        doAsync {
+            val db = Db.getInstance(context = context)
+            movie = db!!.movieDao().getMovie(movieId)
+
+            uiThread {
+                if (movie != null) {
+                    isFavorite = true
+                    toggleFavorite(isFavorite)
+                }
+                if (isConnected()) getMovieDetails() else if (isFavorite) setMovieDetails()
+            }
+        }
     }
 
     private fun getMovieDetails() {
@@ -59,76 +78,7 @@ class MovieDetailsActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Movie>, response: retrofit2.Response<Movie>) {
                 loading = false
                 movie = response.body()
-                if (movie != null) {
-                    movieDescriptionTxt.text = movie!!.overview
-
-                    Picasso.with(context)
-                            .load(Config.imageUrl + movie!!.poster_path)
-                            .into(header)
-
-                    seeMoreBtn.setOnClickListener {
-                        movieDescriptionTxt.maxLines = 200
-                        seeMoreBtn.visibility = View.GONE
-                    }
-
-                    // favorite button
-                    var isFavorite = false
-
-                    doAsync {
-                        val db = Db.getInstance(context = context)
-                        val favoriteMovie = db!!.movieDao().getMovie(movieId)
-
-                        uiThread {
-                            if (favoriteMovie != null) {
-                                isFavorite = true
-                                toggleFavorite(isFavorite)
-                            }
-                        }
-                    }
-
-
-                    favoriteBtn.setOnClickListener {
-                        isFavorite = !isFavorite
-                        toggleFavorite(isFavorite, true)
-                    }
-
-                    // persons fragment
-                    val personsFragment = PersonsFragment().apply {
-                        arguments = Bundle().apply {
-                            putInt("id", movieId)
-                            putInt("origin", 0)
-                        }
-                    }
-                    supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.personsContainer, personsFragment, personsFragment.tag)
-                            .commit()
-
-                    getMovieReviews()
-
-                    seeCommentsBtn.setOnClickListener {
-                        val intent = Intent(context, ReviewsActivity::class.java).apply {
-                            putExtra("type", "Movie")
-                            putExtra("id", movieId)
-                        }
-
-                        startActivity(intent)
-                        overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
-                    }
-
-                    // related movies
-                    val moviesPreviewFragment = PreviewFragment().apply {
-                        arguments = Bundle().apply {
-                            putString("type", "related")
-                            putInt("id", movieId)
-                        }
-                    }
-
-                    supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.relatedMoviesContainer, moviesPreviewFragment, moviesPreviewFragment.tag)
-                            .commit()
-                }
+                if (movie != null) setMovieDetails()
             }
 
             override fun onFailure(call: Call<Movie>, t: Throwable) {
@@ -136,6 +86,56 @@ class MovieDetailsActivity : AppCompatActivity() {
                 loading = false
             }
         })
+    }
+
+    fun setMovieDetails() {
+        movieDescriptionTxt.text = movie!!.overview
+
+        Picasso.with(context)
+                .load(Config.imageUrl + movie!!.poster_path)
+                .into(header)
+
+        seeMoreBtn.setOnClickListener {
+            movieDescriptionTxt.maxLines = 200
+            seeMoreBtn.visibility = View.GONE
+        }
+
+        // persons fragment
+        val personsFragment = PersonsFragment().apply {
+            arguments = Bundle().apply {
+                putInt("id", movieId)
+                putInt("origin", 0)
+            }
+        }
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.personsContainer, personsFragment, personsFragment.tag)
+                .commit()
+
+        getMovieReviews()
+
+        seeCommentsBtn.setOnClickListener {
+            val intent = Intent(context, ReviewsActivity::class.java).apply {
+                putExtra("type", "Movie")
+                putExtra("id", movieId)
+            }
+
+            startActivity(intent)
+            overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom)
+        }
+
+        // related movies
+        val moviesPreviewFragment = PreviewFragment().apply {
+            arguments = Bundle().apply {
+                putString("type", "related")
+                putInt("id", movieId)
+            }
+        }
+
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.relatedMoviesContainer, moviesPreviewFragment, moviesPreviewFragment.tag)
+                .commit()
     }
 
     private fun getMovieReviews() {
@@ -168,7 +168,9 @@ class MovieDetailsActivity : AppCompatActivity() {
                 // update isFavorite
                 Observable.just(Db.getInstance(context))
                         .subscribeOn(Schedulers.io())
-                        .subscribe { db -> db.movieDao().insert(movie!!) }
+                        .subscribe { db ->
+                            db.movieDao().insert(movie!!)
+                        }
             }
         } else {
             favoriteBtn.setImageResource(R.drawable.ic_favorite_border_black_24dp)
@@ -193,5 +195,11 @@ class MovieDetailsActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         return true
+    }
+
+    fun isConnected(): Boolean {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = cm.activeNetworkInfo
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting
     }
 }
