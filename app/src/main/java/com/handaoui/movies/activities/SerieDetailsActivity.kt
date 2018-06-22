@@ -67,17 +67,17 @@ class SerieDetailsActivity : AppCompatActivity() {
 //                toggleFavorite(isFavorite, true, serieId)
 //            }
 //
-////            val personsFragment = PersonsFragment().apply {
-////                arguments = Bundle().apply {
-////                    putInt("id", serieId)
-////                    putInt("origin", 1)
-////                }
-////            }
-////
-////            supportFragmentManager
-////                    .beginTransaction()
-////                    .replace(R.id.personsContainer, personsFragment, personsFragment.tag)
-////                    .commit()
+//            val personsFragment = PersonsFragment().apply {
+//                arguments = Bundle().apply {
+//                    putInt("id", serieId)
+//                    putInt("origin", 1)
+//                }
+//            }
+//
+//            supportFragmentManager
+//                    .beginTransaction()
+//                    .replace(R.id.personsContainer, personsFragment, personsFragment.tag)
+//                    .commit()
 //
 //
 //        }
@@ -181,22 +181,18 @@ class SerieDetailsActivity : AppCompatActivity() {
                         toggleFavorite(isFavorite, true, serieId)
                     }
 
+                    val mLayoutManager = LinearLayoutManager(context.applicationContext)
+                    val mAdapter = SeasonsListAdapter(context, serie.seasons, serie.id)
+
+                    var recyclerView = findViewById<RecyclerView>(R.id.seasons_list_recycler).apply {
+                        layoutManager= mLayoutManager
+                        itemAnimator = DefaultItemAnimator()
+                        adapter = mAdapter
+                    }
+                    recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+
+                    //TODO
 //                    getMovieReviews()
-
-//                    // persons fragment
-//                    val personsFragment = PersonsFragment().apply {
-//                        arguments = Bundle().apply {
-//                            putInt("id", movieId)
-//                            putInt("origin", 0)
-//                        }
-//                    }
-//                    supportFragmentManager
-//                            .beginTransaction()
-//                            .replace(R.id.personsContainer, personsFragment, personsFragment.tag)
-//                            .commit()
-//
-
-                    getMovieReviews()
 
                     // related movies
                     val seriesPreviewFragment = SeriePreviewFragment().apply {

@@ -1,6 +1,7 @@
 package com.handaoui.movies.services
 
 import com.handaoui.movies.data.Series
+import com.handaoui.movies.data.SeriesSeason
 import com.handaoui.movies.dtos.CommentsDto
 import com.handaoui.movies.dtos.SeriesDto
 import retrofit2.Call
@@ -18,6 +19,10 @@ interface SerieService {
 
     @GET("tv/{tv_id}")
     fun getSerie(@Path("tv_id") serieId:Int): Call<Series>
+
+    @GET("tv/{tv_id}/season/{season_number}")
+    fun getSeason(@Path("tv_id") serieId:Int, @Path("season_number") seasonId:Int): Call<SeriesSeason>
+
 
     @GET("tv/{tv_id}/similar")
     fun getSimilarSeries(@Path("tv_id") serieId:Int): Call<SeriesDto>
