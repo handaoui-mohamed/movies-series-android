@@ -1,5 +1,7 @@
 package com.handaoui.movies.fragments
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -10,10 +12,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.handaoui.movies.R
 import com.handaoui.movies.adapters.PersonPreviewAdapter
+import com.handaoui.movies.daos.Db
 import com.handaoui.movies.data.Person
 import com.handaoui.movies.dtos.CreditsDto
 import com.handaoui.movies.fakers.Series
+import com.handaoui.movies.holders.CreditsHolder
 import com.handaoui.movies.services.Api
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import retrofit2.Call
 import retrofit2.Callback
 
@@ -48,12 +54,28 @@ class PersonPreviewFragment : Fragment() {
                 if (credits != null) {
                     personPreviewAdapter.addToList(if (!forActors) filterCrew(credits!!.crew) else credits!!.cast)
                 } else {
-                    getMovieCredits(personPreviewAdapter, forActors)
+                    if (isConnected()) getMovieCredits(personPreviewAdapter, forActors) else getMovieCreditsFromDb(personPreviewAdapter, forActors)
                 }
             }
             "serie" -> {
                 val serie = Series.getSeriesById(0)
 //                persons = if (forActors) serie!!.seasons[id].actors else serie!!.seasons[0].directors
+            }
+        }
+    }
+
+    private fun getMovieCreditsFromDb(personPreviewAdapter: PersonPreviewAdapter, forActors: Boolean) {
+        doAsync {
+            val db = Db.getInstance(context = context!!)
+            val persons = db!!.personMovieDao().getAllCredits(dataId)
+            val crews = ArrayList<Person>()
+            val cast = ArrayList<Person>()
+            persons.forEach { person -> if (person.job == "actor") cast.add(person) else crews.add(person) }
+            credits = CreditsDto(cast, crews)
+
+            Log.i("crewss", "crew = " + credits!!.crew.size + ", castoo = " + persons.size)
+            uiThread {
+                personPreviewAdapter.addToList(if (!forActors) filterCrew(credits!!.crew) else credits!!.cast)
             }
         }
     }
@@ -72,12 +94,18 @@ class PersonPreviewFragment : Fragment() {
                 credits = response.body()
                 Log.i("credits", "id = $dataId")
                 if (credits?.crew != null && credits!!.crew.size > 0 && !forActors) {
-                    personPreviewAdapter.addToList(filterCrew(filterCrew(credits!!.crew) ))
+                    val crew = filterCrew(filterCrew(credits!!.crew))
+                    personPreviewAdapter.addToList(crew)
+                    CreditsHolder.crew = crew
                 }
 
                 if (credits?.cast != null && credits!!.cast.size > 0 && forActors) {
                     personPreviewAdapter.addToList(credits!!.cast)
+                    CreditsHolder.cast = credits?.cast!!
                 }
+
+                CreditsHolder.cast = credits!!.cast
+                CreditsHolder.crew = filterCrew(filterCrew(credits!!.crew))
             }
 
             override fun onFailure(call: Call<CreditsDto>, t: Throwable) {
@@ -85,5 +113,11 @@ class PersonPreviewFragment : Fragment() {
                 loading = false
             }
         })
+    }
+
+    private fun isConnected(): Boolean {
+        val cm = context!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = cm.activeNetworkInfo
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting
     }
 }

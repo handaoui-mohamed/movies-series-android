@@ -13,7 +13,7 @@ import com.handaoui.movies.adapters.PersonTabsAdapter
 
 class PersonsFragment : Fragment() {
     private var dataId = 0
-    private var loading = false
+    private lateinit var personTabsAdapter: PersonTabsAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -32,7 +32,8 @@ class PersonsFragment : Fragment() {
         dataId = arguments!!.getInt("id")
         val origin = arguments!!.getInt("origin")
 
-        pager.adapter = PersonTabsAdapter(childFragmentManager, tabLayout.tabCount, dataId, origin)
+        personTabsAdapter = PersonTabsAdapter(childFragmentManager, tabLayout.tabCount, dataId, origin)
+        pager.adapter = personTabsAdapter
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
