@@ -73,9 +73,9 @@ class PersonPreviewFragment : Fragment() {
             persons.forEach { person -> if (person.job == "actor") cast.add(person) else crews.add(person) }
             credits = CreditsDto(cast, crews)
 
-            Log.i("crewss", "crew = " + credits!!.crew.size + ", castoo = " + persons.size)
+            Log.i("crewss", "crew = " + credits!!.crew.size + ", castoo = " + credits!!.cast.size)
             uiThread {
-                personPreviewAdapter.addToList(if (!forActors) filterCrew(credits!!.crew) else credits!!.cast)
+                personPreviewAdapter.addToList(if (!forActors) credits!!.crew else credits!!.cast)
             }
         }
     }
@@ -94,18 +94,16 @@ class PersonPreviewFragment : Fragment() {
                 credits = response.body()
                 Log.i("credits", "id = $dataId")
                 if (credits?.crew != null && credits!!.crew.size > 0 && !forActors) {
-                    val crew = filterCrew(filterCrew(credits!!.crew))
+                    val crew = filterCrew(credits!!.crew)
                     personPreviewAdapter.addToList(crew)
-                    CreditsHolder.crew = crew
                 }
 
                 if (credits?.cast != null && credits!!.cast.size > 0 && forActors) {
                     personPreviewAdapter.addToList(credits!!.cast)
-                    CreditsHolder.cast = credits?.cast!!
                 }
 
                 CreditsHolder.cast = credits!!.cast
-                CreditsHolder.crew = filterCrew(filterCrew(credits!!.crew))
+                CreditsHolder.crew = filterCrew(credits!!.crew)
             }
 
             override fun onFailure(call: Call<CreditsDto>, t: Throwable) {
