@@ -74,7 +74,9 @@ class PreviewFragment : Fragment() {
 
     private fun loadData(moviesPreviewAdapter: MoviesPreviewAdapter, type: String) {
         loading = true
-        val moviesCallback = object : Callback<MoviesDto> {
+        var moviesCallback: Callback<MoviesDto>? = null
+
+        if (type != "credits") moviesCallback = object : Callback<MoviesDto> {
             override fun onResponse(call: Call<MoviesDto>, response: retrofit2.Response<MoviesDto>) {
                 loading = false
                 val res = response.body()
