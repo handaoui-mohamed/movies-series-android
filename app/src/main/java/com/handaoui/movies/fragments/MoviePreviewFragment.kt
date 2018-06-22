@@ -18,6 +18,8 @@ import com.handaoui.movies.dtos.MoviesDto
 import com.handaoui.movies.services.Api
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import retrofit2.Call
 import retrofit2.Callback
 
@@ -104,13 +106,15 @@ class PreviewFragment : Fragment() {
                 Api.movieService.getPlayingMovies(page).enqueue(moviesCallback)
             }
             "bookmark" -> {
-                Observable.just(Db.getInstance(context!!))
-                        .subscribeOn(Schedulers.io())
-                        .subscribe { db ->
-                            val movies = ArrayList<Movie>()
-                            movies.addAll(db.movieDao().getAllMovies())
-                            moviesPreviewAdapter.addToList(movies)
-                        }
+                doAsync {
+                    val db = Db.getInstance(context = context!!)
+                    val movies = ArrayList<Movie>()
+                    movies.addAll(db!!.movieDao().getAllMovies())
+
+                    uiThread {
+                        moviesPreviewAdapter.addToList(movies)
+                    }
+                }
             }
             "related" -> {
                 Api.movieService.getSimilarMovies(dataId, page).enqueue(moviesCallback)

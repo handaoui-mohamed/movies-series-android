@@ -19,11 +19,14 @@ import com.handaoui.movies.fragments.PreviewFragment
 import com.handaoui.movies.services.Api
 import com.squareup.picasso.Picasso
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_movie_details.*
 import kotlinx.android.synthetic.main.latest_comment.*
 import kotlinx.android.synthetic.main.movie_projection_room.*
 import kotlinx.android.synthetic.main.summary.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import retrofit2.Call
 import retrofit2.Callback
 
@@ -69,12 +72,24 @@ class MovieDetailsActivity : AppCompatActivity() {
                     }
 
                     // favorite button
-                    var isFavorite = User.profile.isMovieFavored(movieId)
-                    toggleFavorite(isFavorite)
+                    var isFavorite = false
+
+                    doAsync {
+                        val db = Db.getInstance(context = context)
+                        val favoriteMovie = db!!.movieDao().getMovie(movieId)
+
+                        uiThread {
+                            if (favoriteMovie != null) {
+                                isFavorite = true
+                                toggleFavorite(isFavorite)
+                            }
+                        }
+                    }
+
 
                     favoriteBtn.setOnClickListener {
                         isFavorite = !isFavorite
-                        toggleFavorite(isFavorite, true, movieId)
+                        toggleFavorite(isFavorite, true)
                     }
 
                     // persons fragment
@@ -146,7 +161,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         })
     }
 
-    private fun toggleFavorite(isFavorite: Boolean, updateProfile: Boolean = false, movieId: Int = -1) {
+    private fun toggleFavorite(isFavorite: Boolean, updateProfile: Boolean = false) {
         if (isFavorite) {
             favoriteBtn.setImageResource(R.drawable.zzz_heart)
             if (updateProfile) {
@@ -157,7 +172,11 @@ class MovieDetailsActivity : AppCompatActivity() {
             }
         } else {
             favoriteBtn.setImageResource(R.drawable.ic_favorite_border_black_24dp)
-            if (updateProfile) User.profile.removeMovie(movieId)
+            if (updateProfile) {
+                Observable.just(Db.getInstance(context))
+                        .subscribeOn(Schedulers.io())
+                        .subscribe { db -> db.movieDao().delete(movie!!) }
+            }
         }
     }
 
