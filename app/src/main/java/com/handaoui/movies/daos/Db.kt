@@ -5,11 +5,12 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import com.handaoui.movies.Config
+import com.handaoui.movies.data.Comment
 import com.handaoui.movies.data.Movie
 import com.handaoui.movies.data.Person
 
 object Db {
-    @Database(entities = [(Person::class), (Movie::class)], version = 1)
+    @Database(entities = [(Comment::class), (Person::class), (Movie::class)], version = 1)
     abstract class MovieDB : RoomDatabase() {
         abstract fun movieDao(): MovieDao
         abstract fun personDao(): PersonDao

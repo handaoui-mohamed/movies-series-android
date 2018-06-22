@@ -11,9 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.handaoui.movies.R
 import com.handaoui.movies.adapters.MoviesPreviewAdapter
+import com.handaoui.movies.daos.Db
+import com.handaoui.movies.data.Movie
 import com.handaoui.movies.dtos.MovieCreditDto
 import com.handaoui.movies.dtos.MoviesDto
 import com.handaoui.movies.services.Api
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 
@@ -54,7 +58,7 @@ class PreviewFragment : Fragment() {
         loadData(moviesPreviewAdapter, type)
 
         recyclerView.layoutManager = layoutManager
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        if (type != "bookmark") recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             var pastVisibleItems: Int = 0
             var visibleItemCount: Int = 0
             var totalItemCount: Int = 0
@@ -100,6 +104,13 @@ class PreviewFragment : Fragment() {
                 Api.movieService.getPlayingMovies(page).enqueue(moviesCallback)
             }
             "bookmark" -> {
+                Observable.just(Db.getInstance(context!!))
+                        .subscribeOn(Schedulers.io())
+                        .subscribe { db ->
+                            val movies = ArrayList<Movie>()
+                            movies.addAll(db.movieDao().getAllMovies())
+                            moviesPreviewAdapter.addToList(movies)
+                        }
             }
             "related" -> {
                 Api.movieService.getSimilarMovies(dataId, page).enqueue(moviesCallback)

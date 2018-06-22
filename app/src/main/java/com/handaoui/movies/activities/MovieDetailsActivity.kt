@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import com.handaoui.movies.Config
 import com.handaoui.movies.R
+import com.handaoui.movies.daos.Db
 import com.handaoui.movies.data.Movie
 import com.handaoui.movies.dtos.CommentsDto
 import com.handaoui.movies.fakers.User
@@ -17,6 +18,8 @@ import com.handaoui.movies.fragments.PersonsFragment
 import com.handaoui.movies.fragments.PreviewFragment
 import com.handaoui.movies.services.Api
 import com.squareup.picasso.Picasso
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_movie_details.*
 import kotlinx.android.synthetic.main.latest_comment.*
 import kotlinx.android.synthetic.main.movie_projection_room.*
@@ -29,6 +32,7 @@ class MovieDetailsActivity : AppCompatActivity() {
     private var movieId: Int = 0
     private var loading = true
     private lateinit var context: Context
+    private var movie: Movie? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,12 +55,12 @@ class MovieDetailsActivity : AppCompatActivity() {
         Api.movieService.getMovie(movieId).enqueue(object : Callback<Movie> {
             override fun onResponse(call: Call<Movie>, response: retrofit2.Response<Movie>) {
                 loading = false
-                val movie = response.body()
+                movie = response.body()
                 if (movie != null) {
-                    movieDescriptionTxt.text = movie.overview
+                    movieDescriptionTxt.text = movie!!.overview
 
                     Picasso.with(context)
-                            .load(Config.imageUrl + movie.poster_path)
+                            .load(Config.imageUrl + movie!!.poster_path)
                             .into(header)
 
                     seeMoreBtn.setOnClickListener {
@@ -145,7 +149,12 @@ class MovieDetailsActivity : AppCompatActivity() {
     private fun toggleFavorite(isFavorite: Boolean, updateProfile: Boolean = false, movieId: Int = -1) {
         if (isFavorite) {
             favoriteBtn.setImageResource(R.drawable.zzz_heart)
-            if (updateProfile) User.profile.addMovie(movieId)
+            if (updateProfile) {
+                // update isFavorite
+                Observable.just(Db.getInstance(context))
+                        .subscribeOn(Schedulers.io())
+                        .subscribe { db -> db.movieDao().insert(movie!!) }
+            }
         } else {
             favoriteBtn.setImageResource(R.drawable.ic_favorite_border_black_24dp)
             if (updateProfile) User.profile.removeMovie(movieId)
