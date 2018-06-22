@@ -1,12 +1,14 @@
 package com.handaoui.movies.fragments
 
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentTransaction
+import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.handaoui.movies.R
+import com.handaoui.movies.adapters.HomeTabsAdapter
 
 
 class HomeFragment : Fragment() {
@@ -14,18 +16,28 @@ class HomeFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
-
-        val fragmentTransaction = childFragmentManager.beginTransaction()
-        loadMoviesFragment(fragmentTransaction)
-        fragmentTransaction.commit()
+        configureTabLayout(rootView)
         return rootView
     }
 
-    private fun loadMoviesFragment(fragmentTransaction: FragmentTransaction){
-        val moviesArgs = Bundle()
-        val projectionMoviesFragment = PreviewFragment()
-        projectionMoviesFragment.arguments = moviesArgs
+    private fun configureTabLayout(rootView: View) {
+        val tabLayout: TabLayout = rootView.findViewById(R.id.tab_layout)
+        val pager: ViewPager = rootView.findViewById(R.id.pager)
 
-        fragmentTransaction.replace(R.id.moviesInProjectionLayout, projectionMoviesFragment, projectionMoviesFragment.tag)
+
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.movies_in_projection)))
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.series_airing)))
+
+        pager.adapter = HomeTabsAdapter(childFragmentManager, tabLayout.tabCount)
+        pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                pager.currentItem = tab.position
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
     }
 }

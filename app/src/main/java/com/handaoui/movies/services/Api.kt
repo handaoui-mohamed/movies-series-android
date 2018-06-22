@@ -24,6 +24,7 @@ object Api {
             .client(client)
             .build()
 
-    val movieService = retrofit.create(MovieService::class.java)
-    val serieService = retrofit.create(SerieService::class.java)
+    val movieService = retrofit.create(MovieService::class.java)!!
+    val serieService = retrofit.create(SerieService::class.java)!!
+    val personService = retrofit.create(PersonService::class.java)!!
 }

@@ -17,9 +17,9 @@ import com.squareup.picasso.Picasso
 import java.util.ArrayList
 
 
-class PersonPreviewAdapter(var context: Context,
+class PersonsListAdapter(var context: Context,
                            private var personsList: ArrayList<Person>) :
-        RecyclerView.Adapter<PersonPreviewAdapter.CustomViewHolder>() {
+        RecyclerView.Adapter<PersonsListAdapter.CustomViewHolder>() {
 
     override fun getItemCount() = personsList.size
 
@@ -27,28 +27,33 @@ class PersonPreviewAdapter(var context: Context,
         val person: Person = personsList[position]
         Picasso.with(context)
                 .load(Config.imagePreviewUrl + person.profile_path)
-                .resize(200,200)
-                .centerCrop()
                 .into(holder?.imageView)
-        holder?.nameView?.text = person.name
+        holder?.projectionRoomView?.text = ""
+        holder?.titleView?.text = person.name
         holder?.id = person.id
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomViewHolder {
-        val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.person_preview, parent, false)
-        return CustomViewHolder(view)
+    fun updateList(persons: ArrayList<Person>) {
+        personsList = persons
+        notifyDataSetChanged()
     }
 
-    fun addToList(persons:ArrayList<Person>){
+    fun addToList(persons: ArrayList<Person>) {
         personsList.addAll(persons)
         notifyDataSetChanged()
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CustomViewHolder {
+        val view: View = LayoutInflater.from(parent?.context).inflate(R.layout.movie_preview_card, parent, false)
+        return CustomViewHolder(view)
+    }
+
     inner class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var id: Int = 0
-        var nameView: TextView = view.findViewById(R.id.personNameTxt)
-        var imageView: ImageView = view.findViewById(R.id.personImg)
-        private var cardView: CardView = view.findViewById(R.id.person_card_view)
+        var titleView: TextView = view.findViewById(R.id.movieTitleTxt)
+        var projectionRoomView: TextView = view.findViewById(R.id.projectionRoomTxt)
+        var imageView: ImageView = view.findViewById(R.id.coverImg)
+        private var cardView: CardView = view.findViewById(R.id.card_view)
 
         init {
             cardView.setOnClickListener {

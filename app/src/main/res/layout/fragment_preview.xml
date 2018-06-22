@@ -6,13 +6,13 @@
     android:id="@+id/moviesContainer"
     tools:context=".activities.DrawerActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/sectionTitleTxt"
-        android:padding="7sp"
-        android:textColor="@color/white"
-        android:textSize="17sp"/>
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/sectionTitleTxt"-->
+        <!--android:padding="7sp"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="17sp"/>-->
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

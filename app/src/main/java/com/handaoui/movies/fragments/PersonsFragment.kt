@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,9 @@ import com.handaoui.movies.R
 import com.handaoui.movies.adapters.PersonTabsAdapter
 
 class PersonsFragment : Fragment() {
+    private var dataId = 0
+    private var loading = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_persons, container, false)
@@ -26,7 +28,8 @@ class PersonsFragment : Fragment() {
 
         tabLayout.addTab(tabLayout.newTab().setText(resources.getString(R.string.actors)))
         tabLayout.addTab(tabLayout.newTab().setText(resources.getString(R.string.directors)))
-        val dataId = arguments!!.getInt("id")
+
+        dataId = arguments!!.getInt("id")
         val origin = arguments!!.getInt("origin")
 
         pager.adapter = PersonTabsAdapter(childFragmentManager, tabLayout.tabCount, dataId, origin)

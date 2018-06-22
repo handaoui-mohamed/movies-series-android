@@ -13,22 +13,14 @@ import com.handaoui.movies.R
 
 import com.handaoui.movies.data.Comment
 
-class ReviewsAdapter(private val context: Context, private val cartList: MutableList<Comment>) : RecyclerView.Adapter<ReviewsAdapter.MyViewHolder>() {
+class ReviewsAdapter(private val context: Context, private val cartList: MutableList<Comment>) :
+        RecyclerView.Adapter<ReviewsAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var name: TextView
-        var description: TextView
-        var price: TextView
-        var thumbnail: ImageView
-        var viewForeground: RelativeLayout
+        var name: TextView = view.findViewById(R.id.name)
+        var description: TextView = view.findViewById(R.id.description)
+        var price: TextView = view.findViewById(R.id.price)
 
-        init {
-            name = view.findViewById(R.id.name)
-            description = view.findViewById(R.id.description)
-            price = view.findViewById(R.id.price)
-            thumbnail = view.findViewById(R.id.thumbnail)
-            viewForeground = view.findViewById(R.id.view_foreground)
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -39,18 +31,12 @@ class ReviewsAdapter(private val context: Context, private val cartList: Mutable
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = cartList[position]
-        holder.name.setText(item.author)
-        holder.description.setText(item.content)
+        holder.name.text = item.author
+        holder.description.text = item.content
         holder.price.text = item.rating.toString()
-
-//        Glide.with(context)
-//                .load(item.getThumbnail())
-//                .into(holder.thumbnail)
     }
 
     override fun getItemCount(): Int {
         return cartList.size
     }
-
-
 }

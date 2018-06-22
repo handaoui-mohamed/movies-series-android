@@ -9,11 +9,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.handaoui.movies.adapters.MoviesPreviewAdapter
 import com.handaoui.movies.R
+import com.handaoui.movies.adapters.MoviesPreviewAdapter
+import com.handaoui.movies.daos.Db
+import com.handaoui.movies.data.Movie
+import com.handaoui.movies.dtos.MovieCreditDto
 import com.handaoui.movies.dtos.MoviesDto
 import com.handaoui.movies.services.Api
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import retrofit2.Call
 import retrofit2.Callback
 
@@ -21,7 +27,7 @@ import retrofit2.Callback
 class PreviewFragment : Fragment() {
     private var loading = true
     private var page = 1
-    private var movieId = 0
+    private var dataId = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_preview, container, false)
@@ -44,29 +50,17 @@ class PreviewFragment : Fragment() {
         recyclerView.adapter = moviesPreviewAdapter
 
         when (type) {
-            "all" -> {
-                rootView.findViewById<TextView>(R.id.sectionTitleTxt).visibility = View.GONE
-                loadData(moviesPreviewAdapter, type)
-            }
-            "projected" -> {
-                rootView.findViewById<TextView>(R.id.sectionTitleTxt).text = getString(R.string.movies_in_projection)
-                loadData(moviesPreviewAdapter, type)
-            }
-            "bookmark" -> {
-                rootView.findViewById<TextView>(R.id.sectionTitleTxt).visibility = View.GONE
-                loadData(moviesPreviewAdapter, type)
-            }
-            "related" -> {
+            "related", "credits" -> {
                 layoutManager = GridLayoutManager(rootView.context, 1, GridLayoutManager.HORIZONTAL, false)
                 recyclerView.setHasFixedSize(true)
-                movieId = args.getInt("id")
-                loadData(moviesPreviewAdapter, type)
-                rootView.findViewById<View>(R.id.sectionTitleTxt).visibility = View.GONE
+                dataId = args.getInt("id")
             }
         }
 
+        loadData(moviesPreviewAdapter, type)
+
         recyclerView.layoutManager = layoutManager
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        if (type != "bookmark") recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             var pastVisibleItems: Int = 0
             var visibleItemCount: Int = 0
             var totalItemCount: Int = 0
@@ -86,7 +80,9 @@ class PreviewFragment : Fragment() {
 
     private fun loadData(moviesPreviewAdapter: MoviesPreviewAdapter, type: String) {
         loading = true
-        val moviesCallback = object : Callback<MoviesDto> {
+        var moviesCallback: Callback<MoviesDto>? = null
+
+        if (type != "credits") moviesCallback = object : Callback<MoviesDto> {
             override fun onResponse(call: Call<MoviesDto>, response: retrofit2.Response<MoviesDto>) {
                 loading = false
                 val res = response.body()
@@ -110,9 +106,36 @@ class PreviewFragment : Fragment() {
                 Api.movieService.getPlayingMovies(page).enqueue(moviesCallback)
             }
             "bookmark" -> {
+                doAsync {
+                    val db = Db.getInstance(context = context!!)
+                    val movies = ArrayList<Movie>()
+                    movies.addAll(db!!.movieDao().getAllMovies())
+
+                    uiThread {
+                        moviesPreviewAdapter.addToList(movies)
+                    }
+                }
             }
             "related" -> {
-                Api.movieService.getSimilarMovies(movieId, page).enqueue(moviesCallback)
+                Api.movieService.getSimilarMovies(dataId, page).enqueue(moviesCallback)
+            }
+            "credits" -> {
+                if (page == 1) Api.personService.getMovieCredits(dataId).enqueue(object : Callback<MovieCreditDto> {
+                    override fun onResponse(call: Call<MovieCreditDto>, response: retrofit2.Response<MovieCreditDto>) {
+                        loading = false
+                        val res = response.body()
+                        if (res?.cast != null) {
+                            moviesPreviewAdapter.addToList(res.cast)
+                            moviesPreviewAdapter.addToList(res.crew)
+                            page++
+                        }
+                    }
+
+                    override fun onFailure(call: Call<MovieCreditDto>, t: Throwable) {
+                        Log.i("Movies credits", t.toString())
+                        loading = false
+                    }
+                })
             }
         }
     }
