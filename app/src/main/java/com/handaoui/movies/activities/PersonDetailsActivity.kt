@@ -1,7 +1,6 @@
 package com.handaoui.movies.activities
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -12,13 +11,10 @@ import com.handaoui.movies.Config
 import com.handaoui.movies.R
 import com.handaoui.movies.data.Person
 import com.handaoui.movies.fakers.User
-import com.handaoui.movies.fragments.PersonsFragment
 import com.handaoui.movies.fragments.PreviewFragment
 import com.handaoui.movies.services.Api
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_details.*
-import kotlinx.android.synthetic.main.latest_comment.*
-import kotlinx.android.synthetic.main.movie_projection_room.*
 import kotlinx.android.synthetic.main.summary.*
 import retrofit2.Call
 import retrofit2.Callback

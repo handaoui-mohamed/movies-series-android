@@ -30,6 +30,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
+        ViewCompat.setElevation(appBarLayout, 0f)
 
         if(savedInstanceState == null){
             nav_view.menu.getItem(0).isChecked = true
@@ -65,7 +66,7 @@ class DrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_home -> {
-                ViewCompat.setElevation(appBarLayout, 4f)
+                ViewCompat.setElevation(appBarLayout, 0f)
                 setTitle(R.string.home)
                 loadFragment(HomeFragment())
             }
