@@ -181,6 +181,7 @@ class SerieDetailsActivity : AppCompatActivity() {
                         toggleFavorite(isFavorite, true, serieId)
                     }
 
+
                     val mLayoutManager = LinearLayoutManager(context.applicationContext)
                     val mAdapter = SeasonsListAdapter(context, serie.seasons, serie.id)
 

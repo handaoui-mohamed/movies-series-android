@@ -13,11 +13,12 @@ import android.view.View
 import com.handaoui.movies.Config
 import com.handaoui.movies.R
 import com.handaoui.movies.adapters.EpisodesListAdapter
+import com.handaoui.movies.data.SeasonEpisode
 import com.handaoui.movies.data.SeriesSeason
 import com.handaoui.movies.fakers.Comments
 import com.handaoui.movies.fakers.User
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_season_preview.*
+import kotlinx.android.synthetic.main.activity_episode_preview.*
 import kotlinx.android.synthetic.main.activity_serie_details.*
 import kotlinx.android.synthetic.main.latest_comment.*
 import com.handaoui.movies.services.Api
@@ -25,31 +26,30 @@ import kotlinx.android.synthetic.main.summary.*
 import retrofit2.Call
 import retrofit2.Callback
 
-class SeasonPreviewActivity : AppCompatActivity() {
+class EpisodePreviewActivity : AppCompatActivity() {
 
     private var serieId: Int = 0
     private var seasonId: Int = 0
+    private var episodeId: Int = 0
     private var loading = true
     private lateinit var context: Context
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_season_preview)
+        setContentView(R.layout.activity_episode_preview)
         seasonId = intent.getIntExtra("seasonId", 0)
-        serieId = intent.getIntExtra("serieId", 0)
+        serieId = intent.getIntExtra("season_number", 0)
+        episodeId = intent.getIntExtra("episodeId", 0)
 
 
 
         context = this
-        seasonTitleTxt.text = "Season ${intent.getIntExtra("season_number", 0)+1}"
+        episodeTitleTxt.text = "Episode ${intent.getIntExtra("episode_number", 0)+1} : " + intent.getStringExtra("name")
         Picasso.with(this)
-                .load(Config.imagePreviewUrl + intent.getStringExtra("poster_path"))
-                .into(seasonHeader)
-        seasonReleaseTxt.text = "${resources.getString(R.string.releaseDate)}:  ${intent.getStringExtra("air_date")}"
-
-        Log.i("Serieee" , serieId.toString())
-        Log.i("Serieee" , seasonId.toString())
+                .load(Config.imagePreviewUrl + intent.getStringExtra("still_path"))
+                .into(episodeHeader)
+        episodeReleaseTxt.text = "${resources.getString(R.string.releaseDate)}:  ${intent.getStringExtra("air_date")}"
 
         getSeasonDetails()
 
@@ -121,19 +121,18 @@ class SeasonPreviewActivity : AppCompatActivity() {
 
 
     private fun getSeasonDetails() {
-        Api.serieService.getSeason(serieId,intent.getIntExtra("season_number", 0)).enqueue(object : Callback<SeriesSeason> {
-            override fun onResponse(call: Call<SeriesSeason>, response: retrofit2.Response<SeriesSeason>) {
+        Api.serieService.getEpisode(serieId,seasonId,episodeId).enqueue(object : Callback<SeasonEpisode> {
+            override fun onResponse(call: Call<SeasonEpisode>, response: retrofit2.Response<SeasonEpisode>) {
                 loading = false
                 val season = response.body()
 //                Log.i("Serieee" , season!!.overview)
                 if (season != null) {
 
-                    seasonTitleTxt.text = season.name
                     movieDescriptionTxt.text = season.overview
 
                     Picasso.with(context)
-                            .load(Config.imageUrl + season.poster_path)
-                            .into(seasonHeader)
+                            .load(Config.imageUrl + season.still_path)
+                            .into(episodeHeader)
 
                     seeMoreBtn.setOnClickListener {
                         movieDescriptionTxt.maxLines = 200
@@ -149,15 +148,15 @@ class SeasonPreviewActivity : AppCompatActivity() {
 //                        toggleFavorite(isFavorite, true, serieId)
 //                    }
 
-                    val mLayoutManager = LinearLayoutManager(context.applicationContext)
-                    val mAdapter = EpisodesListAdapter(context, season.episodes, season.id, serieId)
-
-                    var recyclerView = findViewById<RecyclerView>(R.id.episodes_list_recycler).apply {
-                        layoutManager= mLayoutManager
-                        itemAnimator = DefaultItemAnimator()
-                        adapter = mAdapter
-                    }
-                    recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+//                    val mLayoutManager = LinearLayoutManager(context.applicationContext)
+//                    val mAdapter = EpisodesListAdapter(context, season.episodes, season.id, serieId)
+//
+//                    var recyclerView = findViewById<RecyclerView>(R.id.episodes_list_recycler).apply {
+//                        layoutManager= mLayoutManager
+//                        itemAnimator = DefaultItemAnimator()
+//                        adapter = mAdapter
+//                    }
+//                    recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
 
 //                    getMovieReviews()
@@ -177,7 +176,7 @@ class SeasonPreviewActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<SeriesSeason>?, t: Throwable?) {
+            override fun onFailure(call: Call<SeasonEpisode>?, t: Throwable?) {
                 Log.i("SeasonDetails", t.toString())
                 loading = false
             }

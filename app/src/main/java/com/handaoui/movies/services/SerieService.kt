@@ -1,5 +1,6 @@
 package com.handaoui.movies.services
 
+import com.handaoui.movies.data.SeasonEpisode
 import com.handaoui.movies.data.Series
 import com.handaoui.movies.data.SeriesSeason
 import com.handaoui.movies.dtos.CommentsDto
@@ -21,8 +22,11 @@ interface SerieService {
     fun getSerie(@Path("tv_id") serieId:Int): Call<Series>
 
     @GET("tv/{tv_id}/season/{season_number}")
-    fun getSeason(@Path("tv_id") serieId:Int, @Path("season_number") seasonId:Int): Call<SeriesSeason>
+    fun getSeason(@Path("tv_id") serieId:Int, @Path("season_number") season_number:Int): Call<SeriesSeason>
 
+
+    @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}")
+    fun getEpisode(@Path("tv_id") serieId:Int, @Path("season_number") season_number:Int, @Path("episode_number") episode_number:Int): Call<SeasonEpisode>
 
     @GET("tv/{tv_id}/similar")
     fun getSimilarSeries(@Path("tv_id") serieId:Int): Call<SeriesDto>

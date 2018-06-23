@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.text.Layout
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,7 +51,7 @@ class SeasonsListAdapter(private val context: Context, private val seasons: Arra
 
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.name.text = """Season ${position + 1}"""
+        holder.name.text = seasons[position].name
         holder.id = seasons[position].id
     }
 

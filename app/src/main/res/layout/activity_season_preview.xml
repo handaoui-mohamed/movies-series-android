@@ -81,13 +81,14 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"/>
 
+            <include layout="@layout/episodes_list" />
 
             <include android:id="@+id/news_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 layout="@layout/latest_comment"/>
 
-            <include layout="@layout/seasons_list" />
+
 
 
 

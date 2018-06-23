@@ -11,7 +11,8 @@ data class SeasonEpisode(
         val air_date: String,
         val crew: ArrayList<Person> = ArrayList(),
 //        val guest_stars: ArrayList<Person> = ArrayList(),
-        val vote_average: Float
+        val vote_average: Float,
+        val still_path: String
 //        val diffusion: String,
 //        val directors: ArrayList<Person> = ArrayList(),
 //        val trailerUrl: String = "",
