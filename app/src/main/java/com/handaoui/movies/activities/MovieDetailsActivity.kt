@@ -13,9 +13,11 @@ import com.handaoui.movies.Config
 import com.handaoui.movies.R
 import com.handaoui.movies.daos.Db
 import com.handaoui.movies.data.Movie
+import com.handaoui.movies.data.PersonMovie
 import com.handaoui.movies.dtos.CommentsDto
 import com.handaoui.movies.fragments.PersonsFragment
 import com.handaoui.movies.fragments.PreviewFragment
+import com.handaoui.movies.holders.CreditsHolder
 import com.handaoui.movies.services.Api
 import com.squareup.picasso.Picasso
 import io.reactivex.Observable
@@ -35,6 +37,7 @@ class MovieDetailsActivity : AppCompatActivity() {
     private var loading = true
     private lateinit var context: Context
     private var movie: Movie? = null
+    private lateinit var personsFragment: PersonsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,7 +104,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         }
 
         // persons fragment
-        val personsFragment = PersonsFragment().apply {
+        personsFragment = PersonsFragment().apply {
             arguments = Bundle().apply {
                 putInt("id", movieId)
                 putInt("origin", 0)
@@ -170,6 +173,17 @@ class MovieDetailsActivity : AppCompatActivity() {
                         .subscribeOn(Schedulers.io())
                         .subscribe { db ->
                             db.movieDao().insert(movie!!)
+
+                            Log.i("crewss", "crew = " + CreditsHolder.crew.size + ", cast = " + CreditsHolder.cast.size)
+                            CreditsHolder.crew.forEach { person ->
+                                db.personDao().insert(person)
+                                db.personMovieDao().insert(PersonMovie(movieId, person.id, "director"))
+                            }
+
+                            CreditsHolder.cast.forEach { person ->
+                                db.personDao().insert(person)
+                                db.personMovieDao().insert(PersonMovie(movieId, person.id,  "actor"))
+                            }
                         }
             }
         } else {
@@ -177,7 +191,10 @@ class MovieDetailsActivity : AppCompatActivity() {
             if (updateProfile) {
                 Observable.just(Db.getInstance(context))
                         .subscribeOn(Schedulers.io())
-                        .subscribe { db -> db.movieDao().delete(movie!!) }
+                        .subscribe { db ->
+                            db.movieDao().delete(movie!!)
+                            db.personMovieDao().delete(movieId)
+                        }
             }
         }
     }
@@ -197,7 +214,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         return true
     }
 
-    fun isConnected(): Boolean {
+    private fun isConnected(): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = cm.activeNetworkInfo
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting

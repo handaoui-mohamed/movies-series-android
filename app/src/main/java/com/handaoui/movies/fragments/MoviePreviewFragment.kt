@@ -139,5 +139,4 @@ class PreviewFragment : Fragment() {
             }
         }
     }
-
 }
